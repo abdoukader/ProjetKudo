@@ -3,7 +3,6 @@ package digitalkudo.kudowall.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.List;
 
 @Entity
 @Table(name = "structure")
@@ -24,10 +23,6 @@ public class Structure {
     @Size(max = 20)
     private String lieu;
 
-
-    @ManyToMany(mappedBy = "structures",cascade = CascadeType.ALL)
-    private List<Utilisateur> utilisateur;
-
     public Structure(){
 
     }
@@ -36,7 +31,6 @@ public class Structure {
         this.departement = departement;
         this.sousStructure = sousStructure;
         this.lieu = lieu;
-        this.sousStructure=sousStructure;
 
     }
 
@@ -64,19 +58,11 @@ public class Structure {
         this.sousStructure = sousStructure;
     }
 
-    public String getLieu() {
-        return lieu;
-    }
+    public String getLieu() { return lieu; }
 
     public void setLieu(String lieu) {
         this.lieu = lieu;
     }
 
-    public List<Utilisateur> getUtilisateur() {
-        return utilisateur;
-    }
 
-    public void setUtilisateur(List<Utilisateur> utilisateur) {
-        this.utilisateur = utilisateur;
-    }
 }

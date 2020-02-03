@@ -1,4 +1,11 @@
 package digitalkudo.kudowall.repository;
 
-public interface KudoPointRepository {
+import digitalkudo.kudowall.model.KudoPoint;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+
+@Repository
+public interface KudoPointRepository extends JpaRepository<KudoPoint ,Integer> {
+
 }

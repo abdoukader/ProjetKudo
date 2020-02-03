@@ -10,23 +10,27 @@ import java.util.List;
 public class KudoPoint {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @NotBlank
-    @Size(max = 12)
+    @Size(min =3 ,max =30)
     private String libelle;
-    @NotBlank
-    @Size(max = 3)
     private Integer point;
 
-    @OneToMany(mappedBy = "kudoPoint",cascade = CascadeType.ALL)
-    private List<Kudo> kudo;
+    public KudoPoint(){
 
-    public Long getId() {
+    }
+    public KudoPoint(String libelle,int point){
+        this.libelle = libelle;
+        this.point = point;
+
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -38,11 +42,12 @@ public class KudoPoint {
         this.libelle = libelle;
     }
 
-    public Integer getPoint() {
+    public int getPoint() {
         return point;
     }
 
     public void setPoint(Integer point) {
         this.point = point;
     }
+
 }

@@ -1,63 +1,70 @@
 package digitalkudo.kudowall.model;
 
 import org.hibernate.annotations.NaturalId;
-
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "utilisateur")
+@Table(name = "users", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {
+                "email"
+        }),
+        @UniqueConstraint(columnNames = {
+                "username"
+        })
+})
 
 public class Utilisateur {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Size(min = 3, max = 30)
+    @NotBlank
+    @Size(min=3, max = 50)
     private String nom;
 
-    @NotBlank
     @NaturalId
-    @Size(max = 30)
+    @NotBlank
+    @Size(max = 50)
     @Email
     private String email;
 
-    @NotBlank
-    @Size(max = 20)
+    @Column(length = 15)
     private String telephone;
+    @Column(length = 50)
 
     @NotBlank
-    @Size(max = 20)
-    private String password;
-
-    @NotBlank
-    @Size(max = 20)
+    @Size(min=3, max = 50)
     private String username;
 
+    @NotBlank
+    @Size(min=6, max = 100)
+    private String password;
+
+    private Integer nbrepoint;
+    private Integer nbrekudo;
+
+    //relation Utilisateur_Role
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "user_structure",
+    @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "structure_id"))
-
-    private Set<Structure> structures = new HashSet<>();
-
-    @OneToMany(mappedBy = "utilisateur",cascade = CascadeType.ALL)
-    private List<Kudo> kudo;
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
 
     public Utilisateur() {
-
     }
 
-    public Utilisateur(String nom, String email, String telephone, String username, String password) {
+    public Utilisateur(String nom, String email, String telephone, String username, String password, Integer nbrekudo, Integer nbrepoint) {
         this.nom = nom;
         this.email = email;
         this.telephone = telephone;
         this.username = username;
         this.password = password;
+        this.nbrekudo = nbrekudo;
+        this.nbrekudo = nbrepoint;
     }
 
     public Long getId() {
@@ -108,11 +115,14 @@ public class Utilisateur {
         this.username = username;
     }
 
-    public Set<Structure> getStructures() {
-        return structures;
-    }
+    public Integer getNbrepoint(Object o) { return nbrepoint; }
 
-    public void setStructures(Set<Structure> structures) {
-        this.structures = structures;
-    }
+    public void setNbrepoint(Integer nbrepoint) { this.nbrepoint = nbrepoint; }
+
+    public Integer getNbrekudo() { return nbrekudo; }
+
+    public void setNbrekudo(Integer nbrekudo) { this.nbrekudo = nbrekudo; }
+
+
+
 }
