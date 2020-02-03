@@ -6,7 +6,9 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+
 
 @Entity
 @Table(name = "users", uniqueConstraints = {
@@ -47,15 +49,27 @@ public class Utilisateur {
     private Integer nbrepoint;
     private Integer nbrekudo;
 
-    //relation Utilisateur_Role
-    @ManyToMany(fetch = FetchType.LAZY)
+    //Relation Utilisateur_Role
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
+
     private Set<Role> roles = new HashSet<>();
 
-    public Utilisateur() {
-    }
+    //Relation Utilisateur_Structure
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "user_structures",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "structure_id"))
+
+    private Set<Structure> structures = new HashSet<>();
+
+    //Relaton with Utilisateur
+    @OneToMany(mappedBy = "utilisateur", cascade = CascadeType.ALL)
+    public List<Kudo> kudo;
+
+    public Utilisateur() { }
 
     public Utilisateur(String nom, String email, String telephone, String username, String password, Integer nbrekudo, Integer nbrepoint) {
         this.nom = nom;
@@ -111,11 +125,9 @@ public class Utilisateur {
         return username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+    public void setUsername(String username) { this.username = username; }
 
-    public Integer getNbrepoint(Object o) { return nbrepoint; }
+    public Integer getNbrepoint() { return nbrepoint; }
 
     public void setNbrepoint(Integer nbrepoint) { this.nbrepoint = nbrepoint; }
 
@@ -123,6 +135,14 @@ public class Utilisateur {
 
     public void setNbrekudo(Integer nbrekudo) { this.nbrekudo = nbrekudo; }
 
+
+    public Set<Role> getRoles() { return roles; }
+
+    public void setRoles(Set<Role> roles) { this.roles = roles; }
+
+    public Set<Structure> getStructures() { return structures; }
+
+    public void setStructures(Set<Structure> structures) { this.structures = structures; }
 
 
 }

@@ -18,6 +18,9 @@ public class UserPrinciple implements UserDetails {
     private String email;
     private String username;
     private String telephone;
+    private Integer nbrepoint;
+    private Integer nbrekudo;
+
     @JsonIgnore
     private String password;
 
@@ -25,13 +28,15 @@ public class UserPrinciple implements UserDetails {
     private Collection<? extends GrantedAuthority> authorities;
 
     public UserPrinciple(Long id, String nom,String email,String telephone,
-                         String username, String password,
+                         String username, Integer nbrekudo,Integer nbrepoint,String password,
                          Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.nom = nom;
         this.email = email;
         this.telephone = telephone;
         this.username = username;
+        this.nbrekudo = nbrekudo;
+        this.nbrepoint = nbrepoint;
         this.password = password;
         this.authorities = authorities;
     }
@@ -47,6 +52,8 @@ public class UserPrinciple implements UserDetails {
                 user.getEmail(),
                 user.getTelephone(),
                 user.getUsername(),
+                user.getNbrekudo(),
+                user.getNbrepoint(),
                 user.getPassword(),
                 authorities
         );
@@ -65,6 +72,10 @@ public class UserPrinciple implements UserDetails {
     }
 
     public String getTelephone() { return telephone; }
+
+    public Integer getNbrepoint(){ return nbrepoint; }
+
+    public Integer getNbrekudo(){ return nbrekudo; }
 
     @Override
     public String getUsername() {

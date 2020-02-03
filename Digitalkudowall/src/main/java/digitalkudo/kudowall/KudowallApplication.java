@@ -15,6 +15,7 @@ public class KudowallApplication extends SpringBootServletInitializer implements
     }
     @Autowired
     PasswordEncoder encoder;
+
     public void run(String...args) throws Exception{
         System.out.println(encoder.encode("passer"));
     }

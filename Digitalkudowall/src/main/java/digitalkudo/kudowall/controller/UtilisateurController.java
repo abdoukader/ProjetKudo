@@ -26,12 +26,14 @@ public class UtilisateurController {
     PasswordEncoder encoder;
 
     @PostMapping(value = "/addUser")
+    //@PreAuthorize("hasAnyAuthority('ROLE_USER')")
     public Utilisateur addUser(@RequestBody(required = false) Utilisateur u) {
         Utilisateur user = new Utilisateur(u.getNom(), u.getEmail(), u.getTelephone(), u.getUsername(),
                 encoder.encode(u.getPassword()),u.getNbrekudo(),u.getNbrepoint());
         user.setNbrekudo(null);
+        user.setNbrepoint(null);
 
-        return utilisateurRepository.save(user);
+        return utilisateurRepository.save(u);
     }
 
     @PostMapping(value = "/addStructure", consumes = { MediaType.APPLICATION_JSON_VALUE})

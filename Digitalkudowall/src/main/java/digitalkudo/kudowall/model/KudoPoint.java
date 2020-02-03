@@ -3,7 +3,6 @@ package digitalkudo.kudowall.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.List;
 
 @Entity
 @Table(name = "kudoPoint")
