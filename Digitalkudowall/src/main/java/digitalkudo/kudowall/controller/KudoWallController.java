@@ -29,12 +29,13 @@ public class KudoWallController {
 
     @PostMapping(value = "/kudopoint", consumes = {MediaType.APPLICATION_JSON_VALUE})
     //@PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
-    public KudoPoint kudoPoint(@RequestBody(required = false) KudoPoint kp){
+    public KudoPoint kudoPoint(@RequestBody(required = false) KudoPoint kp) {
 
         return kudoPointRepository.save(kp);
     }
-    @PostMapping(value = "/addKudo", consumes = { MediaType.APPLICATION_JSON_VALUE})
-    public Kudo addKudo(@RequestBody(required = false) Kudo kudo){
+
+    @PostMapping(value = "/addKudo", consumes = {MediaType.APPLICATION_JSON_VALUE})
+    public Kudo addKudo(@RequestBody(required = false) Kudo kudo) {
         Kudo k = new Kudo();
         //recup saisi
         k.setDatekudo(new Date());
@@ -44,12 +45,16 @@ public class KudoWallController {
         KudoPoint kp = new KudoPoint();
         kp.getPoint();
         //recup info emmetteur
-        Utilisateur user=UserDetailsService.getUserConnect();
+        Utilisateur user = UserDetailsService.getUserConnect();
         //affectation nombre kudo à emetteur
-        user.setNbrekudo(user.getNbrekudo()+1);
-        //kp.setNbrepoint(user.getNbrepoint()+k.getPoint());
-
+        user.setNbrekudo(user.getNbrekudo() + 1);
+        //Utilisateur utilisateur = new Utilisateur();
+        if (user.getNom() == kudo.getNombeneficiare()) {
+            //user.setNbrepoint()=user.getNbrepoint()+kp.getPoint();
+        } else {
+                    System.out.println("cet utilisateur n'est pas inscrit");
+        }
         return kudoRepository.save(k);
-    }
 
+    }
 }
