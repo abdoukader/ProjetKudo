@@ -9,7 +9,7 @@ import javax.validation.constraints.Size;
 public class Structure {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @NotBlank
     @Size(max = 20)
@@ -34,11 +34,13 @@ public class Structure {
 
     }
 
-    public Long getId() {
+     public void get(){ }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

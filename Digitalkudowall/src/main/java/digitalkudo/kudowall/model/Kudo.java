@@ -2,6 +2,7 @@ package digitalkudo.kudowall.model;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
 @Entity
@@ -10,10 +11,12 @@ public class Kudo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idK;
+    @NotBlank
     @Column(length = 150)
     private String commentaire;
     @Column(length = 50)
-    private String nombeneficiare;
+    @NotBlank
+    private String nombeneficiaire;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date datekudo;
 
@@ -44,9 +47,13 @@ public class Kudo {
         this.commentaire = commentaire;
     }
 
-    public String getNombeneficiare() { return nombeneficiare; }
+    public String getNombeneficiaire() {
+        return nombeneficiaire;
+    }
 
-    public void setNombeneficiare(String nombeneficiare) { this.nombeneficiare = nombeneficiare; }
+    public void setNombeneficiaire(String nombeneficiaire) {
+        this.nombeneficiaire = nombeneficiaire;
+    }
 
     public Date getDatekudo() {
         return datekudo;
@@ -54,5 +61,13 @@ public class Kudo {
 
     public void setDatekudo(Date datekudo) {
         this.datekudo = datekudo;
+    }
+
+    public KudoPoint getKudoPoint() {
+        return kudoPoint;
+    }
+
+    public void setKudoPoint(KudoPoint kudoPoint) {
+        this.kudoPoint = kudoPoint;
     }
 }

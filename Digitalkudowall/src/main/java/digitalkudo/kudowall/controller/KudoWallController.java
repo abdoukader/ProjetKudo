@@ -1,6 +1,5 @@
 package digitalkudo.kudowall.controller;
 
-
 import digitalkudo.kudowall.model.Kudo;
 import digitalkudo.kudowall.model.KudoPoint;
 import digitalkudo.kudowall.model.Utilisateur;
@@ -13,18 +12,20 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/kudo",method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE })
 public class KudoWallController {
     @Autowired
     private UtilisateurRepository utilisateurRepository;
+    private Utilisateur utilisateur;
     @Autowired
     private KudoPointRepository kudoPointRepository;
-
+    private KudoPoint kudoPoint;
     @Autowired
     private KudoRepository kudoRepository;
-
     private UserDetailsServiceImpl UserDetailsService;
 
     @PostMapping(value = "/kudopoint", consumes = {MediaType.APPLICATION_JSON_VALUE})
@@ -34,27 +35,29 @@ public class KudoWallController {
         return kudoPointRepository.save(kp);
     }
 
-    @PostMapping(value = "/addKudo", consumes = {MediaType.APPLICATION_JSON_VALUE})
-    public Kudo addKudo(@RequestBody(required = false) Kudo kudo) {
-        Kudo k = new Kudo();
+   /* @PostMapping(value = "/addKudo")
+    public Kudo addKudo(@RequestBody(required = false) Kudo k){
         //recup saisi
         k.setDatekudo(new Date());
-        k.getNombeneficiare();
+        k.getNombeneficiaire();
         k.getCommentaire();
-        //recup point kudo
-        KudoPoint kp = new KudoPoint();
-        kp.getPoint();
+        //verifier si beneficiaire est dans la base
+        List<Kudo> beneficiaire = kudoRepository.findByNombeneficiaire(k.getNombeneficiaire());
         //recup info emmetteur
         Utilisateur user = UserDetailsService.getUserConnect();
-        //affectation nombre kudo à emetteur
+        //affectation kudo à emmetteur
         user.setNbrekudo(user.getNbrekudo() + 1);
-        //Utilisateur utilisateur = new Utilisateur();
-        if (user.getNom() == kudo.getNombeneficiare()) {
-            //user.setNbrepoint()=user.getNbrepoint()+kp.getPoint();
-        } else {
-                    System.out.println("cet utilisateur n'est pas inscrit");
-        }
+        //recup point kudo
+        Optional <KudoPoint> kp = kudoPointRepository.findOneById(kudoPoint.getPoint());
+        //creation objet Utilisateur
+        Utilisateur utilisateur = new Utilisateur();
+        //affecter point à beneficiaire
+        utilisateur.setNbrepoint(utilisateur.getNbrepoint() + kudoPoint.getPoint());
+
+        //utilisateurRepository.save();
         return kudoRepository.save(k);
 
     }
+*/
 }
+
