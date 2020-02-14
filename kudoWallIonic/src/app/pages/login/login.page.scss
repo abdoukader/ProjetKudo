@@ -1,0 +1,27 @@
+.loginForm {
+   
+    padding: 4px;
+}
+.btnLogin {
+    margin-top: 5vh;
+    border: green;
+}
+#cadre{
+    height: 300px;
+    width: 400px;
+    padding: 40px;
+        
+}
+
+.logo {
+    position: relative;
+    height: 250px;
+}
+
+.logo ion-icon{
+    font-size: 14em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

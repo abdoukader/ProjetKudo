@@ -1,0 +1,15 @@
+{
+  "name": "kudoWallIonic",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular",
+  "v2": true,
+  "typescript": true,
+  "proxies": [
+    {
+      "path": "/v1",
+      "proxyUrl": "http://localhost:8080"
+    }
+  ]
+}

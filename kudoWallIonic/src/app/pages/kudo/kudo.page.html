@@ -1,0 +1,40 @@
+<ion-header>
+    <ion-toolbar  color="danger">
+      <ion-title class="ion-text-center">Faire un kudo</ion-title>
+      <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content>
+    <ion-card class="loginForm" *ngIf="!isLoading">
+        <img id="cadre" src="../../../assets/Merciiikudo.jpg" alt="" />
+        <div class="kudo">
+          <ion-card-content>
+
+                <form #f="ngForm" (ngSubmit)="onLogin(f.value)">
+                    <ion-item>
+                        <ion-label position="floating">NomBénéficiaire</ion-label>
+                        <ion-input type="text" name="nomBeneficiaire" ngModel></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label position="floating">SousStructure</ion-label>
+                        <ion-input type="text" name="sousStructure" ngModel></ion-input>
+                    </ion-item>
+                    <br>
+                    <ion-item>
+                         <ion-label position="floating">Commentaire</ion-label> 
+                        <ion-textarea></ion-textarea>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label position="floating">TypeKudo</ion-label>
+                        <ion-input type="text" name="typekudo" ngModel></ion-input>
+                    </ion-item>
+                    <br>
+                    <ion-button type="submit" expand="block" fill="outline" class="btnLogin">Djadieuf</ion-button>
+                </form>
+          </ion-card-content>
+        </div> 
+      </ion-card>
+  </ion-content>
