@@ -42,31 +42,19 @@
               </ion-item>
               <ion-item>
                 <ion-label position="floating">Username</ion-label>
-                <ion-input type="texte" name="username" ngModel></ion-input>
+                <ion-input type="texte" name="username" ngModel required></ion-input>
             </ion-item>
               <ion-item>
                 <ion-label position="floating">Password</ion-label>
-                <ion-input type="password" name="password" ngModel></ion-input>
+                <ion-input type="password" name="password" ngModel required></ion-input>
             </ion-item>
             <ion-item>
               <ion-label position="floating">Structure</ion-label>
-                  <ion-select ok-text="Okay" cancel-text="cancel" type="number" name="structure" ngModel>
-                      <ion-select-option value=1>DSI/DAC/COE</ion-select-option>
-                      <ion-select-option value=2>DSI/DAC/DIF</ion-select-option>
-                      <ion-select-option value=3>DSI/DAC/CES</ion-select-option>
-                      <ion-select-option value=4>DSI/SMC/SMC</ion-select-option>
-                      <ion-select-option value=5>DSI/2AI</ion-select-option>
-                      <ion-select-option value=6>DSI/INS</ion-select-option>
-                      <ion-select-option value=7>DSI/APS</ion-select-option>
-                      <ion-select-option value=8>DSI/ILAB</ion-select-option>
-                      <ion-select-option value=9>DSI/OCIO</ion-select-option>
-                      <ion-select-option value=10>DSI/INS</ion-select-option>
-                      <ion-select-option value=11>DSI/CSPS</ion-select-option>
-                  </ion-select>
+              <ion-input type="number" name="structure" ngModel required></ion-input>
           </ion-item>
                 <ion-item>
                     <ion-label position="floating">Téléphone</ion-label>
-                    <ion-input type="text" name="telephone" ngModel></ion-input>
+                    <ion-input type="text" name="telephone" ngModel required></ion-input>
                 </ion-item>
                 
                 <ion-button type="submit" expand="block" fill="outline" class="btnLogin"  shape="round">Se connecter</ion-button>

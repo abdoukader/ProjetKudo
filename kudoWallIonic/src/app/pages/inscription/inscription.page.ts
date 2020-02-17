@@ -11,18 +11,7 @@ import { AlertController } from '@ionic/angular';
     styleUrls: ['./inscription.page.scss'],
   })
   export class InscriptionPage implements OnInit {
-  
-    insData:any = {
-        // nom:"",
-        // email:"",
-        // tel:"",
-        // sousStructure:"",
-        // username:"",
-        // password:""
-
-    };
     
-    values = {};
     Data: any={};
 
     constructor(private inscrip: InscriptionService,private alertController:AlertController) { }
