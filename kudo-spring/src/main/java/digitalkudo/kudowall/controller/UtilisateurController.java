@@ -1,29 +1,21 @@
 package digitalkudo.kudowall.controller;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import digitalkudo.kudowall.model.Role;
 import digitalkudo.kudowall.model.Structure;
 import digitalkudo.kudowall.model.Utilisateur;
 import digitalkudo.kudowall.repository.RoleRepository;
 import digitalkudo.kudowall.repository.StructureRepository;
 import digitalkudo.kudowall.repository.UtilisateurRepository;
-import digitalkudo.kudowall.services.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.http.MediaType;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-
 import java.util.*;
 
 
 
 @CrossOrigin("http://localhost:8100")
 @RestController
-@RequestMapping(value = "/user", method = RequestMethod.POST)
+@RequestMapping(value = "/add", method = RequestMethod.POST)
 public class UtilisateurController {
     @Autowired
     private UtilisateurRepository utilisateurRepository;
@@ -32,11 +24,9 @@ public class UtilisateurController {
     @Autowired
     private RoleRepository roleRepository;
     @Autowired
-    private UserDetailsServiceImpl userDetailsService;
-    @Autowired
     PasswordEncoder encoder;
 
-    @PostMapping(value = "/add")
+    @PostMapping(value = "/user")
     public Utilisateur addUser(@RequestBody(required = false) Utilisateur u) {
         Utilisateur user = new Utilisateur(u.getNom(), u.getEmail(), u.getTelephone(), u.getUsername(),
                 encoder.encode(u.getPassword()),u.getNbrekudo(),u.getNbrepoint());
@@ -66,21 +56,37 @@ public class UtilisateurController {
         return utilisateurRepository.save(u);
     }
 
-    @GetMapping(value = "/showUsers")
+    @GetMapping(value = "/liste-user")
     //@PreAuthorize("hasAuthority('ROLE_USER')")
     public List<Utilisateur> users(@RequestBody (required = false) Utilisateur utilisateur){
 
         return utilisateurRepository.findAll();
     }
 
-    @PostMapping(value = "/addStructure")
+    @PostMapping(value = "/structure")
     //@PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public Structure addStructure(@RequestBody(required = false) Structure s){
         Structure structure = new Structure(s.getDepartement(),s.getSousStructure(),s.getLieu());
 
         return structureRepository.save(s);
     }
-    @PostMapping(value = "/updatestructure/{id}")
+
+   @GetMapping(value = "/liste-structures")
+    //@PreAuthorize("hasAnyAuthority('ROLE_USER')")
+          public List <Structure> structures (@RequestBody(required = false) Structure structures){
+
+       return  structureRepository.findAll();
+    }
+
+    @GetMapping(value = "/liste-structure/{id}")
+    public Structure lister(@PathVariable long id) throws Exception {
+        Structure structure = structureRepository.findById(id).orElseThrow(
+                ()->new Exception("Cette structure n'existe pas !")
+        );
+        return structure;
+    }
+
+    @PostMapping(value = "/update-structure/{id}")
     //@PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public Structure updatestructure(@RequestBody Structure structure,@PathVariable Long id) throws Exception{
         structure.setId(id);
@@ -90,22 +96,6 @@ public class UtilisateurController {
         structureRepository.save(structure);
         return structure;
     }
-
-   @GetMapping(value = "/showstructures")
-    //@PreAuthorize("hasAnyAuthority('ROLE_USER')")
-          public List <Structure> structures (@RequestBody(required = false) Structure structures){
-
-       return  structureRepository.findAll();
-    }
-
-    @GetMapping(value = "/showstructures/{id}")
-    public Structure lister(@PathVariable long id) throws Exception {
-        Structure structure = structureRepository.findById(id).orElseThrow(
-                ()->new Exception("Cette structure n'existe pas !")
-        );
-        return structure;
-    }
-
 
 }
 

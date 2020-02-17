@@ -63,7 +63,7 @@ public class KudoWallController<id> {
 
         if (user.getNom().compareTo(beneficiaire.getNom()) == 0) 
         {
-            throw new Exception("vous ne pouvez pas être le bénéficiaire du kudo que vous émettez !" + user.getNom());
+            throw new Exception("vous ne pouvez pas être le bénéficiaire du kudo que vous émettez " + user.getNom()+  "!");
         } else {
 
             //recup point kudo
@@ -74,7 +74,7 @@ public class KudoWallController<id> {
             kudo.setKudoPoint(pointkudo);
 
             //recup point beneficiaire
-            Integer points = beneficiaire.getNbrepoint((long) 0);
+            Integer points = beneficiaire.getNbrepoint();
 
             //affecter point à beneficiaire
             beneficiaire.setNbrepoint(points + point);
@@ -93,7 +93,7 @@ public class KudoWallController<id> {
             return message;
         }
     }
-    @PostMapping(value = "/team")
+   /* @PostMapping(value = "/team")
     @PreAuthorize("hasAuthority('ROLE_USER')")
     public Message kudoTeam(@RequestBody(required = false) KudoWall kw) throws Exception {
         Utilisateur user = UserDetailsService.getUserConnect();
@@ -119,7 +119,7 @@ public class KudoWallController<id> {
         String msg = "Felicitation " + user.getNom() + "  vous venez de faire un kudo à la team" + teamBeneficiaire.getNom();
         Message message = new Message(200,msg);
         return message;
-    }
+    }*/
 
     }
-}
+

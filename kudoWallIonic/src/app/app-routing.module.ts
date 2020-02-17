@@ -24,6 +24,10 @@ const routes: Routes = [
   {
     path: 'choix-beneficiaire',
     loadChildren: () => import('./choix-beneficiaire/choix-beneficiaire.module').then( m => m.ChoixBeneficiairePageModule)
+  },
+  {
+    path: 'kudowall',
+    loadChildren: () => import('./pages/kudowall/kudowall.module').then( m => m.KudowallPageModule)
   }
 
    

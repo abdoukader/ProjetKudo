@@ -87,11 +87,6 @@ public class Utilisateur {
         this.nbrekudo = nbrepoint;
     }
 
-    public Utilisateur(String nom, Integer nbrepoint) {
-        this.nom = nom;
-        this.nbrepoint = nbrepoint;
-    }
-
     public Long getId() {
         return id;
     }
@@ -124,6 +119,14 @@ public class Utilisateur {
         this.telephone = telephone;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -131,41 +134,6 @@ public class Utilisateur {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) { this.username = username; }
-
-    public Integer getNbrepoint(long l) {
-        return nbrepoint;
-    }
-
-    public void setNbrepoint(Integer nbrepoint) {
-        this.nbrepoint = nbrepoint;
-    }
-
-    public List<Kudo> getKudo() {
-        return kudo;
-    }
-
-    public void setKudo(List<Kudo> kudo) {
-        this.kudo = kudo;
-    }
-
-    public Integer getNbrekudo() { return nbrekudo; }
-
-    public void setNbrekudo(Integer nbrekudo) { this.nbrekudo = nbrekudo; }
-
-
-    public Set<Role> getRoles() { return roles; }
-
-    public void setRoles(Set<Role> roles) { this.roles = roles; }
-
-    public Set<Structure> getStructures() { return structures; }
-
-    public void setStructures(Set<Structure> structures) { this.structures = structures; }
 
     public Long getStructure() {
         return structure;
@@ -175,4 +143,43 @@ public class Utilisateur {
         this.structure = structure;
     }
 
+    public Integer getNbrepoint() {
+        return nbrepoint;
+    }
+
+    public void setNbrepoint(Integer nbrepoint) {
+        this.nbrepoint = nbrepoint;
+    }
+
+    public Integer getNbrekudo() {
+        return nbrekudo;
+    }
+
+    public void setNbrekudo(Integer nbrekudo) {
+        this.nbrekudo = nbrekudo;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
+    public Set<Structure> getStructures() {
+        return structures;
+    }
+
+    public void setStructures(Set<Structure> structures) {
+        this.structures = structures;
+    }
+
+    public List<Kudo> getKudo() {
+        return kudo;
+    }
+
+    public void setKudo(List<Kudo> kudo) {
+        this.kudo = kudo;
+    }
 }
