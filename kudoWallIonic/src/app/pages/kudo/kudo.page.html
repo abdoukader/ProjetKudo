@@ -13,23 +13,23 @@
         <div class="kudo">
           <ion-card-content>
 
-                <form #f="ngForm" (ngSubmit)="onLogin(f.value)">
+                <form #f="ngForm" (ngSubmit)="fairekudo(f.value)">
                     <ion-item>
                         <ion-label position="floating">NomBénéficiaire</ion-label>
-                        <ion-input type="text" name="nomBeneficiaire" ngModel></ion-input>
+                        <ion-input type="text" name="nombeneficiaire" ngModel required></ion-input>
                     </ion-item>
-                    <ion-item>
+                    <!-- <ion-item>
                         <ion-label position="floating">SousStructure</ion-label>
                         <ion-input type="text" name="sousStructure" ngModel></ion-input>
-                    </ion-item>
+                    </ion-item> -->
                     <br>
                     <ion-item>
                          <ion-label position="floating">Commentaire</ion-label> 
-                        <ion-textarea></ion-textarea>
+                         <ion-input type="text" name="commentaire" ngModel required=""></ion-input>
                     </ion-item>
                     <ion-item>
                         <ion-label position="floating">TypeKudo</ion-label>
-                        <ion-input type="text" name="typekudo" ngModel></ion-input>
+                        <ion-input type="number" name="point" ngModel reqiered></ion-input>
                     </ion-item>
                     <br>
                     <ion-button type="submit" expand="block" fill="outline" class="btnLogin">Djadieuf</ion-button>

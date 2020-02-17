@@ -1,14 +1,23 @@
 
 import { Injectable } from "@angular/core";
 import { HttpClientModule, HttpClient,  } from "@angular/common/http";
+import { Observable } from 'rxjs';
+import { AutoCompleteService } from 'ionic4-auto-complete';
 
 @Injectable({
     providedIn: 'root'
 })
 export class InscriptionService  {
-  
+
+  labelAttribute = 'structure';
+  formValueAttribute ='id';
+  private endpoint = 'http://127.0.0.1:8080/user/add';
+  private URL = 'http://127.0.0.1:8080/user/showstructures/7';
+  private endpoint1 = 'http://127.0.0.1:8080/kudo/personne';
+
     constructor(private http: HttpClient,private inscript :InscriptionService) { }
     
+<<<<<<< HEAD
     private endpoint = 'http://127.0.0.1:8080/add/user';
     
   
@@ -26,8 +35,21 @@ export class InscriptionService  {
        
       
       console.log(formData1);
+=======
+      FindBySousStructure(data):Observable<any>{
+        
+        return this.http.post(this.URL, data);
+
+      }
+
+    inscription(data1):Observable<any> {
+>>>>>>> 1cb209db8db4fd5fe47ce563795673e505fe4659
       
-      return this.http.post(this.endpoint, formData1);
+      return this.http.post(this.endpoint, data1);
+    }
+
+    faireKudo(data2):Observable<any>{
+      return this.http.post(this.endpoint1,data2)
     }
   }
   
