@@ -87,13 +87,16 @@ public class Utilisateur {
         this.nbrekudo = nbrepoint;
     }
 
-    public Utilisateur(String nom, Integer nbrepoint) {
-        this.nom = nom;
-        this.nbrepoint = nbrepoint;
-    }
-
     public Long getId() {
         return id;
+    }
+
+    public Integer getNbrepoint() {
+        return nbrepoint;
+    }
+
+    public void setNbrepoint(Integer nbrepoint) {
+        this.nbrepoint = nbrepoint;
     }
 
     public void setId(Long id) {
@@ -137,14 +140,6 @@ public class Utilisateur {
     }
 
     public void setUsername(String username) { this.username = username; }
-
-    public Integer getNbrepoint(long l) {
-        return nbrepoint;
-    }
-
-    public void setNbrepoint(Integer nbrepoint) {
-        this.nbrepoint = nbrepoint;
-    }
 
     public List<Kudo> getKudo() {
         return kudo;

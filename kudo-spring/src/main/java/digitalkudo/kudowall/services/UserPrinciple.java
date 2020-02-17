@@ -53,7 +53,7 @@ public class UserPrinciple implements UserDetails {
                 user.getTelephone(),
                 user.getUsername(),
                 user.getNbrekudo(),
-                user.getNbrepoint((long) 0),
+                user.getNbrepoint(),
                 user.getPassword(),
                 authorities
         );
