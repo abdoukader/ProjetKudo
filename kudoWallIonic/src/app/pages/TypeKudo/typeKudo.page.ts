@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { InscriptionService } from 'src/app/services/inscription.service';
 
 @Component({
   selector: 'app-typeKudo',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TypeKudoPage implements OnInit {
 
-  constructor() { }
-
+  constructor(private listek:InscriptionService) { }
+  listeku ;
   ngOnInit() {
+    this.listekudoP();
+  }
+
+  listekudoP(){
+    this.listek.listekudoP()
+    .subscribe(response=>{
+      this.listeku=response
+      console.log(this.listeku);
+    },
+    err => console.log(err)
+    )
   }
 
 }

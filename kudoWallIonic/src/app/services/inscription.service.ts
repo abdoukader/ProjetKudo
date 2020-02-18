@@ -14,6 +14,7 @@ export class InscriptionService  {
   private endpoint = 'http://127.0.0.1:8080/user/add';
   private URL = 'http://127.0.0.1:8080/user/showstructures/7';
   private endpoint1 = 'http://127.0.0.1:8080/kudo/personne';
+  private urliste = 'http://127.0.0.1:8080/user/listekudopoint'
 
     constructor(private http: HttpClient,private inscript :InscriptionService) { }
     
@@ -30,6 +31,10 @@ export class InscriptionService  {
 
     faireKudo(data2):Observable<any>{
       return this.http.post(this.endpoint1,data2)
+    }
+
+    listekudoP(){
+      return this.http.get(this.urliste);
     }
   }
   
