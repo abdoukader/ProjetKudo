@@ -12,8 +12,8 @@ import { AuthService } from './services/auth.service';
 import { TokenInterceptorService } from './services/token-interceptor.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { InscriptionService } from './services/inscription.service';
 import { AutoCompleteModule } from 'ionic4-auto-complete';
+import { KudowallPageModule } from './pages/kudowall/kudowall.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,12 +25,14 @@ import { AutoCompleteModule } from 'ionic4-auto-complete';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    AutoCompleteModule
+    AutoCompleteModule,
+    KudowallPageModule,
   ],
   providers: [
     StatusBar,
     AuthService,
     SplashScreen,
+    
     
     
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi:true }

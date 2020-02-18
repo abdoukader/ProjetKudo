@@ -119,8 +119,6 @@ import { from } from 'rxjs';
         // })
     }
 
-
-
     inscription(Data){
         this.inscrip.inscription(Data)
         .subscribe(

@@ -1,18 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { KudowallPage } from './kudowall.page';
+import { InfiniteScrollPage } from './infinite-scroll.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: KudowallPage
+    component: InfiniteScrollPage
   }
-
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class KudowallPageRoutingModule {}
+export class InfiniteScrollPageRoutingModule {}

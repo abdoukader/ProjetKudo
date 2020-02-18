@@ -33,6 +33,12 @@ export class AppComponent {
       url: '/kudo',
       icon: 'heart'
     },
+
+    {
+      title: 'kudowall',
+      url: '/kudowall',
+      icon: '/liste-kudos'
+    },
     
     {
       title: 'deconexion',

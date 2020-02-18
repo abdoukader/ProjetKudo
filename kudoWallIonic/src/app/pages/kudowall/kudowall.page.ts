@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { InscriptionService } from 'src/app/services/inscription.service';
 
 @Component({
   selector: 'app-kudowall',
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class KudowallPage implements OnInit {
 
-  constructor() { }
+  constructor(private listekudos: InscriptionService) { }
+  kudos: any = [];
 
   ngOnInit() {
   }
 
+  kudowall(kudos) {
+  this.listekudos.kudowall(kudos)
+   .subscribe(
+   res => {
+   this.listekudos = res
+   },
+  err => {
+  console.error(err)
+  }
+  );
+  }
 }

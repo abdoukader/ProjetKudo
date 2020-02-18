@@ -1,0 +1,33 @@
+#m{
+    background-color: red;
+    width: 100px;    
+    border-radius: 5px;
+}
+#t{
+    background-color: #830b21;
+    size: 125px;
+    border-radius: 5px;
+}
+#f{
+    background-color: #0f5f0f;
+    border-radius: 5px ;
+}
+#b{
+    background-color: rgb(71, 9, 71);
+    border-radius: 5px;
+}
+#exc{
+    background-color: rgb(122, 4, 83);
+    border-radius: 5px;
+}
+#ext{
+    background-color: #318CE7;
+    border-radius: 5px;
+}
+ion-title #multicolortext {
+    background-image: linear-gradient(to left, violet, indigo, blue, green, yellow, orange, red);   
+    -webkit-background-clip: text;
+    -moz-background-clip: text; 
+    background-clip: text;
+    color: transparent;
+    } 

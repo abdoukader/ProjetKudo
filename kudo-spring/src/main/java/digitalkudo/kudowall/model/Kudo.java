@@ -20,7 +20,6 @@ public class Kudo {
     private String nombeneficiaire;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date datekudo;
-
     // Relation Kudo_Utilisateur
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn
