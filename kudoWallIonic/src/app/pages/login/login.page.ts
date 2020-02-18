@@ -39,7 +39,7 @@ onLogin(data) {
         this._auth.saveToken(jwt);
 
         
-      this._router.navigate(['/kudo']);
+      this._router.navigate(['/typeKudo']);
       },
        err => console.log(err)
     );

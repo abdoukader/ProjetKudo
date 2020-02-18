@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { InscriptionService } from 'src/app/services/inscription.service';
 import { AlertController } from '@ionic/angular';
+import { ActivatedRoute, Router} from '@angular/router'
 
 @Component({
   selector: 'app-kudo',
@@ -10,15 +11,22 @@ import { AlertController } from '@ionic/angular';
 export class KudoPage implements OnInit {
 
   data: any=[];
-
-
-  constructor(private kudos: InscriptionService, private alertController:AlertController) { }
+ 
+  idk= this.actRoute.snapshot.params['id'];
+  constructor(private kudos: InscriptionService, private alertController:AlertController, public actRoute: ActivatedRoute) { }
 
   ngOnInit() {
+    
+  }
+  
+  formKudo = {
+    point:this.idk,
+    nombeneficiaire:"",
+    commentaire:""
   }
 
-  fairekudo(data){
-    this.kudos.faireKudo(data)
+  fairekudo(){
+    this.kudos.faireKudo(this.formKudo)
     .subscribe(
       res => {
         this.presentAlertError()
@@ -30,7 +38,7 @@ export class KudoPage implements OnInit {
         console.log(err)
       }
     )
-    console.log(data)
+    console.log(this.formKudo)
   }
 
   async presentAlertError(){

@@ -34,7 +34,7 @@ public class KudoWallController<id> {
         return kudoPointRepository.save(kudoPoint);
 
     }
-
+    @CrossOrigin("http://localhost:8100")
     @PostMapping(value = "/personne")
     @PreAuthorize("hasAuthority('ROLE_USER')")
     public Message kudoPersonne(@RequestBody(required = false) KudoWall kw) throws Exception {
@@ -116,7 +116,7 @@ public class KudoWallController<id> {
                 KudoPoint pointkudo = kudoPointRepository.findByPoint(kw.getPoint());
                 Integer point = pointkudo.getPoint();
                 kudo.setKudoPoint(pointkudo);
-                teamBeneficiaire.setNbrepoint(teamBeneficiaire.getNbrepoint((long) 0) + point);
+                teamBeneficiaire.setNbrepoint(teamBeneficiaire.getNbrepoint() + point);
                 user.setNbrekudo(user.getNbrekudo() + 1);
 
         utilisateurRepository.save(teamBeneficiaire);

@@ -91,6 +91,14 @@ public class Utilisateur {
         return id;
     }
 
+    public Integer getNbrepoint() {
+        return nbrepoint;
+    }
+
+    public void setNbrepoint(Integer nbrepoint) {
+        this.nbrepoint = nbrepoint;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -143,6 +151,7 @@ public class Utilisateur {
         this.structure = structure;
     }
 
+<<<<<<< HEAD
     public Integer getNbrepoint() {
         return nbrepoint;
     }
@@ -153,6 +162,10 @@ public class Utilisateur {
 
     public Integer getNbrekudo() {
         return nbrekudo;
+=======
+    public List<Kudo> getKudo() {
+        return kudo;
+>>>>>>> 9877e641a7828aa48ed79398d3e78dd88304aed2
     }
 
     public void setNbrekudo(Integer nbrekudo) {
