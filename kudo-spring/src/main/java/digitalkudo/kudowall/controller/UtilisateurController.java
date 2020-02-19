@@ -46,7 +46,7 @@ public class UtilisateurController {
         u.setStructures(structure);
 
         Role role = new Role();
-        Role role1 =roleRepository.findById(1);//ROLE_USER
+        Role role1 =roleRepository.findById(2);//ROLE_USER
         Set<Role> roles = new HashSet<>();
         roles.add(role1);
         u.setPassword(encoder.encode(u.getPassword()));

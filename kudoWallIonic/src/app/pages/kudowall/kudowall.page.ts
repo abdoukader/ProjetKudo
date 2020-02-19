@@ -11,8 +11,7 @@ export class KudowallPage implements OnInit {
   constructor(private listekudos: InscriptionService) { }
   kudos: any = [];
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   kudowall(kudos) {
   this.listekudos.kudowall(kudos)

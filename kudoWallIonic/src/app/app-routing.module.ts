@@ -24,12 +24,7 @@ const routes: Routes = [
   { path: 'typeKudo',loadChildren: './pages/TypeKudo/typeKudo.module#TypeKudoPageModule'},
   { path: 'kudowall',loadChildren: './pages/kudowall/kudowall.module#KudowallPageModule' },
   { path: 'choix-beneficiaire', loadChildren: () => import('./choix-beneficiaire/choix-beneficiaire.module').then( m => m.ChoixBeneficiairePageModule) },
-  {
-    path: 'infinite-scroll',
-    loadChildren: () => import('./pages/infinite-scroll/infinite-scroll.module').then( m => m.InfiniteScrollPageModule)
-  },
 
-    
 ];
 
 @NgModule({

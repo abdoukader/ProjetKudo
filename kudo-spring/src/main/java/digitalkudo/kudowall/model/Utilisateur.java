@@ -55,7 +55,7 @@ public class Utilisateur {
     private Integer nbrekudo;
 
     //Relation Utilisateur_Role
-    @JsonIgnoreProperties({"users"})
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "user_roles",
     joinColumns = @JoinColumn(name = "user_id"),
@@ -68,11 +68,11 @@ public class Utilisateur {
     @JoinTable(name = "user_structures",
     joinColumns = @JoinColumn(name = "user_id"),
     inverseJoinColumns = @JoinColumn(name = "structure_id"))
-
     private Set<Structure> structures = new HashSet<>();
 
     //Relaton Utilisateur_kudo
     @OneToMany(mappedBy = "utilisateur", cascade = CascadeType.ALL)
+    @JsonIgnore
     public List<Kudo> kudo;
 
     public Utilisateur() { }
@@ -86,7 +86,6 @@ public class Utilisateur {
         this.nbrekudo = nbrekudo;
         this.nbrekudo = nbrepoint;
     }
-
     public Long getId() {
         return id;
     }

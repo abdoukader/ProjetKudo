@@ -41,7 +41,9 @@ public class KudoWallController<id> {
         int compareTo;
         //recup info emmetteur
         Utilisateur user = UserDetailsService.getUserConnect();
-
+//        if(user.getRoles() != 'ROLE_USER'){
+//            throw new Exception("votre role d'amin ne vous permet pas d'effectuer cette requête");
+//        }
         //instanciation objet Kudo
         Kudo kudo = new Kudo();
 

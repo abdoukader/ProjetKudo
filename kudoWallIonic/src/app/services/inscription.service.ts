@@ -7,18 +7,15 @@ import { AutoCompleteService } from 'ionic4-auto-complete';
 @Injectable({
     providedIn: 'root'
 })
-export class InscriptionService  {
+export class InscriptionService{
 
   labelAttribute = 'structure';
   formValueAttribute ='id';
   private endpoint = 'http://127.0.0.1:8080/add/user';
   private URL = 'http://127.0.0.1:8080/user/showstructures/{id}';
   private endpoint1 = 'http://127.0.0.1:8080/kudo/personne';
-<<<<<<< HEAD
   private endpoint2 = 'http://127.0.0.1:8080/kudo/liste';
-=======
   private urliste = 'http://127.0.0.1:8080/user/listekudopoint'
->>>>>>> 9877e641a7828aa48ed79398d3e78dd88304aed2
 
   constructor(private http: HttpClient,private inscript :InscriptionService) { }
     
@@ -37,15 +34,15 @@ export class InscriptionService  {
       return this.http.post(this.endpoint1,data2)
     }
 
-<<<<<<< HEAD
     kudowall(kudos):Observable<any>{
       return this.http.get(this.endpoint2,kudos)
     }
-  }
-=======
+
+    //getKudopointDuKudo(id:number){
+      //return this.getElement("/utilisateur/affecterCompte/"+id);
+    //}
+      
     listekudoP(){
       return this.http.get(this.urliste);
     }
   }
-  
->>>>>>> 9877e641a7828aa48ed79398d3e78dd88304aed2
