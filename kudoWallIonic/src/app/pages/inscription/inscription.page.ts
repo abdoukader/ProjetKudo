@@ -112,11 +112,6 @@ import { from } from 'rxjs';
     }
 
     ngOnInit() {
-        // this.f= new NgForm({
-        //     structure: new name('', [
-        //         Validators.required
-        //     ])
-        // })
     }
 
 
