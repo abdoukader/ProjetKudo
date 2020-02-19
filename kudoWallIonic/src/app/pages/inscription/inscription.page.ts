@@ -114,8 +114,6 @@ import { from } from 'rxjs';
     ngOnInit() {
     }
 
-
-
     inscription(Data){
         this.inscrip.inscription(Data)
         .subscribe(
@@ -156,4 +154,5 @@ import { from } from 'rxjs';
         });
     return alert;
     }
+
 }

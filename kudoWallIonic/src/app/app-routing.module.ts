@@ -22,14 +22,10 @@ const routes: Routes = [
   { path: 'kudo/:id', loadChildren: './pages/kudo/kudo.module#KudoPageModule'},
   { path: 'inscription',loadChildren: './pages/inscription/inscription.module#InscriptionPageModule'},
   { path: 'typeKudo',loadChildren: './pages/TypeKudo/typeKudo.module#TypeKudoPageModule'},
-  {
-    path: 'choix-beneficiaire',
-    loadChildren: () => import('./choix-beneficiaire/choix-beneficiaire.module').then( m => m.ChoixBeneficiairePageModule)
-  }
+  { path: 'kudowall',loadChildren: './pages/kudowall/kudowall.module#KudowallPageModule' },
+  { path: 'choix-beneficiaire', loadChildren: () => import('./choix-beneficiaire/choix-beneficiaire.module').then( m => m.ChoixBeneficiairePageModule) },
 
-   
 ];
-
 
 @NgModule({
   imports: [

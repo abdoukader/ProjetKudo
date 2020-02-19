@@ -12,6 +12,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/kudo",method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE })
@@ -40,7 +41,9 @@ public class KudoWallController<id> {
         int compareTo;
         //recup info emmetteur
         Utilisateur user = UserDetailsService.getUserConnect();
-
+//        if(user.getRoles() != 'ROLE_USER'){
+//            throw new Exception("votre role d'amin ne vous permet pas d'effectuer cette requête");
+//        }
         //instanciation objet Kudo
         Kudo kudo = new Kudo();
 
@@ -61,9 +64,8 @@ public class KudoWallController<id> {
         }
         //verifier si le beneficiaire n'est pas l'émetteur
 
-        if (user.getNom().compareTo(beneficiaire.getNom()) == 0) 
-        {
-            throw new Exception("vous ne pouvez pas être le bénéficiaire du kudo que vous émettez !" + user.getNom());
+        if (user.getNom().compareTo(beneficiaire.getNom()) == 0) {
+            throw new Exception("vous ne pouvez pas être le bénéficiaire du kudo que vous émettez " + user.getNom() + "!");
         } else {
 
             //recup point kudo
@@ -89,11 +91,17 @@ public class KudoWallController<id> {
             utilisateurRepository.save(user);
             kudoRepository.save(kudo);
             String msg = "Felicitation " + user.getNom() + "  vous venez de faire un kudo à " + beneficiaire.getNom();
-            Message message = new Message(200,msg);
+            Message message = new Message(200, msg);
             return message;
         }
+
     }
-    @PostMapping(value = "/team")
+    @GetMapping(value = "/liste")
+    public List <Kudo> kudos(@RequestBody(required = false)Kudo Kudo){
+        return kudoRepository.findAll();
+    }
+
+   /* @PostMapping(value = "/team")
     @PreAuthorize("hasAuthority('ROLE_USER')")
     public Message kudoTeam(@RequestBody(required = false) KudoWall kw) throws Exception {
         Utilisateur user = UserDetailsService.getUserConnect();
@@ -119,7 +127,7 @@ public class KudoWallController<id> {
         String msg = "Felicitation " + user.getNom() + "  vous venez de faire un kudo à la team" + teamBeneficiaire.getNom();
         Message message = new Message(200,msg);
         return message;
-    }
+    }*/
 
     }
-}
+
