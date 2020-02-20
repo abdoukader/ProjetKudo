@@ -33,7 +33,6 @@ public class Utilisateur {
     private String nom;
 
     @NaturalId
-    @NotBlank
     @Size(max = 50)
     @Email
     private String email;
@@ -42,11 +41,9 @@ public class Utilisateur {
     private String telephone;
     @Column(length = 50)
 
-    @NotBlank
     @Size(min=3, max = 50)
     private String username;
 
-    @NotBlank
     @Size(min=6, max = 100)
     private String password;
 

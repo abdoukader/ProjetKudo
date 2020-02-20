@@ -62,7 +62,6 @@ public class UtilisateurController {
 
         return utilisateurRepository.findAll();
     }
-
     @PostMapping(value = "/structure")
     //@PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public Structure addStructure(@RequestBody(required = false) Structure s){

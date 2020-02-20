@@ -1,18 +1,13 @@
 package digitalkudo.kudowall.controller;
 
 import digitalkudo.kudowall.model.*;
-import digitalkudo.kudowall.repository.KudoPointRepository;
-import digitalkudo.kudowall.repository.KudoRepository;
-import digitalkudo.kudowall.repository.StructureRepository;
-import digitalkudo.kudowall.repository.UtilisateurRepository;
+import digitalkudo.kudowall.repository.*;
 import digitalkudo.kudowall.services.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @RestController
 @RequestMapping(value = "/kudo",method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE })
@@ -26,14 +21,20 @@ public class KudoWallController<id> {
     @Autowired
     private UserDetailsServiceImpl UserDetailsService;
 
+    @Autowired
+    private StructureRepository structureRepository;
+
+    @Autowired
+    private RoleRepository roleRepository;
+
     @PostMapping(value = "/kudopoint")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public KudoPoint kudopoint(@RequestBody(required = false) KudoPoint kudoPoint) {
         kudoPoint.getLibelle();
         kudoPoint.getPoint();
         return kudoPointRepository.save(kudoPoint);
-
     }
+
     @CrossOrigin("http://localhost:8100")
     @PostMapping(value = "/personne")
     @PreAuthorize("hasAuthority('ROLE_USER')")
@@ -63,7 +64,6 @@ public class KudoWallController<id> {
             throw new Exception("Cet utilisateur n\'est pas inscrit");
         }
         //verifier si le beneficiaire n'est pas l'émetteur
-
         if (user.getNom().compareTo(beneficiaire.getNom()) == 0) {
             throw new Exception("vous ne pouvez pas être le bénéficiaire du kudo que vous émettez " + user.getNom() + "!");
         } else {
@@ -96,38 +96,119 @@ public class KudoWallController<id> {
         }
 
     }
+
+    @CrossOrigin("http://localhost:8100")
     @GetMapping(value = "/liste")
-    public List <Kudo> kudos(@RequestBody(required = false)Kudo Kudo){
+    public List<Kudo> kudos(@RequestBody(required = false) Kudo Kudo) {
         return kudoRepository.findAll();
     }
 
-   /* @PostMapping(value = "/team")
+
+    @CrossOrigin("http://localhost:8100")
+    @PostMapping(value = "/team")
     @PreAuthorize("hasAuthority('ROLE_USER')")
-    public Message kudoTeam(@RequestBody(required = false) KudoWall kw) throws Exception {
+    public String kudoTeam(@RequestBody(required = false) KudoWall kw) throws Exception {
         Utilisateur user = UserDetailsService.getUserConnect();
         Kudo kudo = new Kudo();
         kudo.setDatekudo(new Date());
-        kudo.setNombeneficiaire(kw.getNombeneficiaire());
         kudo.setCommentaire(kw.getCommentaire());
+        kudo.setNombeneficiaire(kw.getNombeneficiaire());
         kudo.setUtilisateur(user);
-        Utilisateur teamBeneficiaire = utilisateurRepository.findByNom(kw.getNombeneficiaire());
-        if (teamBeneficiaire == null){
-            throw new Exception("cette team n\'existe pas");
+
+        Utilisateur teambeneficiaire = utilisateurRepository.findByNom(kw.getNombeneficiaire());
+        if (teambeneficiaire == null) {
+            Utilisateur team = new Utilisateur();
+            team.setNom(team.getNom());
+            team.setNbrepoint(0);
+
+            Structure s = structureRepository.findById(team.getStructure()).get();
+            Set<Structure> structure = new HashSet<>();
+            List<Structure> structures = new ArrayList<>();
+            structures = structureRepository.findAll();
+            if (!structures.isEmpty()) {
+                structures.forEach(Structure -> {
+                    if (team.getStructure().equals(Structure.getId())) {
+                        Structure.setId(Structure.getId());
+                    }
+                });
+            }
+            structure.add(s);
+            team.setStructures(structure);
+
+            Role role = new Role();
+            Role role1 = roleRepository.findById(2);//ROLE_USER
+            Set<Role> roles = new HashSet<>();
+            roles.add(role1);
+            team.setRoles(roles);
         }
-        else{
-                KudoPoint pointkudo = kudoPointRepository.findByPoint(kw.getPoint());
-                Integer point = pointkudo.getPoint();
-                kudo.setKudoPoint(pointkudo);
-                teamBeneficiaire.setNbrepoint(teamBeneficiaire.getNbrepoint() + point);
-                user.setNbrekudo(user.getNbrekudo() + 1);
+            //recup point kudo
+            KudoPoint pointkudo = kudoPointRepository.findByPoint(kw.getPoint());
 
-        utilisateurRepository.save(teamBeneficiaire);
+            //recup point kudo
+            Integer point = pointkudo.getPoint();
+            kudo.setKudoPoint(pointkudo);
+
+            //recup point beneficiaire
+            Integer points = teambeneficiaire.getNbrepoint();
+
+            //affecter point à beneficiaire
+            teambeneficiaire.setNbrepoint(points + point);
+
+            //recup kudos emmetteur
+            Integer kudos = user.getNbrekudo();
+
+            //affectation nbre kudo à l'emmetteur
+            user.setNbrekudo(kudos + 1);
+
+
+        String msg = "Felicitation " + user.getNom() + "  vous venez de faire un kudos à  la team " + teambeneficiaire.getNom();
+        Message message = new Message(200, msg);
+
         utilisateurRepository.save(user);
+        utilisateurRepository.save(teambeneficiaire);
         kudoRepository.save(kudo);
-        String msg = "Felicitation " + user.getNom() + "  vous venez de faire un kudo à la team" + teamBeneficiaire.getNom();
-        Message message = new Message(200,msg);
-        return message;
-    }*/
-
+        return msg;
     }
+
+}
+
+
+
+//        else {
+//
+//            //recup point kudo
+//            KudoPoint pointkudo = kudoPointRepository.findByPoint(kw.getPoint());
+//
+//            //recup point kudo
+//            Integer point = pointkudo.getPoint();
+//            kudo.setKudoPoint(pointkudo);
+//
+//            //recup point beneficiaire
+//            Integer points = teambeneficiaire.getNbrepoint();
+//
+//            //affecter point à beneficiaire
+//            teambeneficiaire.setNbrepoint(points + point);
+//
+//            //recup kudos emmetteur
+//            Integer kudos = user.getNbrekudo();
+//
+//            //affectation nbre kudo à l'emmetteur
+//            user.setNbrekudo(kudos + 1);
+//
+//        }
+//            String msg = "Felicitation " + user.getNom() +"    vous venez de faire un kudos à  "  + teambeneficiaire.getNom();
+//            Message message = new Message(200, msg);
+//
+//            utilisateurRepository.save(user);
+//            utilisateurRepository.save(teambeneficiaire);
+//            kudoRepository.save(kudo);
+//            return msg;
+//    }
+
+
+
+
+
+
+
 
