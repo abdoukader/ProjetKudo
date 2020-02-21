@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 @Table(name = "structure")
@@ -24,6 +25,9 @@ public class Structure {
     @NotBlank
     @Size(max = 20)
     private String lieu;
+
+    @OneToMany(mappedBy = "structure",cascade = CascadeType.ALL)
+    List <Utilisateur> utilisateur;
 
     public Structure(){
 

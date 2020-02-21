@@ -6,6 +6,7 @@ public class KudoWall {
         Date   datekudo;
         String nombeneficiaire;
         String commentaire;
+        Long structure;
         private Kudo kudo;
         String nom;
         String email;
@@ -40,6 +41,14 @@ public class KudoWall {
 
     public void setCommentaire(String commentaire) {
         this.commentaire = commentaire;
+    }
+
+    public Long getStructure() {
+        return structure;
+    }
+
+    public void setStructure(Long structure) {
+        this.structure = structure;
     }
 
     public String getNom() {

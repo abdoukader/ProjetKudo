@@ -1,7 +1,6 @@
 package digitalkudo.kudowall.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.NaturalId;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -50,6 +49,7 @@ public class Utilisateur {
     private Long    structure;
     private Integer nbrepoint;
     private Integer nbrekudo;
+    private Integer kudos;
 
     //Relation Utilisateur_Role
     @JsonIgnore
@@ -74,7 +74,7 @@ public class Utilisateur {
 
     public Utilisateur() { }
 
-    public Utilisateur(String nom, String email, String telephone, String username, String password, Integer nbrekudo, Integer nbrepoint) {
+    public Utilisateur(String nom, String email, String telephone, String username, String password, Integer nbrekudo, Integer nbrepoint,Integer kudos) {
         this.nom = nom;
         this.email = email;
         this.telephone = telephone;
@@ -82,6 +82,7 @@ public class Utilisateur {
         this.password = password;
         this.nbrekudo = nbrekudo;
         this.nbrekudo = nbrepoint;
+        this.kudos = kudos;
     }
     public Long getId() {
         return id;
@@ -154,6 +155,10 @@ public class Utilisateur {
     public void setNbrekudo(Integer nbrekudo) {
         this.nbrekudo = nbrekudo;
     }
+
+    public Integer getKudos() { return kudos; }
+
+    public void setKudos(Integer kudos) { this.kudos = kudos; }
 
     public Set<Role> getRoles() {
         return roles;

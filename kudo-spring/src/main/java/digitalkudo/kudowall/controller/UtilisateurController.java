@@ -11,8 +11,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
-
-
 @CrossOrigin("http://localhost:8100")
 @RestController
 @RequestMapping(value = "/add", method = RequestMethod.POST)
@@ -29,7 +27,7 @@ public class UtilisateurController {
     @PostMapping(value = "/user")
     public Utilisateur addUser(@RequestBody(required = false) Utilisateur u) {
         Utilisateur user = new Utilisateur(u.getNom(), u.getEmail(), u.getTelephone(), u.getUsername(),
-                encoder.encode(u.getPassword()),u.getNbrekudo(),u.getNbrepoint());
+                encoder.encode(u.getPassword()),u.getNbrekudo(),u.getNbrepoint(),u.getKudos());
 
         Structure s =structureRepository.findById(u.getStructure()).get();
         Set<Structure> structure = new HashSet<>();
@@ -53,6 +51,7 @@ public class UtilisateurController {
         u.setRoles(roles);
         u.setNbrekudo(0);
         u.setNbrepoint(0);
+        u.setKudos(0);
         return utilisateurRepository.save(u);
     }
 
@@ -62,6 +61,7 @@ public class UtilisateurController {
 
         return utilisateurRepository.findAll();
     }
+
     @PostMapping(value = "/structure")
     //@PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public Structure addStructure(@RequestBody(required = false) Structure s){
