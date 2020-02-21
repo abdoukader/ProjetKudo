@@ -41,6 +41,11 @@ public class Kudo {
         this.getCommentaire();
 
     }
+
+    public Kudo(String nom) {
+
+    }
+
     //getter and setters
     public Long getIdK() {
         return idK;
