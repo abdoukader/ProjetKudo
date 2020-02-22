@@ -102,6 +102,7 @@ public class KudoWallController<id> {
 
         Utilisateur teambeneficiaire = utilisateurRepository.findByNom(kw.getNombeneficiaire());
         if (teambeneficiaire != null) {
+
             //recup point kudo
             KudoPoint pointkudo = kudoPointRepository.findByPoint(kw.getPoint());
 
@@ -162,11 +163,3 @@ public class KudoWallController<id> {
        }
 
         }
-
-
-
-
-
-
-
-

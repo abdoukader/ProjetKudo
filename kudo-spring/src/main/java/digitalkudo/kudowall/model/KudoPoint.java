@@ -6,6 +6,7 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "kudoPoint")
 public class KudoPoint {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

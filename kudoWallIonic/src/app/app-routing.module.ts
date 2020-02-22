@@ -24,6 +24,10 @@ const routes: Routes = [
   { path: 'typeKudo',loadChildren: './pages/TypeKudo/typeKudo.module#TypeKudoPageModule'},
   { path: 'kudowall',loadChildren: './pages/kudowall/kudowall.module#KudowallPageModule' },
   { path: 'choix-beneficiaire', loadChildren: () => import('./choix-beneficiaire/choix-beneficiaire.module').then( m => m.ChoixBeneficiairePageModule) },
+  {
+    path: 'kudo-team',
+    loadChildren: () => import('./pages/kudo-team/kudo-team.module').then( m => m.KudoTeamPageModule)
+  },
 
 ];
 
