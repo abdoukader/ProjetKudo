@@ -1,6 +1,5 @@
 package digitalkudo.kudowall.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;

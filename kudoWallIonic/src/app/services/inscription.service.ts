@@ -38,10 +38,10 @@ export class InscriptionService{
       return this.http.get(this.endpoint2,kudos)
     }
 
-    //getKudopointDuKudo(id:number){
-      //return this.getElement("/utilisateur/affecterCompte/"+id);
-    //}
-      
+    getKudopointDuKudo(id:number):Observable<any>{
+      return this.http.get(this.urliste)
+    }
+    
     listekudoP(){
       return this.http.get(this.urliste);
     }

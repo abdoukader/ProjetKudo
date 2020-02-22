@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface KudoRepository extends JpaRepository<Kudo, Long> {
     List<Kudo> findAll();
-/*
+
     List<Kudo> findByNombeneficiaire(String nombeneficiaire);
-    Boolean existsByNombeneficiaire(String nombeneficiaire);*/
+    Boolean existsByNombeneficiaire(String nombeneficiaire);
 }
