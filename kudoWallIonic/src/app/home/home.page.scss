@@ -1,4 +1,32 @@
-.welcome-card img {
-  max-height: 35vh;
-  overflow: hidden;
+// .welcome-card img {
+//   max-height: 35vh;
+//   overflow: hidden;
+//   background-color:orange ;
+  
+// }
+.but{
+  background-color:orangered;
+  width: 90%;
+  border-radius: 30%;
+  margin-left: 5%;
+  color: aliceblue;
+}
+.but1{
+  background-color:black;
+  width: 90%;
+  border-radius: 30%;
+  margin-left: 5%;
+  color: aliceblue;
+}
+.tout{
+  background-color:orange ;
+  width: 100%;
+  height: 100;
+}
+ion-card-header {
+  --ion-background-color: orange;
+}
+ion-toolbar{
+  background-color:orangered;
+  font-size: 80%;
 }

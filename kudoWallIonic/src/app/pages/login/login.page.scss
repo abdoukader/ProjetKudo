@@ -1,10 +1,11 @@
 .loginForm {
    
     padding: 4px;
+    color:black;
 }
 .btnLogin {
     margin-top: 5vh;
-    border: green;
+    border: black;
 }
 #cadre{
     height: 300px;
@@ -25,3 +26,14 @@
     left: 50%;
     transform: translate(-50%, -50%);
 }
+ion-toolbar{
+    background-color:orangered;
+    font-size: 80%;
+}
+.but1{
+    background-color:orangered;
+    width: 100%;
+    border-radius: 30%;
+    //margin-left: 3%;
+    color: black;
+  }

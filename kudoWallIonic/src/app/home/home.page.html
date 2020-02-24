@@ -1,8 +1,8 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
+    <ion-toolbar  color="orange">
+      <ion-title class="ion-text-center">KUDO WALL</ion-title>
+    </ion-toolbar>
     <ion-title>
       Home
     </ion-title>
@@ -10,7 +10,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-card class="welcome-card">
+  <ion-card >
     <img src="/assets/kuDImage.jpg" alt=""/>
     <ion-card-header>
       <ion-card-subtitle>Get Started</ion-card-subtitle>
@@ -22,14 +22,10 @@
       </p>
     </ion-card-content>
 
-    <ion-button expand="block" shape="round" color="success" routerLink="/login">Connexion</ion-button>
+    <ion-button expand="block" shape="round" color="#f77911" class="but"routerLink="/login">Connexion</ion-button>
     <br>
-    <ion-button expand="block" shape="round" routerLink="/inscription">Inscription</ion-button>
+    <ion-button expand="block" shape="round" color="#f77911" class="but1"routerLink="/inscription">Inscription</ion-button>
+    <br>
+    <!-- <ion-button   class="but1" routerLink="/inscription">Inscription</ion-button> -->
   </ion-card>
-
-  <ion-list lines="none">
-    <ion-list-header>
-      <ion-label>Resources</ion-label>
-    </ion-list-header>
-  </ion-list>
 </ion-content>

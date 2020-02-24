@@ -24,8 +24,4 @@ export class KudowallPage implements OnInit {
   }
   );
   }
-
-  getKudopointDuKudo(id:number){
-    return this.getKudopointDuKudo;
-  }
 }

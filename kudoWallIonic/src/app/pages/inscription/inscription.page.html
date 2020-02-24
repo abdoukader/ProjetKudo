@@ -18,8 +18,8 @@
 
 
 <ion-header>
-  <ion-toolbar  color="primary">
-    <ion-title class="ion-text-center">Inscription</ion-title>
+  <ion-toolbar  color="orange">
+    <ion-title class="ion-text-center">INSCRIPTION</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -48,14 +48,15 @@
                 <ion-label position="floating">Password</ion-label>
                 <ion-input type="password" name="password" ngModel required></ion-input>
               </ion-item>
+      
               <ion-item>
-                  <ion-label position="floating">Structure</ion-label>
-                  <!-- <ion-input type="text"  name="sousStructure" #sousStructure=ngModel  [(ngModel)]="f.sousStructure" class="form-control" (keyup)="test($event)" ></ion-input> -->
-                  <ion-searchbar (ionInput)="FilterJsonData($event)"></ion-searchbar>
-                  <ion-list>
-                    <ion-item (click)="selectVal(item.sousStructure)" *ngFor="let item of Data"></ion-item>
-                  </ion-list>
+                <ion-label position="floating">Structure </ion-label>
+                <ion-input type="text" name="structure" #sousStructure (keyup)="filterStructure(sousStructure)" (ionFocus)="filtered = true" ngModel required></ion-input>
+                <div class="list" *ngIf="filtered">
+                    <li class="item" *ngFor="let item of filterStr" (click)="selectStr(sousStructure, item.id, item.sousStructure)">{{item.sousStructure}}</li>
+                  </div>
               </ion-item>
+
             
                   <ion-item>
                       <ion-label position="floating">Téléphone</ion-label>

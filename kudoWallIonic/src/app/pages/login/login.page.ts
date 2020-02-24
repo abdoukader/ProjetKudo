@@ -16,9 +16,9 @@ export class LoginPage implements OnInit {
 
   async presentAlertError() {
     const alert = await this.alertController.create({
-      header: 'connexion reussie',
+      header: 'BIENVENUE',
       subHeader: 'KUDOWALL',
-      message: 'connexion non reussie',
+      message: 'connexion reussie',
       buttons: ['OK']
     });
 
@@ -30,15 +30,10 @@ onLogin(data) {
     .subscribe(
       res => {
         this.presentAlertError();
-      //Swal.fire('Authentification Réussie!!!')
       console.log(data);
-         console.log(res);
-        // tslint:disable-next-line: prefer-const
+      console.log(res);
       let jwt = (res.token);
-        // tslint:disable-next-line: align
-        this._auth.saveToken(jwt);
-
-        
+      this._auth.saveToken(jwt);
       this._router.navigate(['/typeKudo']);
       },
        err => console.log(err)

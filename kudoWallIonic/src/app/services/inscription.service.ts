@@ -15,7 +15,8 @@ export class InscriptionService{
   private URL = 'http://127.0.0.1:8080/user/showstructures/{id}';
   private endpoint1 = 'http://127.0.0.1:8080/kudo/personne';
   private endpoint2 = 'http://127.0.0.1:8080/kudo/liste';
-  private urliste = 'http://127.0.0.1:8080/user/listekudopoint'
+  private urliste = 'http://127.0.0.1:8080/add/listekudopoint';
+  private urllsiteStructure = 'http://127.0.0.1:8080/add/liste-structures';
 
   constructor(private http: HttpClient,private inscript :InscriptionService) { }
     
@@ -25,9 +26,9 @@ export class InscriptionService{
 
       }
 
-    inscription(data1):Observable<any> {
+    inscription(Data):Observable<any> {
       
-      return this.http.post(this.endpoint, data1);
+      return this.http.post(this.endpoint, Data);
     }
 
     faireKudo(data2):Observable<any>{
@@ -38,11 +39,15 @@ export class InscriptionService{
       return this.http.get(this.endpoint2,kudos)
     }
 
-    getKudopointDuKudo(id:number):Observable<any>{
-      return this.http.get(this.urliste)
-    }
-    
+    //getKudopointDuKudo(id:number){
+      //return this.getElement("/utilisateur/affecterCompte/"+id);
+    //}
+      
     listekudoP(){
       return this.http.get(this.urliste);
+    }
+
+    listeStructure(){
+      return this.http.get(this.urllsiteStructure)
     }
   }

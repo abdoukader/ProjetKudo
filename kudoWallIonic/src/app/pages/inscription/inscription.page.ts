@@ -5,6 +5,7 @@ import { FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
 import { AutoCompleteService } from 'ionic4-auto-complete';
 import { from } from 'rxjs';
+import { NULL_EXPR } from '@angular/compiler/src/output/output_ast';
 
 
 @Component({
@@ -15,107 +16,57 @@ import { from } from 'rxjs';
   export class InscriptionPage implements OnInit {
     
     Data: any=[];
-    structure: any;
+    structure: any=[];
+    lStruc:any[];
     f: any; 
+    str: any=[];
+    filterStr: any=[];
+    filtered = false;
+    selectedId = null;
 
-    constructor(private inscrip: InscriptionService,private alertController:AlertController) { 
-        this.initializationData();
+    constructor(private inscrip: InscriptionService,private alertController:AlertController, private structureliste:InscriptionService ) { 
+        
     }
 
-    FilterJsonData(ev:any)
-    {
-        this.initializationData();
-        const val = ev.target.value;
-        if(val && val.trim() != '')
-        {
-            this.Data = this.Data.filter((item)=>{
-                return (item.sousStructure.toLowerCase().indexOf(val.toLowerCase())>-1);
-            })
-        }
-    }
-    selectVal(val)
-    {
-        alert("you have select = "+val);
-    }
-
-    initializationData()
-    {
-        this.Data = [
-            {
-                "id": 1,
-                "departement": "DSI/DAC",
-                "lieu": "NSIA",
-                "sousStructure": "COE"
-            },
-            {
-                "id": 2,
-                "departement": "DSI/DAC",
-                "lieu": "NSIA",
-                "sousStructure": "DIF"
-            },
-            {
-                "id": 3,
-                "departement": "DSI/DAC",
-                "lieu": "NSIA",
-                "sousStructure": "CES"
-            },
-            {
-                "id": 4,
-                "departement": "DSI/DAC",
-                "lieu": "SABLUX",
-                "sousStructure": "SMC"
-            },
-            {
-                "id": 5,
-                "departement": "DSI/DAC",
-                "lieu": "SABLUX",
-                "sousStructure": "EAI"
-            },
-            {
-                "id": 6,
-                "departement": "DSI/DAC",
-                "lieu": "SABLUX",
-                "sousStructure": "2AI"
-            },
-            {
-                "id": 7,
-                "departement": "DSI/DAC",
-                "lieu": "SABLUX",
-                "sousStructure": "INS"
-            },
-            {
-                "id": 8,
-                "departement": "DSI/DAC",
-                "lieu": "SABLUX",
-                "sousStructure": "APS"
-            },
-            {
-                "id": 9,
-                "departement": "DSI/DAC",
-                "lieu": "SABLUX",
-                "sousStructure": "ILAB"
-            },
-            {
-                "id": 10,
-                "departement": "DSI/DAC",
-                "lieu": "SABLUX",
-                "sousStructure": "OCIO"
-            },
-            {
-                "id": 11,
-                "departement": "DSI/DAC",
-                "lieu": "SABLUX",
-                "sousStructure": "CSPS"
-            },
-
-        ]
-    }
 
     ngOnInit() {
+        this.listeStructure()
     }
 
+    listeStructure(){
+        this.structureliste.listeStructure().subscribe(
+            rep=> {
+                this.str=rep
+                this.filterStr = this.str;
+                console.log(rep);
+            },err=>console.log(err)
+            
+        );
+
+    }
+
+    filterStructure(e: any) {
+        const val = e.value.toLowerCase();
+        this.filterStr = this.str.filter((s: any) => {
+            return s.sousStructure.toLowerCase().indexOf(val) > -1;
+        })
+        console.log(this.filterStr);
+    }
+
+    selectStr(input: any, id: number, nom: string) {
+        input.value = nom;
+        this.selectedId = id;
+        this.filtered = false;
+    }
+    
     inscription(Data){
-        this.inscrip.inscription(Data)
+        const st = this.str.filter((s: any) => s.id === +this.selectedId);
+        if(this.selectedId === null || (st.length > 0 && st[0].sousStructure !== Data.value.structure)) {
+            this.selectedId = null;
+            return;
+        }
+        Data.value.structure = this.selectedId;
+        this.inscrip.inscription(Data.value)
         .subscribe(
             res => {
                 this.presentAlertError()
