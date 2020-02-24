@@ -1,39 +1,39 @@
 <ion-app>
   <ion-header translucent>
     <ion-toolbar  color="orange">
-      <ion-title class="ion-text-center">CHOIX KUDO</ion-title>
+      <ion-title class="ion-text-center">CHOIX KUDO TEAM</ion-title>
     </ion-toolbar>
   </ion-header>
   
   <ion-content fullscreen >
   <ion-card class="akt">
     <div *ngFor="let test of listeku; let pnt = index">
-      <ion-card *ngIf="test.id == 1" class="col-md-5 MB" routerLink="/kudo/{{test.id}}">
+      <ion-card *ngIf="test.id == 1" class="col-md-5 MB" routerLink="/kudo-team/{{test.id}}">
         <ion-card-header>
           <ion-card-subtitle><strong>MERCI beaucoup </strong></ion-card-subtitle>
         </ion-card-header>
       </ion-card>
-      <ion-card *ngIf="test.id == 2" class="col-md-5 TH"routerLink="/kudo/{{test.id}}">
+      <ion-card *ngIf="test.id == 2" class="col-md-5 TH"routerLink="/kudo-team/{{test.id}}">
         <ion-card-header>
-          <ion-card-subtitle><strong>Extraordinaire </strong></ion-card-subtitle>
+          <ion-card-subtitle><strong>Tres heureux </strong></ion-card-subtitle>
         </ion-card-header>
       </ion-card>
-      <ion-card *ngIf="test.id == 3" class="col-md-5 FT" routerLink="/kudo/{{test.id}}">
+      <ion-card *ngIf="test.id == 3" class="col-md-5 FT" routerLink="/kudo-team/{{test.id}}">
         <ion-card-header>
           <ion-card-subtitle><strong>Felicitations   </strong></ion-card-subtitle>
         </ion-card-header>
       </ion-card>
-      <ion-card *ngIf="test.id == 4" class="col-md-5 BJ" routerLink="/kudo/{{test.id}}">
+      <ion-card *ngIf="test.id == 4" class="col-md-5 BJ" routerLink="/kudo-team/{{test.id}}">
         <ion-card-header >
           <ion-card-subtitle><strong>Bien joue </strong></ion-card-subtitle>
         </ion-card-header>
       </ion-card>
-      <ion-card *ngIf="test.id == 5" class="col-md-5 ET" routerLink="/kudo/{{test.id}}">
+      <ion-card *ngIf="test.id == 5" class="col-md-5 ET" routerLink="/kudo-team/{{test.id}}">
         <ion-card-header>
           <ion-card-subtitle><strong>Excellent Travail</strong></ion-card-subtitle>
         </ion-card-header>
       </ion-card>
-      <ion-card *ngIf="test.id == 6" class="col-md-5 ED" routerLink="/kudo/{{test.id}}">
+      <ion-card *ngIf="test.id == 6" class="col-md-5 ED" routerLink="/kudo-team/{{test.id}}">
         <ion-card-header>
           <ion-card-subtitle><strong>Extraordinaire</strong></ion-card-subtitle>
         </ion-card-header>

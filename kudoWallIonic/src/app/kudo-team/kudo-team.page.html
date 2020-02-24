@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar id="tete">
+    <ion-title class="ion-text-center">Faire un kudoTeam</ion-title>
+    <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card  *ngIf="!isLoading">
+      <img id="cadre" src="../../../assets/imageskudos.png" alt="" />
+      <div class="kudo">
+        <ion-card-content>
+
+          <form #form="ngForm">
+                  <ion-item>
+                      <ion-label position="floating">TeamBénéficiaire</ion-label>
+                      <ion-input type="text" id="nombeneficiaire" [(ngModel)]="formKudo.nombeneficiaire" name="nombeneficiaire"  required></ion-input>
+                  </ion-item>
+                 <ion-item>
+                    <ion-label position="floating">Structure </ion-label>
+                    <ion-input type="text" name="structure" #sousStructure (keyup)="filterStructure(sousStructure)" (ionFocus)="filtered = true" ngModel required></ion-input>
+                    <div class="list" *ngIf="filtered">
+                        <li class="item" *ngFor="let item of filterStr" (click)="selectStr(sousStructure, item.id, item.sousStructure)">{{item.sousStructure}}</li>
+                    </div>
+                  </ion-item>
+                  <br>  
+                  <ion-item>
+                       <ion-label position="floating">Commentaire</ion-label> 
+                       <ion-input type="text" id="commentaire"  [(ngModel)]="formKudo.commentaire" name="commentaire"  required></ion-input>
+                  </ion-item>
+                  <br>
+                  <!-- <ion-button (click)="fairekudo()" type="submit" expand="block" fill="outline" class="btnLogin">Djadieuf</ion-button> -->
+                  <ion-button (click)="faireKudoTeam()" type="submit" shape="round" expand="block" >JADIEUF</ion-button>
+              </form>
+        </ion-card-content>
+      </div> 
+    </ion-card>
+</ion-content>
