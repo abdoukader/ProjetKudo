@@ -19,6 +19,7 @@ public class KudoWall {
         Integer point;
         private KudoPoint kudoPoint;
 
+
     public Date getDatekudo() {
         return datekudo;
     }
@@ -41,14 +42,6 @@ public class KudoWall {
 
     public void setCommentaire(String commentaire) {
         this.commentaire = commentaire;
-    }
-
-    public Long getStructure() {
-        return structure;
-    }
-
-    public void setStructure(Long structure) {
-        this.structure = structure;
     }
 
     public String getNom() {
@@ -139,4 +132,11 @@ public class KudoWall {
         this.kudoPoint = kudoPoint;
     }
 
+    public Long getStructure() {
+        return structure;
+    }
+
+    public void setStructure(Long structure) {
+        this.structure = structure;
+    }
 }

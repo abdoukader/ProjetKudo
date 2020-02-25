@@ -17,7 +17,7 @@ public class UserPrinciple implements UserDetails {
     private String nom;
     private String email;
     private String username;
-    private String telephone;
+    private Integer telephone;
     private Integer nbrepoint;
     private Integer nbrekudo;
 
@@ -27,7 +27,7 @@ public class UserPrinciple implements UserDetails {
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserPrinciple(Long id, String nom,String email,String telephone,
+    public UserPrinciple(Long id, String nom,String email,Integer telephone,
                          String username, Integer nbrekudo,Integer nbrepoint,String password,
                          Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
@@ -71,7 +71,7 @@ public class UserPrinciple implements UserDetails {
         return email;
     }
 
-    public String getTelephone() { return telephone; }
+    public Integer getTelephone() { return telephone; }
 
     public Integer getNbrepoint(){ return nbrepoint; }
 

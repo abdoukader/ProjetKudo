@@ -21,10 +21,8 @@ public class KudoWallController<id> {
     private KudoRepository kudoRepository;
     @Autowired
     private UserDetailsServiceImpl UserDetailsService;
-
     @Autowired
     private StructureRepository structureRepository;
-
     @Autowired
     private RoleRepository roleRepository;
 
@@ -51,14 +49,15 @@ public class KudoWallController<id> {
         String exception1 = "Cet utilisateur n\'est pas inscrit";
         String exception2 = "vous ne pouvez pas être le bénéficiaire du kudo que vous émettez " + user.getNom() + "!";
         Utilisateur beneficiaire = utilisateurRepository.findByNom(kw.getNombeneficiaire());
+        //Utilisateur beneficiaireStruc = utilisateurRepository.findByStructure(kw.getStructure());
         if (beneficiaire == null) {
             Message InvalidCredential = new Message(500,exception1);
             return InvalidCredential;
-        }else if (user.getNom().compareTo(beneficiaire.getNom()) == 0) {
+        }else if (user.getNom().compareTo(beneficiaire.getNom()) == 0 ) {
             Message AbnormalOperation = new Message(500,exception2);
             return AbnormalOperation;
         } else {
-
+            //if( user.getStructures().equals(beneficiaireStruc.getStructures()) == false)
             KudoPoint pointkudo = kudoPointRepository.findByPoint(kw.getPoint());
 
             Integer point = pointkudo.getPoint();
@@ -76,7 +75,7 @@ public class KudoWallController<id> {
             String msg = "Felicitation " + user.getNom() + "  vous venez de faire un kudo à " + beneficiaire.getNom();
             Message message = new Message(200, msg);
             return message;
-        }
+         }
 
     }
 
@@ -103,24 +102,17 @@ public class KudoWallController<id> {
         Utilisateur teambeneficiaire = utilisateurRepository.findByNom(kw.getNombeneficiaire());
         if (teambeneficiaire != null) {
 
-            //recup point kudo
             KudoPoint pointkudo = kudoPointRepository.findByPoint(kw.getPoint());
-
-            //recup point kudo
             Integer point = pointkudo.getPoint();
             kudo.setKudoPoint(pointkudo);
 
-            //recup point beneficiaire
             Integer points = teambeneficiaire.getNbrepoint();
-
-            //affecter point à beneficiaire
             teambeneficiaire.setNbrepoint(points + point);
-
-            //recup kudos emmetteur
             Integer kudos = user.getNbrekudo();
-
-            //affectation nbre kudo à l'emmetteur
             user.setNbrekudo(kudos + 1);
+            Integer kudosrecutaem = teambeneficiaire.getKudos();
+            teambeneficiaire.setKudos(kudosrecutaem + 1);
+
             String msg = "Felicitation " + user.getNom() + "  vous venez de faire un kudos à  la team " + teambeneficiaire.getNom();
             Message message = new Message(200, msg);
 
@@ -130,36 +122,21 @@ public class KudoWallController<id> {
             return message;
 
         } else {
-                Utilisateur teamate = new Utilisateur();
-                teamate.setNom(kw.getNombeneficiaire());
-                teamate.setNbrepoint(0);
-                teamate.setKudos(0);
-                //recup point kudo
-                KudoPoint pointdukodo = kudoPointRepository.findByPoint(kw.getPoint());
+            Utilisateur teamate = new Utilisateur();
+            teamate.setNom(kw.getNombeneficiaire());
+            teamate.setNbrepoint(0);
+            KudoPoint pointdukodo = kudoPointRepository.findByPoint(kw.getPoint());
+            Integer point = pointdukodo.getPoint();
+            kudo.setKudoPoint(pointdukodo);
+            teamate.setNbrepoint(pointdukodo.getPoint());
+            teamate.setKudos(1);
 
-               //recup point kudo
-               Integer point = pointdukodo.getPoint();
-                kudo.setKudoPoint(pointdukodo);
-                //affecter nbre kudos à émetteur
-                teamate.setKudos(1);
-
-               //affecter point à beneficiaire
-               teamate.setNbrepoint(0 + pointdukodo.getPoint());
-
-                //recup kudos emmetteur
-               Integer nbrekudo = user.getNbrekudo();
-
-               //affectation nbre kudo à l'emmetteur
-                user.setNbrekudo(nbrekudo + 1);
-
-                utilisateurRepository.save(teamate);
-
+            utilisateurRepository.save(teamate);
         }
-               utilisateurRepository.save(user);
-               kudoRepository.save(kudo);
-               String msg = "Felicitation " +user.getNom()+  "  votre kudos a été enregisté avec succès" ;
-               Message message = new Message(200, msg);
-               return message;
-       }
-
-        }
+        utilisateurRepository.save(user);
+        kudoRepository.save(kudo);
+        String msg = "Felicitation " +user.getNom()+  "  votre kudos a été enregisté avec succès" ;
+        Message message = new Message(200, msg);
+        return message;
+    }
+}

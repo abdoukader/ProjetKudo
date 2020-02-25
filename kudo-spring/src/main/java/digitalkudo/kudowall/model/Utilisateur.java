@@ -37,7 +37,7 @@ public class Utilisateur {
     private String email;
 
     @Column(length = 15)
-    private String telephone;
+    private Integer telephone;
     @Column(length = 50)
 
     @Size(min=3, max = 50)
@@ -74,7 +74,7 @@ public class Utilisateur {
 
     public Utilisateur() { }
 
-    public Utilisateur(String nom, String email, String telephone, String username, String password, Integer nbrekudo, Integer nbrepoint,Integer kudos) {
+    public Utilisateur(String nom, String email, Integer telephone, String username, String password, Integer nbrekudo, Integer nbrepoint,Integer kudos) {
         this.nom = nom;
         this.email = email;
         this.telephone = telephone;
@@ -108,11 +108,11 @@ public class Utilisateur {
         this.email = email;
     }
 
-    public String getTelephone() {
+    public Integer getTelephone() {
         return telephone;
     }
 
-    public void setTelephone(String telephone) {
+    public void setTelephone(Integer telephone) {
         this.telephone = telephone;
     }
 
@@ -183,4 +183,6 @@ public class Utilisateur {
     public void setKudo(List<Kudo> kudo) {
         this.kudo = kudo;
     }
+
+
 }
