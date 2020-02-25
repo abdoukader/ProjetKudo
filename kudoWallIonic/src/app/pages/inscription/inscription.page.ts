@@ -6,6 +6,7 @@ import { AlertController } from '@ionic/angular';
 import { AutoCompleteService } from 'ionic4-auto-complete';
 import { from } from 'rxjs';
 import { NULL_EXPR } from '@angular/compiler/src/output/output_ast';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -24,7 +25,7 @@ import { NULL_EXPR } from '@angular/compiler/src/output/output_ast';
     filtered = false;
     selectedId = null;
 
-    constructor(private inscrip: InscriptionService,private alertController:AlertController, private structureliste:InscriptionService ) { 
+    constructor(private _router: Router,private inscrip: InscriptionService,private alertController:AlertController, private structureliste:InscriptionService ) { 
         
     }
 
@@ -32,7 +33,6 @@ import { NULL_EXPR } from '@angular/compiler/src/output/output_ast';
     ngOnInit() {
         this.listeStructure()
     }
-
     listeStructure(){
         this.structureliste.listeStructure().subscribe(
             rep=> {
@@ -40,11 +40,8 @@ import { NULL_EXPR } from '@angular/compiler/src/output/output_ast';
                 this.filterStr = this.str;
                 console.log(rep);
             },err=>console.log(err)
-            
         );
-
     }
-
     filterStructure(e: any) {
         const val = e.value.toLowerCase();
         this.filterStr = this.str.filter((s: any) => {
@@ -60,18 +57,18 @@ import { NULL_EXPR } from '@angular/compiler/src/output/output_ast';
     }
     
     inscription(Data){
-        const st = this.str.filter((s: any) => s.id === +this.selectedId);
-        if(this.selectedId === null || (st.length > 0 && st[0].sousStructure !== Data.value.structure)) {
-            this.selectedId = null;
-            return;
-        }
+        // const st = this.str.filter((s: any) => s.id === +this.selectedId);
+        // if(this.selectedId === null || (st.length > 0 && st[0].sousStructure !== Data.value.structure)) {
+        //     this.selectedId = null;
+        //     return;
+        // }
         Data.value.structure = this.selectedId;
         this.inscrip.inscription(Data.value)
         .subscribe(
             res => {
                 this.presentAlertError()
-                window.confirm('inscription réussie');
                 console.log(res);
+                this._router.navigate(['/login']);
             },
             err=> {
                 window.confirm('inscription echouée')
@@ -103,7 +100,7 @@ import { NULL_EXPR } from '@angular/compiler/src/output/output_ast';
           buttons: ['OK']
         
         });
-    return alert;
+        await alert.present();
     }
 
 }

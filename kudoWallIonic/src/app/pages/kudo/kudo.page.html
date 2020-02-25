@@ -1,5 +1,5 @@
 <ion-header>
-    <ion-toolbar  color="danger">
+    <ion-toolbar class="tete">
       <ion-title class="ion-text-center">Faire un kudo</ion-title>
       <ion-buttons slot="start">
           <ion-menu-button></ion-menu-button>
@@ -28,11 +28,11 @@
                     <br>  
                     <ion-item>
                          <ion-label position="floating">Commentaire</ion-label> 
-                         <ion-input type="text" id="commentaire"  [(ngModel)]="formKudo.commentaire" name="commentaire"  required=""></ion-input>
+                         <ion-input type="text" id="commentaire"  [(ngModel)]="formKudo.commentaire" name="commentaire"  required></ion-input>
                     </ion-item>
                     <br>
                     <!-- <ion-button (click)="fairekudo()" type="submit" expand="block" fill="outline" class="btnLogin">Djadieuf</ion-button> -->
-                    <ion-button (click)="fairekudo()" type="submit" expand="block" fill="outline" class="btnLogin">Djadieuf</ion-button>
+                    <ion-button (click)="fairekudo()" type="submit" expand="block"  class="btnLogin">Djadieuf</ion-button>
                 </form>
           </ion-card-content>
         </div> 

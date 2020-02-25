@@ -14,9 +14,6 @@
     }
   </style>
 </head>
-
-
-
 <ion-header>
   <ion-toolbar  color="orange">
     <ion-title class="ion-text-center">INSCRIPTION</ion-title>
@@ -26,15 +23,12 @@
   </ion-toolbar>
 </ion-header>
 
-
-
-
 <ion-content>
   <ion-card class="loginForm" *ngIf="!isLoading">
       <div class="logo">
           
       </div>
-        <ion-card-content>add
+        <ion-card-content>
             <form #f="ngForm" (ngSubmit)="inscription(f)">
               <ion-item>
                   <ion-label position="floating">Email</ion-label>
@@ -64,10 +58,11 @@
             
                   <ion-item>
                       <ion-label position="floating">Téléphone</ion-label>
-                      <ion-input type="text" name="telephone" ngModel required></ion-input>
+                      <ion-input type="number" name="telephone" ngModel required></ion-input>
                   </ion-item>
                   
-                  <ion-button type="submit" expand="block" fill="outline" class="btnLogin"  shape="round">Se connecter</ion-button>
+                  <ion-button type="submit" expand="block"  class="btnLogin"  shape="round">S'Inscrire</ion-button>
+                  
                   
             </form>
         </ion-card-content>

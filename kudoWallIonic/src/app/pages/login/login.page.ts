@@ -34,7 +34,7 @@ onLogin(data) {
       console.log(res);
       let jwt = (res.token);
       this._auth.saveToken(jwt);
-      this._router.navigate(['/typeKudo']);
+      this._router.navigate(['/choix-beneficiaire']);
       },
        err => console.log(err)
     );

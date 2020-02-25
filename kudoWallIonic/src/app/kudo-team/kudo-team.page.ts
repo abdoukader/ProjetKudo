@@ -61,7 +61,7 @@ export class KudoTeamPage implements OnInit {
     //     return;
     // }
     this.formKudo.structure = this.selectedId;
-    this.kudos.faireKudo(this.formKudo)
+    this.kudos.faireKudoTeam(this.formKudo)
     .subscribe(
       res => {
         this.presentAlertError()
@@ -80,7 +80,7 @@ export class KudoTeamPage implements OnInit {
     const alert = await this.alertController.create({
       header: 'kudowall',
       subHeader: 'KUDO WALL',
-      message: 'kudo réussie',
+      message: 'kudo team réussie',
       buttons: ['ok']
     })
     await alert.present();
