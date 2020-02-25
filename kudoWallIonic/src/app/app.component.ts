@@ -16,11 +16,7 @@ export class AppComponent {
       url: '/home',
       icon: 'home'
     },
-    {
-      title: 'List',
-      url: '/list',
-      icon: 'list'
-    },
+  
 
     {
       title: 'Inscription',
@@ -34,12 +30,7 @@ export class AppComponent {
       icon: 'heart'
     },
 
-    {
-      title: 'kudowall',
-      url: '/kudowall',
-      icon: 'logo-vk'
-    },
-    
+
     {
       title: 'deconexion',
       url: '/login',

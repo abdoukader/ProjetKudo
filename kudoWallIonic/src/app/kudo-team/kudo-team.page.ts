@@ -65,15 +65,17 @@ export class KudoTeamPage implements OnInit {
     .subscribe(
       res => {
         this.presentAlertError()
-        window.confirm('kudo team réussit');
+       // window.confirm('kudo team réussit');
         console.log(res)
+        
       },
       err => {
-        window.confirm('kudo team echoué')
+        //window.confirm('kudo team echoué')
         console.log(err)
       }
     )
     console.log(this.formKudo)
+    
   }
 
   async presentAlertError(){
