@@ -16,14 +16,6 @@ export class AppComponent {
       url: '/home',
       icon: 'home'
     },
-  
-
-    {
-      title: 'Inscription',
-      url: '/inscription',
-      icon: 'add'
-    },
-
     {
       title: 'Kudo',
       url: '/kudo',

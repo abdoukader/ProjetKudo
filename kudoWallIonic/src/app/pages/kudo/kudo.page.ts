@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { InscriptionService } from 'src/app/services/inscription.service';
 import { AlertController } from '@ionic/angular';
-import { ActivatedRoute, Router} from '@angular/router'
+import { ActivatedRoute, Router} from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-kudo',
@@ -15,12 +16,15 @@ export class KudoPage implements OnInit {
   filterStr: any=[];
   filtered = false;
   selectedId = null;
+  errorMsg='';
+  msg=""
  
   idk= this.actRoute.snapshot.params['id'];
   constructor(private kudos: InscriptionService, private alertController:AlertController, public actRoute: ActivatedRoute,private structureliste:InscriptionService) { }
 
   ngOnInit() {
     this.listeStructure()
+  
   }
 
   listeStructure(){
@@ -65,12 +69,17 @@ export class KudoPage implements OnInit {
     .subscribe(
       res => {
         this.presentAlertError()
-        window.confirm('kudo réussit');
+       // window.confirm('kudo réussit');
         console.log(res)
       },
-      err => {
-        window.confirm('kudo echoué')
-        console.log(err)
+      err => {console.log(err)
+        this.errorMsg=err.error.exception[1].msg;
+        Swal.fire({
+          title: 'erreur',
+          text:this.errorMsg,
+        })
+        
+        
       }
     )
     console.log(this.formKudo)

@@ -1,8 +1,9 @@
 
 import { Injectable } from "@angular/core";
 import { HttpClientModule, HttpClient,  } from "@angular/common/http";
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { AutoCompleteService } from 'ionic4-auto-complete';
+import { CATCH_ERROR_VAR } from '@angular/compiler/src/output/abstract_emitter';
 
 @Injectable({
     providedIn: 'root'
@@ -51,4 +52,9 @@ export class InscriptionService{
     listeStructure(){
       return this.http.get(this.urllsiteStructure)
     }
+
+  //   async check_initial_cpfObservable(something){
+  //     return this.http.get(this.endpoint1,).pipe(CATCH_ERROR_VAR(error => throwError(error)));
+    
+  // }
   }
