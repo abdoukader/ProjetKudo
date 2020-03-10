@@ -21,7 +21,9 @@
                       <ion-label position="floating">Structure </ion-label>
                       <ion-input type="text" name="structure" #sousStructure (keyup)="filterStructure(sousStructure)" (ionFocus)="filtered = true" ngModel required></ion-input>
                       <div class="list" *ngIf="filtered">
+                        <ul>
                           <li class="item" *ngFor="let item of filterStr" (click)="selectStr(sousStructure, item.id, item.sousStructure)">{{item.sousStructure}}</li>
+                          </ul>
                       </div>
                     </ion-item>
                     <br>  
@@ -30,7 +32,6 @@
                          <ion-input type="text" id="commentaire"  [(ngModel)]="formKudo.commentaire" name="commentaire"  required></ion-input>
                     </ion-item>
                     <br>
-                    <!-- <ion-button (click)="fairekudo()" type="submit" expand="block" fill="outline" class="btnLogin">Djadieuf</ion-button> -->
                     <ion-button (click)="fairekudo()" type="submit" expand="block"  class="btnLogin">Djadieuf</ion-button>
                 </form>
           </ion-card-content>

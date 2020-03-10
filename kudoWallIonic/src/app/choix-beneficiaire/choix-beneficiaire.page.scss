@@ -1,43 +1,84 @@
-:root {
-    --ion-safe-area-top: 20px;
-    --ion-safe-area-bottom: 22px;
-  }
-
-header {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    margin-bottom: 1.25em;
-    text-transform: uppercase;
-  }
-
-  section {
-    margin-top: 1em;
-    margin-bottom: 2.5em;
-  }
-
-  section:not(.full-width),
-  .full-width > header {
-    padding: 0 10px;
-  }
-.team{
-    background-color: rgb(255, 94, 0);
+.page{
+  display: block;
+  top: 200px;
 }
-.but1{
-    //background-color:black;
-    width: 90%;
-    border-radius: 30%;
-    margin-left: 5%;
-    color: aliceblue;
+/*header {
+    font-size: 11px;
+    font-weight: bold;
+    background-color: #FF7900;
+    text-transform: uppercase;
+  }*/
+.choix{
+  background-color: #FF7900;
+  color: #ffffff;
+}
+ion-title{
+background-color: #FF7900;
+text-align: center;
+height: 60px;
+font-size: 30px;
   }
-  .but{
-    background-color:rgb(255, 94, 0);
-    width: 90%;
-    //border-radius: 30%;
-    margin-left: 5%;
-    color: aliceblue;
-    border-radius: 20px;
-  }
-#block{
-    margin-bottom: 150%;
+#3{
+  display: block;
+  top: 300px;
+}
+.man{
+  height: 100px;
+  width: 100%;
+  background-color: #cccccc;
+  color:#000000;
+  font-size: 25px;
+  display: inline-block;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer; 
+  //box-shadow: 0 8px 16px 0 rgb(104, 91, 91);
+}
+.man:active{  
+  background-color: #FF7900;
+}
+img{
+  height: 100px;
+  width: auto;
+  margin: 1px;
+  float: left;
+}
+.person{
+  float: left;
+  width: auto;
+  height: 100px;
+}
+.team{
+  height: 120px;
+  width: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #cccccc;
+  color:#000000;
+  font-size: 25px;
+  text-align: center;
+  font-weight: bold;
+  border: double  3px;
+  cursor: pointer; 
+  //box-shadow: 0 8px 16px 0 rgb(104, 91, 91);
+  text-decoration: none;   
+  border: 1px  #000000;  
+}
+.img1{
+  float: left;
+}
+.team:active{ 
+   background-color: #FF7900;
+}
+.ok {
+  height: 50px;
+  width: 300px;
+  color: #cccccc;
+  font-size: 20px;
+  display: block;
+  margin: auto;
+  border-radius: 5px;
+  top: 200px;
+}
+.ok:active{
+  background-color: #FF7900;
 }

@@ -2,9 +2,9 @@ package digitalkudo.kudowall.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.NaturalId;
+import org.hibernate.validator.constraints.UniqueElements;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.List;
@@ -27,8 +27,7 @@ public class Utilisateur {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotBlank
-    @Size(min=3, max = 50)
+    @Size(min=2)
     private String nom;
 
     @NaturalId
@@ -38,12 +37,11 @@ public class Utilisateur {
 
     @Column(length = 15)
     private Integer telephone;
-    @Column(length = 50)
 
-    @Size(min=3, max = 50)
+    @Size(min=2)
     private String username;
 
-    @Size(min=6, max = 100)
+    @Size(min=2)
     private String password;
 
     private Long    structure;

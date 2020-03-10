@@ -11,6 +11,7 @@ import digitalkudo.kudowall.repository.KudoPointRepository;
 import digitalkudo.kudowall.repository.UtilisateurRepository;
 import digitalkudo.kudowall.services.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.cors.CorsConfiguration;
@@ -39,38 +40,59 @@ public class UtilisateurController {
     PasswordEncoder encoder;
 
     @PostMapping(value = "/user")
-    public Utilisateur addUser(@RequestBody(required = false) Utilisateur u) {
-        Utilisateur user = new Utilisateur(u.getNom(), u.getEmail(), u.getTelephone(), u.getUsername(),
-                encoder.encode(u.getPassword()),u.getNbrekudo(),u.getNbrepoint(),u.getKudos());
-
-        Structure s =structureRepository.findById(u.getStructure()).get();
-        Set<Structure> structure = new HashSet<>();
-        List<Structure> structures = new ArrayList<>();
-        structures = structureRepository.findAll();
-        if (!structures.isEmpty()){
-            structures.forEach(Structure ->{
-                if (u.getStructure().equals(Structure.getId())){
-                    Structure.setId(Structure.getId());
-                }
-            });
+    public Message addUser(@RequestBody(required = false) Utilisateur u) {
+        Boolean emailExist = utilisateurRepository.existsByEmail(u.getEmail());
+        Boolean usernameExist = utilisateurRepository.existsByUsername(u.getUsername());
+        Boolean telephonExist = utilisateurRepository.existsByTelephone(u.getTelephone());
+        String msgErreur1 ="Un utilisateur a déjà cet email!";
+        String msgErreur2 ="Un utilisateur a déjà ce userame!";
+        String msgErreur3 ="Un utilisateur a déjà ce numéro de téléphone!";
+        if (emailExist){
+            Message InvalidEmail = new Message(500,msgErreur1,"","","");
+            return InvalidEmail;
         }
-        structure.add(s);
-        u.setStructures(structure);
+            else if(usernameExist){
+            Message InvalidUsername = new Message(500,msgErreur2,"","","");
+            return InvalidUsername;
+            }
+            else if(telephonExist){
+            Message InvalidTelephone = new Message(500,msgErreur3,"","","");
+            return InvalidTelephone;
+        }
+        else{
+            Utilisateur user = new Utilisateur(u.getNom(), u.getEmail(), u.getTelephone(), u.getUsername(),
+                    encoder.encode(u.getPassword()),u.getNbrekudo(),u.getNbrepoint(),u.getKudos());
+            Structure s =structureRepository.findById(u.getStructure()).get();
+            Set<Structure> structure = new HashSet<>();
+            List<Structure> structures = new ArrayList<>();
+            structures = structureRepository.findAll();
+            if (!structures.isEmpty()){
+                structures.forEach(Structure ->{
+                    if (u.getStructure().equals(Structure.getId())){
+                        Structure.setId(Structure.getId());
+                    }
+                });
+            }
+            structure.add(s);
+            u.setStructures(structure);
 
-        Role role = new Role();
-        Role role1 =roleRepository.findById(2);//ROLE_USER
-        Set<Role> roles = new HashSet<>();
-        roles.add(role1);
-        u.setPassword(encoder.encode(u.getPassword()));
-        u.setRoles(roles);
-        u.setNbrekudo(0);
-        u.setNbrepoint(0);
-        u.setKudos(0);
-        return utilisateurRepository.save(u);
+            Role role = new Role();
+            Role role1 =roleRepository.findById(2);//ROLE_USER
+            Set<Role> roles = new HashSet<>();
+            roles.add(role1);
+            u.setPassword(encoder.encode(u.getPassword()));
+            u.setRoles(roles);
+            u.setNbrekudo(0);
+            u.setNbrepoint(0);
+            u.setKudos(0);
+            String msg="Félicitation " +u.getNom()+ "  vous êtes inscrit au Digital Kudo Wall de la DSI";
+            Message message = new Message(200,msg,"","","") ;
+            utilisateurRepository.save(u);
+            return message;
+        }
     }
-
     @GetMapping(value = "/liste-user")
-    //@PreAuthorize("hasAuthority('ROLE_USER')")
+    @PreAuthorize("hasAuthority('ROLE_USER')")
     public List<Utilisateur> users(@RequestBody (required = false) Utilisateur utilisateur){
 
         return utilisateurRepository.findAll();
@@ -104,8 +126,6 @@ public class UtilisateurController {
 
         return  kudoPointRepository.findAll();
     }
-
-
     public Date datefrom;
     public String dateTo;
     /*@GetMapping(value = "/kudodetails")
@@ -115,7 +135,7 @@ public class UtilisateurController {
         return user;
     }*/
     @PostMapping(value = "/update-structure/{id}")
-    //@PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public Structure updatestructure(@RequestBody Structure structure,@PathVariable Long id) throws Exception{
         structure.setId(id);
         Structure structure1=structureRepository.findStructureById(id).orElseThrow(

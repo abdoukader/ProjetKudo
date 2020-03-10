@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { InscriptionService } from '../../services/inscription.service';
 import { HttpClient } from 'selenium-webdriver/http';
-import { FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
 import { AutoCompleteService } from 'ionic4-auto-complete';
 import { from } from 'rxjs';
@@ -15,7 +15,9 @@ import { Router } from '@angular/router';
     styleUrls: ['./inscription.page.scss'],
   })
   export class InscriptionPage implements OnInit {
-    
+
+    inscriptionForm : FormGroup;
+    isSubmitted = false;
     Data: any=[];
     structure: any=[];
     lStruc:any[];
@@ -25,14 +27,61 @@ import { Router } from '@angular/router';
     filtered = false;
     selectedId = null;
 
-    constructor(private _router: Router,private inscrip: InscriptionService,private alertController:AlertController, private structureliste:InscriptionService ) { 
+    constructor(private formBuilder: FormBuilder,private _router: Router,
+        private inscrip: InscriptionService,
+        private alertController:AlertController, 
+        private structureliste:InscriptionService) { 
         
     }
-
-
-    ngOnInit() {
-        this.listeStructure()
+    ValidationMsg = {
+        'email': [
+            { type: 'required', message: 'L\'email est obligatoire' },
+            { type: 'minlength', message: 'Vous devez remplir au moins 5 caracteres' },
+            { type: 'pattern', message: 'Rentrer un email valide' }
+          ],
+        'nom': [
+          { type: 'required', message: 'Le nom est obligatoire' },
+          { type: 'minlength(5)', message: 'Vous devez remplir au moins 5 caracteres' },
+          { type: 'pattern', message: 'Rentrer un nom valide' }
+        ],
+        'username': [
+            { type: 'required', message: 'Le username est obligatoire' },
+            { type: 'minlength', message: 'Vous devez remplir au moins 5 caracteres' },
+            { type: 'pattern', message: 'Rentrer un username valide' }
+          ],
+          'password': [
+            { type: 'required', message: 'Le password est obligatoire' },
+            { type: 'minlength', message: 'Vous devez remplir au moins 5 caracteres' },
+            { type: 'pattern', message: 'Rentrer un nom valide' }
+          ],
+        'structure':[
+          { type: 'required', message:'La structure est obligatoire' },
+        ],
+        'telephone': [
+            { type: 'required', message: 'Le numéro de téléphone est obligatoire' },
+            { type: 'minlength', message: 'Vous devez remplir au moins 5 caracteres' },
+            { type: 'pattern', message: 'Rentrer un numéro de téléphone valide' }
+          ],
+      
     }
+    initForm(){
+        this.inscriptionForm = this.formBuilder.group({
+            email: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
+            nom: ['', [Validators.required, Validators.minLength(2), Validators.pattern(/[a-z-A-Z]/)]],
+            username : ['',[Validators.required,Validators.minLength(2), Validators.pattern(/[a-z0-9-A-Z]/)]],
+            password:['',[Validators.required,Validators.minLength(2), Validators.pattern(/[a-z0-9-A-Z]/)]],
+            structure:['',[Validators.required]],
+            telephone: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
+        })
+    }
+    //ngOnInit() {
+       // this.initForm()
+    //}
+    ngOnInit(){
+        this.listeStructure();
+        this.initForm();
+    }
+    
     listeStructure(){
         this.structureliste.listeStructure().subscribe(
             rep=> {
@@ -56,17 +105,12 @@ import { Router } from '@angular/router';
         this.filtered = false;
     }
     
-    inscription(Data){
-        // const st = this.str.filter((s: any) => s.id === +this.selectedId);
-        // if(this.selectedId === null || (st.length > 0 && st[0].sousStructure !== Data.value.structure)) {
-        //     this.selectedId = null;
-        //     return;
-        // }
+    /*inscription(Data){
         Data.value.structure = this.selectedId;
         this.inscrip.inscription(Data.value)
         .subscribe(
             res => {
-                this.presentAlertError()
+                this.presentAlertError(res.msg)
                 console.log(res);
                 this._router.navigate(['/login']);
             },
@@ -77,9 +121,37 @@ import { Router } from '@angular/router';
         );
         console.log(Data);
     }
+*/
+
+    inscription(){
+        this.isSubmitted = true;
+        this.inscriptionForm.value.structure = this.selectedId;
+        this.inscrip.inscription(this.inscriptionForm.value)
+        .subscribe(
+            res => {
+                this.presentAlertError(res.msg);
+                console.log(res);
+                if(res){   
+                this._router.navigate(['/login']);
+                }
+             
+            },
+            error=> {
+                console.log(error);
+                if(error.msg==error.error.msgErreur1)
+                this.presentAlertError(error.msgErreur1);
+                else if(error.msg==error.msgErreur2) 
+                this.presentAlertError(error.msgErreur2)
+                else if(error.msg==error.msgErreur3)
+                this.presentAlertError(error.msgErreur3)
+                this._router.navigate(['/inscription']);
+            }
+        );
+        this.inscriptionForm.reset();
+    }
 
     test(){
-        this.inscrip.FindBySousStructure(this.f)
+        this.inscrip.FindBySousStructure(this.structure.value)
         .subscribe(
             res => {
                 this.structure= res
@@ -91,16 +163,13 @@ import { Router } from '@angular/router';
             }
         );
     }
-
-    async presentAlertError() {
+    async presentAlertError(message:string) {
         const alert = await this.alertController.create({
-          header: 'inscription',
-          subHeader: 'KUDO WALL',
-          message: 'inscription reussie',
-          buttons: ['OK']
-        
+          message: message,
+          buttons: [{text: 'OK'}]
         });
+    
         await alert.present();
-    }
+      }
 
-}
+  }

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { InscriptionService } from 'src/app/services/inscription.service';
 import { AlertController } from '@ionic/angular';
 import { ActivatedRoute, Router} from '@angular/router';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-kudo',
@@ -11,16 +10,16 @@ import Swal from 'sweetalert2';
 })
 export class KudoPage implements OnInit {
 
-  data: any=[];
+  detail: any;
   str: any=[];
   filterStr: any=[];
   filtered = false;
   selectedId = null;
   errorMsg='';
-  msg=""
+  msg="";
  
   idk= this.actRoute.snapshot.params['id'];
-  constructor(private kudos: InscriptionService, private alertController:AlertController, public actRoute: ActivatedRoute,private structureliste:InscriptionService) { }
+  constructor(private _router:Router, private kudos: InscriptionService, private alertController:AlertController, public actRoute: ActivatedRoute,private structureliste:InscriptionService) { }
 
   ngOnInit() {
     this.listeStructure()
@@ -57,41 +56,43 @@ export class KudoPage implements OnInit {
     structure:"",
     commentaire:""
   }
+ 
+  async presentAlertError(nombeneficiaire:string,commentaire:string,nom:string) {
+    const alert = await this.alertController.create({
+      
+      message: "à "+nombeneficiaire+ " "+commentaire+" "+nom,
+      buttons: [{text: 'OK'}]
+    });
+
+    await alert.present();
+  }
 
   fairekudo(){
-    // const st = this.str.filter((s: any) => s.id === +this.selectedId);
-    // if(this.selectedId === null || (st.length > 0 && st[0].sousStructure !== this.formKudo.structure)) {
-    //     this.selectedId = null;
-    //     return;
-    // }
     this.formKudo.structure = this.selectedId;
     this.kudos.faireKudo(this.formKudo)
     .subscribe(
       res => {
-        this.presentAlertError()
-       // window.confirm('kudo réussit');
-        console.log(res)
+        //console.log(res)
+        this.presentAlertError(res.nombeneficiaire,res.commentaire,res.nom_emetteur)
+        this._router.navigate(['/kudowall'])
       },
-      err => {console.log(err)
-        this.errorMsg=err.error.exception[1].msg;
-        Swal.fire({
-          title: 'erreur',
-          text:this.errorMsg,
-        })
-        
-        
-      }
-    )
-    console.log(this.formKudo)
-  }
+      error => {
+        console.log(error)
+        if(error.status === 500){
+          this.presentAlertError(error,"","")
+          this._router.navigate(['/typeKudo'])
+        }
 
-  async presentAlertError(){
-    const alert = await this.alertController.create({
-      header: 'kudowall',
-      subHeader: 'KUDO WALL',
-      message: 'kudo réussie',
-      buttons: ['ok']
-    })
-    await alert.present();
-  }
+        //this.errorMsg=err.error.exception[1].msg;
+       //Swal.fire({
+          //title: 'erreur',
+          //text:this.errorMsg,
+        }
+        );
+      }
+      /*goToViewKudos(detail:any){
+        this.kudos.selectkudo = detail;
+        this._router.navigateByUrl('/kudowall');
+
+      }*/
 }

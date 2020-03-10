@@ -1,9 +1,7 @@
-
 import { Injectable } from "@angular/core";
-import { HttpClientModule, HttpClient,  } from "@angular/common/http";
-import { Observable, throwError } from 'rxjs';
-import { AutoCompleteService } from 'ionic4-auto-complete';
-import { CATCH_ERROR_VAR } from '@angular/compiler/src/output/abstract_emitter';
+import { HttpClient } from "@angular/common/http";
+import { Observable } from 'rxjs';
+import { Kudos} from '../infokudo/kudos';
 
 @Injectable({
     providedIn: 'root'
@@ -21,7 +19,7 @@ export class InscriptionService{
   private endpoint3 = 'http://127.0.0.1:8080/kudo/team';
 
 
-  constructor(private http: HttpClient,private inscript :InscriptionService) { }
+  constructor(private http: HttpClient, /*public selectkudo:Kudos*/) { }
     
       FindBySousStructure(data):Observable<any>{
         
@@ -54,7 +52,8 @@ export class InscriptionService{
     }
 
   //   async check_initial_cpfObservable(something){
-  //     return this.http.get(this.endpoint1,).pipe(CATCH_ERROR_VAR(error => throwError(error)));
+  //   return this.http.get(this.endpoint1,).pipe(CATCH_ERROR_VAR(error => throwError(error)));
     
   // }
+
   }

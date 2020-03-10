@@ -1,39 +1,56 @@
-.loginForm {
-   
-    padding: 4px;
-    color:black;
-}
-.btnLogin {
-    margin-top: 5vh;
-    border: black;
-}
-#cadre{
-    height: 300px;
-    width: 400px;
-    padding: 40px;
-        
-}
-
-.logo {
-    position: relative;
-    height: 250px;
-}
-
-.logo ion-icon{
-    font-size: 14em;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+.loginForm{
+    display: block;
+    top: 210px;
 }
 ion-toolbar{
-    background-color:rgb(255, 94, 0);
-    font-size: 80%;
-}
-.but1{
-    background-color:rgb(255, 94, 0);
+    background-color :#FF7900;
     width: 100%;
-    border-radius: 30%;
-    //margin-left: 3%;
-    color: black;
+    height: 70px;
+    color:white;
+    margin: auto;
+    padding: initial;
+    padding-top:15px ;
+  
+}
+.auth{
+    text-align: center;
+    text-decoration: none;
+    font-size: 30px;
+    display: block;
+    padding: initial;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+ion-label{
+    font-size: 10px;
+}
+
+.but1{
+    color: white;
+    background-color: #cccccc;
+    border-radius: 5px;
+    font-size: 25px;
+    font-family: Arial, Helvetica, sans-serif;
+    height: 50px;
+    width: 300px;
+    margin: 2px;
+    text-align: center;
+    cursor: pointer;
+    display: block;
+    margin: auto;
+    
   }
+.but1:active{
+    background-color: #FF7900;
+    border-radius: 5px;
+    font-size: 25px;
+    font-family: Arial, Helvetica, sans-serif;
+    height: 50px;
+    width: 300px;
+    margin: 2px;
+    color:white;
+    text-align: center;
+    display: block;
+    margin: auto;
+  }
+  
