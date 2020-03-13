@@ -5,12 +5,10 @@ import digitalkudo.kudowall.model.*;
 import digitalkudo.kudowall.model.Role;
 import digitalkudo.kudowall.model.Structure;
 import digitalkudo.kudowall.model.Utilisateur;
-import digitalkudo.kudowall.repository.RoleRepository;
-import digitalkudo.kudowall.repository.StructureRepository;
-import digitalkudo.kudowall.repository.KudoPointRepository;
-import digitalkudo.kudowall.repository.UtilisateurRepository;
+import digitalkudo.kudowall.repository.*;
 import digitalkudo.kudowall.services.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.cors.CorsConfiguration;
@@ -20,6 +18,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @CrossOrigin("http://localhost:8100")
 @RestController
@@ -37,6 +36,8 @@ public class UtilisateurController {
     private UserDetailsServiceImpl userDetailsService;
     @Autowired
     PasswordEncoder encoder;
+    @Autowired
+    private KudoRepository kudoRepository;
 
     @PostMapping(value = "/user")
     public Utilisateur addUser(@RequestBody(required = false) Utilisateur u) {
@@ -123,6 +124,35 @@ public class UtilisateurController {
         );
         structureRepository.save(structure);
         return structure;
+    }
+    @GetMapping(value = "/plus-genereux")
+    //@PreAuthorize("hasAnyAuthority('ROLE_USER')")
+    public List <Utilisateur> user (@RequestBody(required = false) Utilisateur utilisateur){
+
+        return  utilisateurRepository.findByOrderByNbrekudoDesc();
+    }
+
+    @GetMapping(value = "/vainqueur")
+    public  List<Utilisateur> utilisateur (@RequestBody(required = false) Utilisateur utilisateur){
+        return  utilisateurRepository.findByOrderByNbrepointDesc();
+    }
+    @GetMapping(value = "/vainqueurPeriode/start/{debut}/end/{fin}")
+    public List<Utilisateur> utilisateurr (@PathVariable(value="debut") @DateTimeFormat(pattern = "dd-MM-yyyy") Date debut , @PathVariable (value="fin")@DateTimeFormat(pattern = "dd-MM-yyyy")Date fin){
+        return kudoRepository
+                .findAllByDatekudoIsBetween(debut, fin)
+                .stream()
+                .map(Kudo::getUtilisateur)
+                .sorted(Comparator.comparing(Utilisateur::getNbrepoint).reversed())
+                .collect(Collectors.toList());
+    }
+    @GetMapping(value = "/genereuxPeriode/start/{debut}/end/{fin}")
+    public List<Utilisateur> utilisateurG (@PathVariable(value="debut") @DateTimeFormat(pattern = "dd-MM-yyyy") Date debut , @PathVariable (value="fin")@DateTimeFormat(pattern = "dd-MM-yyyy")Date fin){
+        return kudoRepository
+                .findAllByDatekudoIsBetween(debut, fin)
+                .stream()
+                .map(Kudo::getUtilisateur)
+                .sorted(Comparator.comparing(Utilisateur::getNbrekudo).reversed())
+                .collect(Collectors.toList());
     }
 
 }
