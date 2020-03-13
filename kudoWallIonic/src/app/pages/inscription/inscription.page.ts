@@ -24,6 +24,7 @@ import { Router } from '@angular/router';
     filterStr: any=[];
     filtered = false;
     selectedId = null;
+    isenabled:boolean=false;
 
     constructor(private _router: Router,private inscrip: InscriptionService,private alertController:AlertController, private structureliste:InscriptionService ) { 
         
@@ -33,6 +34,8 @@ import { Router } from '@angular/router';
     ngOnInit() {
         this.listeStructure()
     }
+    
+
     listeStructure(){
         this.structureliste.listeStructure().subscribe(
             rep=> {
@@ -42,6 +45,8 @@ import { Router } from '@angular/router';
             },err=>console.log(err)
         );
     }
+    
+   
     filterStructure(e: any) {
         const val = e.value.toLowerCase();
         this.filterStr = this.str.filter((s: any) => {
@@ -102,5 +107,4 @@ import { Router } from '@angular/router';
         });
         await alert.present();
     }
-
 }

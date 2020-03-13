@@ -1,23 +1,5 @@
-// .welcome-card img {
-//   max-height: 35vh;
-//   overflow: hidden;
-//   background-color:orange ;
-  
-// }
-.but{
-  background-color:rgb(255, 94, 0);
-  width: 90%;
-  border-radius: 30%;
-  margin-left: 5%;
-  color: aliceblue;
-}
-.but1{
-  background-color:black;
-  width: 90%;
-  border-radius: 30%;
-  margin-left: 5%;
-  color: aliceblue;
-}
+
+
 .tout{
   background-color:rgb(255, 94, 0) ;
   width: 100%;
@@ -26,7 +8,45 @@
 ion-card-header {
   --ion-background-color: rgb(255, 94, 0);
 }
-ion-toolbar{
-  background-color:rgb(255, 94, 0);
-  font-size: 80%;
+
+#et{
+  
+    //width: 33.33%;
+    text-align: center;
+    margin-top: -100px;
+
+}
+img{
+  height: 250px;
+  margin-bottom: 40%;
+}
+ion-button{
+  font-size: 20px;
+}
+ion-content{
+  margin-top: -500px;
+}
+.but1 {
+	padding:08px 0 16px 0;
+	font:bold 25px Arial;
+	background:#fdfdfd;
+	color:black;
+	border-radius:2px;
+	width:90%;
+	border:1px solid rgb(27, 26, 26);
+  box-shadow:1px 1px 3px #999;
+  margin-left: 5%;
+  height: 60px;
+}
+.but {
+	padding:08px 0 16px 0;
+	font:bold 25px Arial;
+	background:rgb(255, 94, 0);
+	color:white;
+	border-radius:2px;
+	width:90%;
+	//border:1px solid rgb(27, 26, 26);
+  box-shadow:1px 1px 3px #999;
+  margin-left: 5%;
+  height: 60px;
 }

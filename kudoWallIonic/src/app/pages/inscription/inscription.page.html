@@ -14,56 +14,68 @@
     }
   </style>
 </head>
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar  color="orange">
     <ion-title class="ion-text-center">INSCRIPTION</ion-title>
     <ion-buttons slot="start">
      
     </ion-buttons>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
+
+
 
 <ion-content>
+  
   <ion-card class="loginForm" *ngIf="!isLoading">
+      
       <div class="logo">
-          
+          <p>Merci de vous inscrire sur le systeme du Kudo Wall</p>
       </div>
         <ion-card-content>
             <form #f="ngForm" (ngSubmit)="inscription(f)">
+                <ion-label position="floating">Email</ion-label>
+               
+                <ion-item>
+                   
+                <ion-input  type="email" name="email" ngModel required> </ion-input>
+                </ion-item>
+               
+              
+               <ion-label position="floating">Nom</ion-label>
               <ion-item>
-                  <ion-label position="floating">Email</ion-label>
-                  <ion-input type="email" name="email" ngModel required></ion-input>
+                  <ion-input type="text" name="nom" ngModel required></ion-input> 
               </ion-item>
+          
+            <ion-label position="floating">Username</ion-label>
+         
               <ion-item>
-                  <ion-label position="floating">Nom</ion-label>
-                  <ion-input type="text" name="nom" ngModel required></ion-input>
-              </ion-item>
-              <ion-item>
-                <ion-label position="floating">Username</ion-label>
                 <ion-input type="texte" name="username" ngModel required></ion-input>
               </ion-item>
+           
+            <ion-label position="floating">Password</ion-label>
+           
               <ion-item>
-                <ion-label position="floating">Password</ion-label>
                 <ion-input type="password" name="password" ngModel required></ion-input>
               </ion-item>
-      
+          
+            <ion-label position="floating">Téléphone</ion-label>
+           
               <ion-item>
-                <ion-label position="floating">Structure </ion-label>
-                <ion-input type="text" name="structure" #sousStructure (keyup)="filterStructure(sousStructure)" (ionFocus)="filtered = true" ngModel required></ion-input>
-                <div class="list" *ngIf="filtered">
-                    <li class="item" *ngFor="let item of filterStr" (click)="selectStr(sousStructure, item.id, item.sousStructure)">{{item.sousStructure}}</li>
-                  </div>
+                  <ion-input type="number" name="telephone" ngModel required></ion-input>
               </ion-item>
-
-            
-                  <ion-item>
-                      <ion-label position="floating">Téléphone</ion-label>
-                      <ion-input type="number" name="telephone" ngModel required></ion-input>
-                  </ion-item>
-                  
+           
+            <ion-label position="floating">Structure </ion-label>
+        
+              <ion-item>
+                <ion-input type="text" name="structure" #sousStructure (keyup)="filterStructure(sousStructure)" (ionFocus)="filtered = true"   ngModel required></ion-input>
+              </ion-item>
+              <ul class="list" *ngIf="filtered">
+                <li class="item" *ngFor="let item of filterStr" (click)="selectStr(sousStructure, item.id, item.sousStructure)">{{item.sousStructure}}</li>
+             </ul>
+             <br>
                   <!-- <ion-button type="submit" expand="block"  class="btnLogin"  shape="round">S'Inscrire</ion-button> -->
-
-                  <ion-button type="submit" expand="block" shape="round" class="but" color="orange"> S'inscrire </ion-button>
+                  <ion-button type="submit" [disabled]="!f.form.valid" expand="block" shape="round" class="but" color="orange"> S'inscrire </ion-button>
                   
             </form>
         </ion-card-content>

@@ -14,7 +14,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AutoCompleteModule } from 'ionic4-auto-complete';
 import { KudowallPageModule } from './pages/kudowall/kudowall.module';
-
+//import {TablePage} from '../app/table/table.module';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -32,8 +32,6 @@ import { KudowallPageModule } from './pages/kudowall/kudowall.module';
     StatusBar,
     AuthService,
     SplashScreen,
-    
-    
     
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi:true }
 

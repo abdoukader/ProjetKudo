@@ -1,21 +1,23 @@
 <ion-header>
-    <ion-toolbar class="tete">
-      <ion-title class="ion-text-center">Faire un kudo</ion-title>
-      <ion-buttons slot="start">
-        </ion-buttons>
-    </ion-toolbar>
-  </ion-header>
-  
-  <ion-content>
-    <ion-card  *ngIf="!isLoading">
+  <ion-toolbar  color="orange">
+    <ion-title class="ion-text-center">FAIRE UN KUDO</ion-title>
+  </ion-toolbar>
+</ion-header>
+ 
+  <ion-content >
+    <ion-card  *ngIf="!isLoading" background-color="dark">
         <img id="cadre" src="../../../assets/Merciiikudo.jpg" alt="" />
         <div class="kudo">
           <ion-card-content>
 
-            <form #form="ngForm">
+            <form #form="ngForm" >
                     <ion-item>
                         <ion-label position="floating">NomBénéficiaire</ion-label>
-                        <ion-input type="text" id="nombeneficiaire" [(ngModel)]="formKudo.nombeneficiaire" name="nombeneficiaire"  required></ion-input>
+                        <!-- <ion-input type="text" id="nombeneficiaire" [(ngModel)]="formKudo.nombeneficiaire" name="nombeneficiaire"  required></ion-input> -->
+                        <ion-input type="text" name="nombeneficiaire" #nom (keyup)="filterUtilisateur(nom)" (ionFocus)="filteredd=true" [(ngModel)]="formKudo.nombeneficiaire"  required></ion-input>
+                        <div class="list" *ngIf="filteredd"> 
+                          <li class="user" *ngFor="let user of filterU" (click)="selectliste(nom, user.nom)">{{user.nom}}</li>
+                      </div>
                     </ion-item>
                    <ion-item>
                       <ion-label position="floating">Structure </ion-label>
@@ -29,9 +31,10 @@
                          <ion-label position="floating">Commentaire</ion-label> 
                          <ion-input type="text" id="commentaire"  [(ngModel)]="formKudo.commentaire" name="commentaire"  required></ion-input>
                     </ion-item>
-                    <br>
+                    <br><br><br>
                     <!-- <ion-button (click)="fairekudo()" type="submit" expand="block" fill="outline" class="btnLogin">Djadieuf</ion-button> -->
-                    <ion-button (click)="fairekudo()" type="submit" expand="block"  class="btnLogin">Djadieuf</ion-button>
+                    <!-- <ion-button (click)="fairekudo()" type="submit" expand="block"  class="btnLogin">Djadieuf</ion-button> -->
+                    <ion-button  (click)="fairekudo()" type="submit" expand="block" shape="round" color="#f77911" class="but1"><strong>DJAADIEUF</strong></ion-button>
                 </form>
           </ion-card-content>
         </div> 

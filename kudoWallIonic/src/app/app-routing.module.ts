@@ -27,6 +27,10 @@ const routes: Routes = [
     path: 'kudo-team',
     loadChildren: () => import('./kudo-team/kudo-team.module').then( m => m.KudoTeamPageModule)
   },
+  {
+    path: 'table',
+    loadChildren: () => import('./table/table.module').then( m => m.TablePageModule)
+  },
   
   
 ];
