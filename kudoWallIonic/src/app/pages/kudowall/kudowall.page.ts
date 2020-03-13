@@ -9,9 +9,14 @@ import { InscriptionService } from 'src/app/services/inscription.service';
 export class KudowallPage implements OnInit {
 
   constructor(private listekudos: InscriptionService) { }
-  kudos: any = [];
+  kudos: any;
+  infos: any;
 
-  ngOnInit() { }
+
+  ngOnInit() { 
+    /*console.log(this.kudos.selectkudo);
+    this.infos = this.kudos.selectkudo;*/
+  }
 
   kudowall(kudos) {
   this.listekudos.kudowall(kudos)
@@ -24,4 +29,6 @@ export class KudowallPage implements OnInit {
   }
   );
   }
+
+
 }

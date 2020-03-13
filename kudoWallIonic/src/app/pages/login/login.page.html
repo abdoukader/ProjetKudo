@@ -1,30 +1,29 @@
-<ion-header>
-  <ion-toolbar  color="orange">
-    <ion-title class="ion-text-center">AUTHENTIFICATION</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-
-
 <ion-content>
   <ion-card class="loginForm" *ngIf="!isLoading">
-      <div class="logo">
-          <ion-icon ion-color="blue" name="contact"></ion-icon>
-      </div>
+        <ion-toolbar  color="orange">
+            <ion-title class="auth">Authentification</ion-title>
+          </ion-toolbar>      
         <ion-card-content>
-            <form #f="ngForm" (ngSubmit)="onLogin(f.value)">
-                <ion-item>
-                    <ion-label position="floating">Username</ion-label>
-                    <ion-input type="text" name="username" ngModel></ion-input>
+        <form [formGroup]="loginForm" (ngSubmit)="onLogin()"   class="form" novalidate>
+                <ion-item lines = "full">
+                    <ion-label position="floating">Username
+                    </ion-label>
+                    <ion-input type="text" formControlName = "username" ></ion-input>
                 </ion-item>
-                <ion-item>
-                    <ion-label position="floating">Mot de passe</ion-label>
-                    <ion-input type="password" name="password" ngModel></ion-input>
+               <span class="error ion-padding"  style="color:red" *ngIf = "isSubmitted && loginForm.controls.username.errors?.required">
+                    Username requis
+               </span>   
+                <ion-item lines = "full">
+                    <ion-label position="floating">Mot de passe
+
+                    </ion-label>
+                    <ion-input type="password" formControlName = "password" ></ion-input>
                 </ion-item>
+                <span  class="error ion-padding" style="color:red"  *ngIf = "isSubmitted && loginForm.controls.password.errors?.required">
+                    Password requis
+               </span>  
                 <br>
-                <!-- <ion-button type="submit" expand="block" class="btnLogin" >Se connecter</ion-button> -->
-                <ion-button type="submit" expand="block" shape="round" color="#f77911" class="but1">Se onnecter</ion-button>
-                
+                <button type="submit" class="but1" >Se Connecter</button>
             </form>
         </ion-card-content>
     </ion-card>

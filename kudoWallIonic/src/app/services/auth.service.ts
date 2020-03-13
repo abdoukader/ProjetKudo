@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-//import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { from } from 'rxjs';
@@ -16,8 +15,6 @@ export class AuthService {
   username: string;
   roles: Array<string>;
 
-
- 
   private _loginUrl = "http://localhost:8080/authenticate";
 
 
@@ -26,17 +23,28 @@ export class AuthService {
   loginUser(data) {
     return this.http.post<any>(this._loginUrl, data);
   }
-
+  getToken() {
+    return localStorage.getItem('token');
+  }
   loggedIn() {
-   
     return !!localStorage.getItem('token');
   }
-  // methode de deconnexion
+  parseJWT() {
+    const jwtHelper = new JwtHelperService();
+    const objJWT = jwtHelper.decodeToken(this.jwt);
+    this.username = objJWT.obj;
+    this.roles = objJWT.roles;
+    console.log(objJWT);
+  }
 
-  logoutUser() {
-    localStorage.removeItem('token');
-    this._router.navigate(['/login']);
-    this.initParams();
+  loadToken() {
+    this.jwt = localStorage.getItem('token');
+    this.parseJWT();
+  }
+  saveToken(jwt: string) {
+    localStorage.setItem('token', jwt);
+    this.jwt = jwt;
+    this.parseJWT();
   }
 
   initParams() {
@@ -45,35 +53,11 @@ export class AuthService {
     this.roles = undefined;
   }
 
-  getToken() {
-    return localStorage.getItem('token');
-  }
-
-  // gettoken() {
-  //   return new Promise((resolve, reject) => {
-  //       let headers = new Headers();
-  //       headers.append('Authorization','token'),
-  //         this.http.get(this._loginUrl+'token/auth',{})
-  //         .subscribe(res => {
-  //           console.log('ok');
-  //         }, (err) => {
-  //           reject(err);
-  //         });
-  //   });
-  // }
-
-  saveToken(jwt: string) {
-    localStorage.setItem('token', jwt);
-    this.jwt = jwt;
-    this.parseJWT();
-  }
-
-  parseJWT() {
-    const jwtHelper = new JwtHelperService();
-    const objJWT = jwtHelper.decodeToken(this.jwt);
-    this.username = objJWT.obj;
-    this.roles = objJWT.roles;
-    console.log(objJWT);
+  logoutUser() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    this._router.navigate(['/login']);
+    this.initParams();
   }
 
   isAdmin() {
@@ -86,9 +70,5 @@ export class AuthService {
   isAuthenticated() {
     return this.roles && (this.isAdmin() || this.isUser() );
   }
-  loadToken() {
-    this.jwt = localStorage.getItem('token');
-    this.parseJWT();
-  }
-  
+
 }

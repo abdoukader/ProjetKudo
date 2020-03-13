@@ -16,7 +16,6 @@ import java.util.*;
 public class KudoWallController<id> {
     @Autowired
     private UtilisateurRepository utilisateurRepository;
-
     @Autowired
     private KudoPointRepository kudoPointRepository;
     @Autowired
@@ -41,7 +40,6 @@ public class KudoWallController<id> {
     @PreAuthorize("hasAuthority('ROLE_USER')")
     public Message kudoPersonne(@RequestBody(required = false) KudoWall kw) throws Exception {
         Utilisateur user = UserDetailsService.getUserConnect();
-
         Kudo kudo = new Kudo();
         kudo.setDatekudo(new Date());
         Optional<Structure> structurebeneficiaire = structureRepository.findById(kw.getStructure());
@@ -53,10 +51,10 @@ public class KudoWallController<id> {
         Utilisateur beneficiaire = utilisateurRepository.findByNom(kw.getNombeneficiaire());
         //Utilisateur beneficiaireStruc = utilisateurRepository.findByStructure(kw.getStructure());
         if (beneficiaire == null) {
-            Message InvalidCredential = new Message(500,exception1);
+            Message InvalidCredential = new Message(500,exception1,"","","");
             return InvalidCredential;
         }else if (user.getNom().compareTo(beneficiaire.getNom()) == 0 ) {
-            Message AbnormalOperation = new Message(500,exception2);
+            Message AbnormalOperation = new Message(500,exception2,"" ,"","");
             return AbnormalOperation;
         } else {
             //if( user.getStructures().equals(beneficiaireStruc.getStructures()) == false)
@@ -75,12 +73,11 @@ public class KudoWallController<id> {
             utilisateurRepository.save(user);
             kudoRepository.save(kudo);
             String msg = "Felicitation " + user.getNom() + "  vous venez de faire un kudo à " + beneficiaire.getNom();
-            Message message = new Message(200, msg);
+            Message message = new Message(200, msg,beneficiaire.getNom(),kw.getCommentaire(),user.getNom());
             return message;
          }
 
     }
-
     @CrossOrigin("http://localhost:8100")
     @GetMapping(value = "/liste")
     public List<Kudo> kudos(@RequestBody(required = false) Kudo Kudo) {
@@ -93,7 +90,7 @@ public class KudoWallController<id> {
     public Message kudoTeam(@RequestBody(required = false) KudoWall kw) throws Exception {
         Utilisateur user = UserDetailsService.getUserConnect();
         Utilisateur team = new Utilisateur();
-
+        Message sms = new Message();
         Kudo kudo = new Kudo();
         kudo.setDatekudo(new Date());
         kudo.setCommentaire(kw.getCommentaire());
@@ -103,7 +100,6 @@ public class KudoWallController<id> {
 
         Utilisateur teambeneficiaire = utilisateurRepository.findByNom(kw.getNombeneficiaire());
         if (teambeneficiaire != null) {
-
             KudoPoint pointkudo = kudoPointRepository.findByPoint(kw.getPoint());
             Integer point = pointkudo.getPoint();
             kudo.setKudoPoint(pointkudo);
@@ -116,8 +112,7 @@ public class KudoWallController<id> {
             teambeneficiaire.setKudos(kudosrecutaem + 1);
 
             String msg = "Felicitation " + user.getNom() + "  vous venez de faire un kudos à  la team " + teambeneficiaire.getNom();
-            Message message = new Message(200, msg);
-
+            Message message = new Message(200, msg,teambeneficiaire.getNom(),kw.getCommentaire(),user.getNom());
             utilisateurRepository.save(user);
             utilisateurRepository.save(teambeneficiaire);
             kudoRepository.save(kudo);
@@ -134,11 +129,14 @@ public class KudoWallController<id> {
             teamate.setKudos(1);
 
             utilisateurRepository.save(teamate);
+            sms.setNombeneficiaire(teamate.getNom());
+            sms.setCommentaire(kw.getCommentaire());
+            sms.setNom_emetteur(user.getNom());
         }
         utilisateurRepository.save(user);
         kudoRepository.save(kudo);
         String msg = "Felicitation " +user.getNom()+  "  votre kudos a été enregisté avec succès" ;
-        Message message = new Message(200, msg);
-        return message;
+        //Message message = new Message(200, msg,teamate.getNom(),kw.getCommentaire());
+        return sms;
     }
 }

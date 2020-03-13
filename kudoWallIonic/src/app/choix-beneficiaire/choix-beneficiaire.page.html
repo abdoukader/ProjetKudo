@@ -1,31 +1,33 @@
-<title>Button</title>
-<script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core@next/dist/ionic/ionic.esm.js"></script>
-<script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core@next/dist/ionic/ionic.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core@next/css/ionic.bundle.css"/>
-
-<ion-app>
+<ion-app  class="page">
   <ion-header translucent>
-    <ion-toolbar>
-      <ion-title>A qui est destiné votre kudos</ion-title>
+    <ion-toolbar class="choix">
+      <ion-title>Choisissez votre destinataire</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-content id="block" fullscreen>
+  <ion-content>
 
     <section class="full-width">
       <div>
-          <ion-button expand="block" shape="round" class="but" color="orange"routerLink="/typeKudo">Personne</ion-button>
-      <!-- <ion-button expand="full" routerLink = "/typeKudo">PERSONNE</ion-button> -->
+          <button class="man"  routerLink="/typeKudo"><img src="../../../assets/person.jpg" class="img1" alt="">Personne</button>
       </div>
     </section>
 
+    <br>
+
     <section class="full-width">
       <div>
-      <!-- <ion-button expand="full"   routerLink ="/type-kudo-team" shape="round" class="team">TEAM</ion-button> -->
-      <ion-button expand="block" shape="round" color="dark" class="but1"routerLink="/type-kudo-team">TEAM</ion-button>
+      <button  class="team"routerLink="/type-kudo-team">
+        <img src="../../../assets/teamate.png" alt="" class="img1"> Equipe</button>
     </div>
     </section>
-  
-
+    <br>
+    <br>
+    <br>
+    <section>
+    <div>
+      <button class="ok">Valider</button>
+    </div>
+  </section>
 
   </ion-content>
 </ion-app>
