@@ -1,10 +1,10 @@
 package digitalkudo.kudowall.model;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -19,7 +19,7 @@ public class Kudo {
     @Column(length = 50)
     @NotBlank
     private String nombeneficiaire;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
     private Date datekudo;
     // Relation Kudo_Utilisateur
 

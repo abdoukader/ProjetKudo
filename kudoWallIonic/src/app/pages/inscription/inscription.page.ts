@@ -26,6 +26,7 @@ import { Router } from '@angular/router';
     filterStr: any=[];
     filtered = false;
     selectedId = null;
+    isenabled:boolean=false;
 
     constructor(private formBuilder: FormBuilder,private _router: Router,
         private inscrip: InscriptionService,
@@ -91,6 +92,8 @@ import { Router } from '@angular/router';
             },err=>console.log(err)
         );
     }
+    
+   
     filterStructure(e: any) {
         const val = e.value.toLowerCase();
         this.filterStr = this.str.filter((s: any) => {

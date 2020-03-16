@@ -25,7 +25,11 @@
     "@ionic-native/status-bar": "^5.0.0",
     "@ionic/angular": "^4.7.1",
     "@ionic/lab": "^3.1.0",
+<<<<<<< HEAD
+    "@swimlane/ngx-datatable": "^16.0.3",
+=======
     "@ionic/storage": "^2.2.0",
+>>>>>>> 5ccfb1afc6741fcca57aacfe70a6f6d7de1da772
     "cli": "^1.0.1",
     "cordova-android": "8.1.0",
     "core-js": "^2.5.4",
@@ -70,6 +74,10 @@
     "tslint": "~5.15.0",
     "typescript": "~3.4.3"
   },
+  "config": {
+    "ionic_sass": "./config/sass.config.js",
+    "ionic_copy": "./config/copy.config.js"
+  },
   "description": "An Ionic project",
   "cordova": {
     "plugins": {
@@ -87,3 +95,4 @@
     ]
   }
 }
+

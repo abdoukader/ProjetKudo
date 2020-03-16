@@ -5,13 +5,10 @@ import digitalkudo.kudowall.model.*;
 import digitalkudo.kudowall.model.Role;
 import digitalkudo.kudowall.model.Structure;
 import digitalkudo.kudowall.model.Utilisateur;
-import digitalkudo.kudowall.repository.RoleRepository;
-import digitalkudo.kudowall.repository.StructureRepository;
-import digitalkudo.kudowall.repository.KudoPointRepository;
-import digitalkudo.kudowall.repository.UtilisateurRepository;
+import digitalkudo.kudowall.repository.*;
 import digitalkudo.kudowall.services.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.cors.CorsConfiguration;
@@ -21,6 +18,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @CrossOrigin("http://localhost:8100")
 @RestController
@@ -38,61 +36,42 @@ public class UtilisateurController {
     private UserDetailsServiceImpl userDetailsService;
     @Autowired
     PasswordEncoder encoder;
+    @Autowired
+    private KudoRepository kudoRepository;
 
     @PostMapping(value = "/user")
-    public Message addUser(@RequestBody(required = false) Utilisateur u) {
-        Boolean emailExist = utilisateurRepository.existsByEmail(u.getEmail());
-        Boolean usernameExist = utilisateurRepository.existsByUsername(u.getUsername());
-        Boolean telephonExist = utilisateurRepository.existsByTelephone(u.getTelephone());
-        String msgErreur1 ="Un utilisateur a déjà cet email!";
-        String msgErreur2 ="Un utilisateur a déjà ce userame!";
-        String msgErreur3 ="Un utilisateur a déjà ce numéro de téléphone!";
-        if (emailExist){
-            Message InvalidEmail = new Message(500,msgErreur1,"","","");
-            return InvalidEmail;
-        }
-            else if(usernameExist){
-            Message InvalidUsername = new Message(500,msgErreur2,"","","");
-            return InvalidUsername;
-            }
-            else if(telephonExist){
-            Message InvalidTelephone = new Message(500,msgErreur3,"","","");
-            return InvalidTelephone;
-        }
-        else{
-            Utilisateur user = new Utilisateur(u.getNom(), u.getEmail(), u.getTelephone(), u.getUsername(),
-                    encoder.encode(u.getPassword()),u.getNbrekudo(),u.getNbrepoint(),u.getKudos());
-            Structure s =structureRepository.findById(u.getStructure()).get();
-            Set<Structure> structure = new HashSet<>();
-            List<Structure> structures = new ArrayList<>();
-            structures = structureRepository.findAll();
-            if (!structures.isEmpty()){
-                structures.forEach(Structure ->{
-                    if (u.getStructure().equals(Structure.getId())){
-                        Structure.setId(Structure.getId());
-                    }
-                });
-            }
-            structure.add(s);
-            u.setStructures(structure);
+    public Utilisateur addUser(@RequestBody(required = false) Utilisateur u) {
+        Utilisateur user = new Utilisateur(u.getNom(), u.getEmail(), u.getTelephone(), u.getUsername(),
+                encoder.encode(u.getPassword()),u.getNbrekudo(),u.getNbrepoint(),u.getKudos());
 
-            Role role = new Role();
-            Role role1 =roleRepository.findById(2);//ROLE_USER
-            Set<Role> roles = new HashSet<>();
-            roles.add(role1);
-            u.setPassword(encoder.encode(u.getPassword()));
-            u.setRoles(roles);
-            u.setNbrekudo(0);
-            u.setNbrepoint(0);
-            u.setKudos(0);
-            String msg="Félicitation " +u.getNom()+ "  vous êtes inscrit au Digital Kudo Wall de la DSI";
-            Message message = new Message(200,msg,"","","") ;
-            utilisateurRepository.save(u);
-            return message;
+        Structure s =structureRepository.findById(u.getStructure()).get();
+        Set<Structure> structure = new HashSet<>();
+        List<Structure> structures = new ArrayList<>();
+        structures = structureRepository.findAll();
+        if (!structures.isEmpty()){
+            structures.forEach(Structure ->{
+                if (u.getStructure().equals(Structure.getId())){
+                    Structure.setId(Structure.getId());
+                }
+            });
         }
+        structure.add(s);
+        u.setStructures(structure);
+
+        Role role = new Role();
+        Role role1 =roleRepository.findById(2);//ROLE_USER
+        Set<Role> roles = new HashSet<>();
+        roles.add(role1);
+        u.setPassword(encoder.encode(u.getPassword()));
+        u.setRoles(roles);
+        u.setNbrekudo(0);
+        u.setNbrepoint(0);
+        u.setKudos(0);
+        return utilisateurRepository.save(u);
     }
+
     @GetMapping(value = "/liste-user")
-    @PreAuthorize("hasAuthority('ROLE_USER')")
+    //@PreAuthorize("hasAuthority('ROLE_USER')")
     public List<Utilisateur> users(@RequestBody (required = false) Utilisateur utilisateur){
 
         return utilisateurRepository.findAll();
@@ -126,6 +105,8 @@ public class UtilisateurController {
 
         return  kudoPointRepository.findAll();
     }
+
+
     public Date datefrom;
     public String dateTo;
     /*@GetMapping(value = "/kudodetails")
@@ -135,7 +116,7 @@ public class UtilisateurController {
         return user;
     }*/
     @PostMapping(value = "/update-structure/{id}")
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    //@PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public Structure updatestructure(@RequestBody Structure structure,@PathVariable Long id) throws Exception{
         structure.setId(id);
         Structure structure1=structureRepository.findStructureById(id).orElseThrow(
@@ -143,6 +124,35 @@ public class UtilisateurController {
         );
         structureRepository.save(structure);
         return structure;
+    }
+    @GetMapping(value = "/plus-genereux")
+    //@PreAuthorize("hasAnyAuthority('ROLE_USER')")
+    public List <Utilisateur> user (@RequestBody(required = false) Utilisateur utilisateur){
+
+        return  utilisateurRepository.findByOrderByNbrekudoDesc();
+    }
+
+    @GetMapping(value = "/vainqueur")
+    public  List<Utilisateur> utilisateur (@RequestBody(required = false) Utilisateur utilisateur){
+        return  utilisateurRepository.findByOrderByNbrepointDesc();
+    }
+    @GetMapping(value = "/vainqueurPeriode/start/{debut}/end/{fin}")
+    public List<Utilisateur> utilisateurr (@PathVariable(value="debut") @DateTimeFormat(pattern = "dd-MM-yyyy") Date debut , @PathVariable (value="fin")@DateTimeFormat(pattern = "dd-MM-yyyy")Date fin){
+        return kudoRepository
+                .findAllByDatekudoIsBetween(debut, fin)
+                .stream()
+                .map(Kudo::getUtilisateur)
+                .sorted(Comparator.comparing(Utilisateur::getNbrepoint).reversed())
+                .collect(Collectors.toList());
+    }
+    @GetMapping(value = "/genereuxPeriode/start/{debut}/end/{fin}")
+    public List<Utilisateur> utilisateurG (@PathVariable(value="debut") @DateTimeFormat(pattern = "dd-MM-yyyy") Date debut , @PathVariable (value="fin")@DateTimeFormat(pattern = "dd-MM-yyyy")Date fin){
+        return kudoRepository
+                .findAllByDatekudoIsBetween(debut, fin)
+                .stream()
+                .map(Kudo::getUtilisateur)
+                .sorted(Comparator.comparing(Utilisateur::getNbrekudo).reversed())
+                .collect(Collectors.toList());
     }
 
 }
