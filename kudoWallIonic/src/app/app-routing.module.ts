@@ -13,22 +13,9 @@ const routes: Routes = [
   { path: 'typeKudo',loadChildren: './pages/TypeKudo/typeKudo.module#TypeKudoPageModule'},
   { path: 'kudowall',loadChildren: './pages/kudowall/kudowall.module#KudowallPageModule'},
   { path: 'choix-beneficiaire', loadChildren: () => import('./choix-beneficiaire/choix-beneficiaire.module').then( m => m.ChoixBeneficiairePageModule) },
-<<<<<<< HEAD
   { path: 'type-kudo-team', loadChildren: () => import('./type-kudo-team/type-kudo-team.module').then( m => m.TypeKudoTeamPageModule) },
-  {
-    path: 'kudo-team',
-    loadChildren: () => import('./kudo-team/kudo-team.module').then( m => m.KudoTeamPageModule)
-  },
-  {
-    path: 'table',
-    loadChildren: () => import('./table/table.module').then( m => m.TablePageModule)
-  },
-  
-  
-=======
-  { path: 'type-kudo-team', loadChildren: () => import('./type-kudo-team/type-kudo-team.module').then( m => m.TypeKudoTeamPageModule)},
-  { path: 'kudo-team',    loadChildren: () => import('./kudo-team/kudo-team.module').then( m => m.KudoTeamPageModule)},
->>>>>>> 5ccfb1afc6741fcca57aacfe70a6f6d7de1da772
+  { path: 'kudo-team',loadChildren: () => import('./kudo-team/kudo-team.module').then( m => m.KudoTeamPageModule) },
+
 ];
 
 @NgModule({
