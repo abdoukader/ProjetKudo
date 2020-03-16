@@ -1,33 +1,26 @@
 <ion-app  class="page">
-  <ion-header translucent>
-    <ion-toolbar class="choix">
-      <ion-title>Choisissez votre destinataire</ion-title>
-    </ion-toolbar>
-  </ion-header>
+
   <ion-content>
-
-    <section class="full-width">
+    <ion-header class="premier">
+    <div class="tete">
+      <ion-title>Choisissez votre destinataire</ion-title>
+    </div>
+    </ion-header>
       <div>
-          <button class="man"  routerLink="/typeKudo"><img src="../../../assets/person.jpg" class="img1" alt="">Personne</button>
+      <div class="section1">
+        <div>
+          <button  class="personne" routerLink="/type-kudo-team">
+            <ion-icon name="person" class="person"></ion-icon>
+            Personne</button>
+        </div>
       </div>
-    </section>
-
-    <br>
-
-    <section class="full-width">
-      <div>
-      <button  class="team"routerLink="/type-kudo-team">
-        <img src="../../../assets/teamate.png" alt="" class="img1"> Equipe</button>
+      <div class="section2">
+        <div>
+        <button  class="equipe" routerLink="/type-kudo-team">
+          <ion-icon name="people" class="people"></ion-icon>
+          Equipe</button>
+      </div>
+      </div>
     </div>
-    </section>
-    <br>
-    <br>
-    <br>
-    <section>
-    <div>
-      <button class="ok">Valider</button>
-    </div>
-  </section>
-
   </ion-content>
 </ion-app>

@@ -1,84 +1,79 @@
 .page{
   display: block;
-  top: 200px;
+  top: 35%;
 }
-/*header {
-    font-size: 11px;
-    font-weight: bold;
-    background-color: #FF7900;
-    text-transform: uppercase;
-  }*/
-.choix{
+
+.tete{
   background-color: #FF7900;
-  color: #ffffff;
+  height: 65px;
 }
-ion-title{
-background-color: #FF7900;
-text-align: center;
-height: 60px;
-font-size: 30px;
+
+ion-title {
+    height: 60px;
+    font-size: 35px;
+    text-decoration: none;
+    text-transform: none;
+    color: #ffffff;
   }
-#3{
-  display: block;
-  top: 300px;
+
+.section1{
+  padding-bottom: 1.5em;
+  margin-bottom: 2em;
 }
-.man{
-  height: 100px;
-  width: 100%;
-  background-color: #cccccc;
-  color:#000000;
-  font-size: 25px;
-  display: inline-block;
-  font-weight: bold;
-  text-align: center;
-  cursor: pointer; 
-  //box-shadow: 0 8px 16px 0 rgb(104, 91, 91);
+
+.personne{
+    margin-top: 2em;
+    height: 90px;
+    width: 100%;
+    margin: 1 1 1 1;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #cccccc;
+    color:#000000;
+    font-size: 25px;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 5px;
+    text-decoration: none;   
+    border: 1px  #000000;  
 }
-.man:active{  
-  background-color: #FF7900;
-}
-img{
-  height: 100px;
-  width: auto;
-  margin: 1px;
-  float: left;
+
+.personne:hover{
+    background-color: #FF7900;
+    color: #ffffff;
 }
 .person{
   float: left;
-  width: auto;
-  height: 100px;
+  width: 100px;
 }
-.team{
-  height: 120px;
+
+.people{
+   float: left;
+ }
+
+.section2{
+  margin-bottom: 4em  ;
+}
+
+.equipe{
+  height: 90px;
   width: 100%;
+  margin: 1 1 1 1;
   font-family: Arial, Helvetica, sans-serif;
   background-color: #cccccc;
   color:#000000;
   font-size: 25px;
   text-align: center;
   font-weight: bold;
-  border: double  3px;
-  cursor: pointer; 
-  //box-shadow: 0 8px 16px 0 rgb(104, 91, 91);
+  border-radius: 5px;
   text-decoration: none;   
   border: 1px  #000000;  
 }
-.img1{
-  float: left;
-}
-.team:active{ 
-   background-color: #FF7900;
-}
-.ok {
-  height: 50px;
-  width: 300px;
-  color: #cccccc;
-  font-size: 20px;
-  display: block;
-  margin: auto;
-  border-radius: 5px;
-  top: 200px;
-}
-.ok:active{
+.equipe:hover{ 
   background-color: #FF7900;
+  color: #ffffff;
+}
+
+ion-icon{
+  stroke-opacity: 100;
+  stroke-width: 23%;
 }

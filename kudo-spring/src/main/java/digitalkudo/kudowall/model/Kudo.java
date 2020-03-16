@@ -1,5 +1,6 @@
 package digitalkudo.kudowall.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
@@ -21,14 +22,14 @@ public class Kudo {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date datekudo;
     // Relation Kudo_Utilisateur
-    @JsonIgnoreProperties({"idK","id","id","kudo","password","username","nbrepoint","nbrekudo","telephone","email","roles","datekudo"})
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonIgnoreProperties({"id","kudos","structure","password","username","nbrepoint","nbrekudo","telephone","email","roles","datekudo"})
+    @JoinColumn
     private Utilisateur utilisateur;
 
     //Relation Kudo_KudoPoint
-    @JsonIgnoreProperties({"id"})
+    @JsonIgnoreProperties({"point","libelle"})
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn
     private KudoPoint kudoPoint;

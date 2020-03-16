@@ -6,7 +6,7 @@
         <span style="color: #830b21;">U</span>
         <span style="color: #778844;">D</span>
         <span style="color: #661313;">O</span>
-        &nbsp;<span>o</span><span>u</span>&nbsp;
+                            &nbsp;<span>ou</span>&nbsp;
         <span style="color: #661313;">D</span>
         <span style="color: #808080;">J</span>
         <span style="color: #fa2020;">A</span>
@@ -17,7 +17,7 @@
         <span style="color: #661313;">U</span>
         <span style="color: #808080;">F</span>
         <br>
-        &nbsp;<span style="color: rgb(71, 9, 71);">W</span>
+        &nbsp;<span style="text-align:center;color: rgb(163, 82, 163);">W</span>
         <span style="color: rgb(71, 9, 71);">A</span>
         <span style="color: rgb(71, 9, 71);">L</span>
         <span style="color: rgb(71, 9, 71);">L</span>
@@ -25,7 +25,81 @@
     </ion-toolbar>
   </ion-header>
   <ion-content>
+    <ion-grid>
+      <ion-row >
+        <ion-card class="toto">
+          <ion-col class="rien">
+            <div class="m">Merci beaucoup</div>
+
+            <ng-container *ngFor="let k of kudoA">
+              <div class="merci">
+              <div class="info" >à{{k.nombeneficiaire}} </div>
+            </div>
+              <div>{{k.commentaire}}</div>
+              <div>{{k.utilisateur.nom}}</div>
+            </ng-container>
+            <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+              <ion-infinite-scroll-content
+                loadingSpinner="bubbles"
+                loadingText="Loading more data...">
+              </ion-infinite-scroll-content>
+            </ion-infinite-scroll>
+          </ion-col>
+        </ion-card>
+        <ion-card class="toto">
+          <ion-col class="rien">
+            <div class="t">Tres heureux</div>
+            <ng-container *ngFor="let k of kudoB">
+              <div>à {{k.nombeneficiaire}} </div>
+              <div>{{k.commentaire}}</div>
+              <div>{{k.utilisateur.nom}}</div>
+            </ng-container>
+          </ion-col>
+        </ion-card>
+        <ion-card class="toto">
+          <ion-col class="rien">
+            <div class="f">Felicitations</div>
+            <ng-container *ngFor="let k of kudoC">
+              <div>à {{k.nombeneficiaire}} </div>
+              <div>{{k.commentaire}}</div>
+              <div>{{k.utilisateur.nom}}</div>
+            </ng-container>
+          </ion-col>
+        </ion-card>
+      </ion-row>
+      <ion-row>
+        <ion-card class="toto">
+          <ion-col class="rien">
+            <div class="b">Bien joue</div>
+            <ng-container *ngFor="let k of kudoD">
+              <div>à {{k.nombeneficiaire}} </div>
+              <div>{{k.commentaire}}</div>
+              <div>{{k.utilisateur.nom}}</div>
+            </ng-container>
+          </ion-col>
+        </ion-card>
+        <ion-card class="toto">
+          <ion-col class="rien">
+            <div class="exc">Execellent</div>
+            <ng-container *ngFor="let k of kudoE">
+              <div>à {{k.nombeneficiaire}} </div>
+              <div>{{k.commentaire}}</div>
+              <div>{{k.utilisateur.nom}}</div>
+            </ng-container>
+          </ion-col>
+        </ion-card>
+        <ion-card class="toto">
+          <ion-col class="rien">
+            <div class="ext">Extraordinaire</div>
+            <ng-container *ngFor="let k of kudoF">
+              <div>à {{k.nombeneficiaire}} </div>
+              <div>{{k.commentaire}}</div>
+              <div>{{k.utilisateur.nom}}</div>
+            </ng-container>
+          </ion-col>
+        </ion-card>
+        </ion-row>
+    </ion-grid>
   
-          
   </ion-content>
 </ion-app>

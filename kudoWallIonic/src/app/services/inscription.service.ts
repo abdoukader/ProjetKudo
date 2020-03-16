@@ -17,18 +17,16 @@ export class InscriptionService{
   private urliste = 'http://127.0.0.1:8080/add/listekudopoint';
   private urllsiteStructure = 'http://127.0.0.1:8080/add/liste-structures';
   private endpoint3 = 'http://127.0.0.1:8080/kudo/team';
+  private listeuser = 'http://127.0.0.1:8080/liste-user';
 
 
-  constructor(private http: HttpClient, /*public selectkudo:Kudos*/) { }
+  constructor(private http: HttpClient) { }
     
       FindBySousStructure(data):Observable<any>{
-        
         return this.http.post(this.URL, data);
-
       }
 
     inscription(Data):Observable<any> {
-      
       return this.http.post(this.endpoint, Data);
     }
 
@@ -39,8 +37,8 @@ export class InscriptionService{
       return this.http.post(this.endpoint3,data3)
     }
 
-    kudowall(kudos):Observable<any>{
-      return this.http.get(this.endpoint2,kudos)
+    kudowall():Observable<any>{
+      return this.http.get(this.endpoint2)
     }
       
     listekudoP(){
@@ -49,6 +47,9 @@ export class InscriptionService{
 
     listeStructure(){
       return this.http.get(this.urllsiteStructure)
+    }
+    listuser():Observable<any>{
+      return this.http.get(this.listeuser)
     }
 
   //   async check_initial_cpfObservable(something){
