@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from 'rxjs';
-import { Kudos} from '../infokudo/kudos';
+//import { Kudos} from '../infokudo/kudos';
 
 @Injectable({
     providedIn: 'root'
@@ -59,12 +59,9 @@ export class InscriptionService{
       return this.http.get<any>(this.detailV,data)
     }
 
-<<<<<<< HEAD
-=======
   //   async check_initial_cpfObservable(something){
   //   return this.http.get(this.endpoint1,).pipe(CATCH_ERROR_VAR(error => throwError(error)));
     
   // }
 
->>>>>>> 5ccfb1afc6741fcca57aacfe70a6f6d7de1da772
   }

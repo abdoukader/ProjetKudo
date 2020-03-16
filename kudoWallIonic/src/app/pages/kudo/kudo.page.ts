@@ -17,7 +17,6 @@ export class KudoPage implements OnInit {
   filteredd = false;
   filter = false;
   selectedId = null;
-<<<<<<< HEAD
   selectedNom = null;
   errorMsg: any=[];
   lis: any=[];
@@ -26,15 +25,8 @@ export class KudoPage implements OnInit {
   
  
   idk= this.actRoute.snapshot.params['id'];
-  constructor(private kudos: InscriptionService, private alertController:AlertController,private alertControl:AlertController, public actRoute: ActivatedRoute,private structureliste:InscriptionService, private listeU:InscriptionService) { }
+  constructor(private kudos: InscriptionService, private _router:Router,private alertController:AlertController,private alertControl:AlertController, public actRoute: ActivatedRoute,private structureliste:InscriptionService, private listeU:InscriptionService) { }
   //constructor(private kudos: InscriptionService, private alertController:AlertController, public actRoute: ActivatedRoute,private structureliste:InscriptionService) { }
-=======
-  errorMsg='';
-  msg="";
- 
-  idk= this.actRoute.snapshot.params['id'];
-  constructor(private _router:Router, private kudos: InscriptionService, private alertController:AlertController, public actRoute: ActivatedRoute,private structureliste:InscriptionService) { }
->>>>>>> 5ccfb1afc6741fcca57aacfe70a6f6d7de1da772
 
   ngOnInit() {
     this.listeStructure()
@@ -81,64 +73,6 @@ filterUtilisateur(e:any){
     this.selectedId = id;
     this.filtered = false;
 }
-<<<<<<< HEAD
-
-
- selectliste(input: any, nom: string){
-    input.value = nom;
-    this.selectedNom =nom;
-    this.filteredd =false;
-
-  }
-  
-formKudo = {
-  point:this.idk,
-  nombeneficiaire:"",
-  structure:"",
-  commentaire:""
-}
- 
-
-fairekudo(){
-  // const st = this.str.filter((s: any) => s.id === +this.selectedId);
-  // if(this.selectedId === null || (st.length > 0 && st[0].sousStructure !== this.formKudo.structure)) {
-  //     this.selectedId = null;
-  //     return;
-  // }
-  this.formKudo.structure = this.selectedId;
-  this.kudos.faireKudo(this.formKudo)
-  .subscribe(
-    res => {
-      this.presentAlertError(res.msg)
-     // window.confirm('kudo réussit');
-      console.log(res)
-    },
-    err => {
-      //window.confirm('kudo echoué')
-      console.log(err)
-    }
-  )
-  console.log(this.formKudo)
-}
-
-  async presentAlertSucces(){
-    const alerts = await this.alertController.create({
-      header: 'kudowall',
-      subHeader: 'KUDO WALL',
-      message: 'kudo réussie',
-       buttons: ['ok']
-    })
-    await alerts.present();
-  }
-  async presentAlertError(msg){
-    const alert = await this.alertControl.create({
-      subHeader: 'KUDO WALL',
-      message: msg,
-       buttons: ['ok']
-    })
-    await alert.present();
-  }
-=======
   
   formKudo = {
     point:this.idk,
@@ -185,5 +119,4 @@ fairekudo(){
         this._router.navigateByUrl('/kudowall');
 
       }*/
->>>>>>> 5ccfb1afc6741fcca57aacfe70a6f6d7de1da772
 }
