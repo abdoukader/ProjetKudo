@@ -73,50 +73,60 @@ filterUtilisateur(e:any){
     this.selectedId = id;
     this.filtered = false;
 }
-  
-  formKudo = {
-    point:this.idk,
-    nombeneficiaire:"",
-    structure:"",
-    commentaire:""
-  }
- 
-  async presentAlertError(nombeneficiaire:string,commentaire:string,nom:string) {
-    const alert = await this.alertController.create({
-      
-      message: "à "+nombeneficiaire+ " "+commentaire+" "+nom,
-      buttons: [{text: 'OK'}]
-    });
 
+
+ selectliste(input: any, nom: string){
+    input.value = nom;
+    this.selectedNom =nom;
+    this.filteredd =false;
+
+  }
+  
+formKudo = {
+  point:this.idk,
+  nombeneficiaire:"",
+  structure:"",
+  commentaire:""
+}
+ 
+
+fairekudo(){
+  // const st = this.str.filter((s: any) => s.id === +this.selectedId);
+  // if(this.selectedId === null || (st.length > 0 && st[0].sousStructure !== this.formKudo.structure)) {
+  //     this.selectedId = null;
+  //     return;
+  // }
+  this.formKudo.structure = this.selectedId;
+  this.kudos.faireKudo(this.formKudo)
+  .subscribe(
+    res => {
+      this.presentAlertError(res.msg)
+     // window.confirm('kudo réussit');
+      console.log(res)
+    },
+    err => {
+      //window.confirm('kudo echoué')
+      console.log(err)
+    }
+  )
+  console.log(this.formKudo)
+}
+
+  async presentAlertSucces(){
+    const alerts = await this.alertController.create({
+      header: 'kudowall',
+      subHeader: 'KUDO WALL',
+      message: 'kudo réussie',
+       buttons: ['ok']
+    })
+    await alerts.present();
+  }
+  async presentAlertError(msg){
+    const alert = await this.alertControl.create({
+      subHeader: 'KUDO WALL',
+      message: msg,
+       buttons: ['ok']
+    })
     await alert.present();
   }
-
-  fairekudo(){
-    this.formKudo.structure = this.selectedId;
-    this.kudos.faireKudo(this.formKudo)
-    .subscribe(
-      res => {
-        //console.log(res)
-        this.presentAlertError(res.nombeneficiaire,res.commentaire,res.nom_emetteur)
-        this._router.navigate(['/kudowall'])
-      },
-      error => {
-        console.log(error)
-        if(error.status === 500){
-          this.presentAlertError(error,"","")
-          this._router.navigate(['/typeKudo'])
-        }
-
-        //this.errorMsg=err.error.exception[1].msg;
-       //Swal.fire({
-          //title: 'erreur',
-          //text:this.errorMsg,
-        }
-        );
-      }
-      /*goToViewKudos(detail:any){
-        this.kudos.selectkudo = detail;
-        this._router.navigateByUrl('/kudowall');
-
-      }*/
 }

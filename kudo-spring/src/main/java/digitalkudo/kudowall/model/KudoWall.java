@@ -3,6 +3,7 @@ package digitalkudo.kudowall.model;
 import java.util.Date;
 
 public class KudoWall {
+        String sousStructure;
         Date   datekudo;
         String nombeneficiaire;
         String commentaire;
@@ -138,5 +139,13 @@ public class KudoWall {
 
     public void setStructure(Long structure) {
         this.structure = structure;
+    }
+
+    public String getSousStructure() {
+        return sousStructure;
+    }
+
+    public void setSousStructure(String sousStructure) {
+        this.sousStructure = sousStructure;
     }
 }

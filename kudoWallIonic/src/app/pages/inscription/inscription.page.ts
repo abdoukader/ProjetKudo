@@ -73,11 +73,9 @@ import { Router } from '@angular/router';
             password:['',[Validators.required,Validators.minLength(2), Validators.pattern(/[a-z0-9-A-Z]/)]],
             structure:['',[Validators.required]],
             telephone: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
-        })
+        });
     }
-    //ngOnInit() {
-       // this.initForm()
-    //}
+ 
     ngOnInit(){
         this.listeStructure();
         this.initForm();

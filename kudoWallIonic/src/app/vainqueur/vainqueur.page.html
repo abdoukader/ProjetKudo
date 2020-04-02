@@ -1,8 +1,11 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>vainqueur</ion-title>
+  </ion-toolbar>
+</ion-header>
 
-    <div class="tete"><h1>PLUS GENEREUX/PERIODE</h1></div> 
-    <br><br><br>
-    <ion-content>
-       <form [formGroup]="detailVainqueur" (ngSubmit)="detailU()">
+<ion-content>
+  <form [formGroup]="detailvainqueur" (ngSubmit)="detailV()">
         <ion-item class="form-group">
           <ion-label class="label">date debut</ion-label>
           <ion-datetime formControlName="debut" displayFormat='MMM D, YYYY' type="date" useValueAsDate></ion-datetime>
@@ -14,18 +17,18 @@
       <div class="flex">
    
       <br><br><br>
-      <ion-button expand="block" shape="round" color="#f77911" class="but" type="submit">plus généreux</ion-button>
+      <ion-button expand="block" shape="round" color="#f77911" class="but" type="submit">Vainqueur</ion-button>
    
        </div>
        </form>
        <div>
        <ion-list ng-switch-when="Utilisateur" *ngIf="!vainq">
-          <ion-item *ngFor="let detail of detailUs"  (click)="goToView(detail)" detail>
+          <ion-item *ngFor="let detail of detailVs"  (click)="goToView(detail)" detail>
               <ion-label> 
                   <h2>NOM   {{detail.nom}} </h2>
-                 <h3> NOMBRE DE KUDO DONNÉE {{detail.nbrekudo}}</h3> 
+                 <h3> NOMBRE DE POINT {{detail.nbrepoint}}</h3> 
               </ion-label>
             </ion-item>
       </ion-list>
     </div>
-    </ion-content>
+</ion-content>

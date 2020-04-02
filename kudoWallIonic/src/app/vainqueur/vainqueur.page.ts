@@ -4,13 +4,13 @@ import { Router } from '@angular/router';
 import { InscriptionService } from '../services/inscription.service';
 
 @Component({
-  selector: 'app-table',
-  templateUrl: './table.page.html',
-  styleUrls: ['./table.page.scss'],
+  selector: 'app-vainqueur',
+  templateUrl: './vainqueur.page.html',
+  styleUrls: ['./vainqueur.page.scss'],
 })
-export class TablePage implements OnInit {
+export class VainqueurPage implements OnInit {
 
-  detailUs: any;
+  detailVs: any;
   vainq: Boolean;
   public classement: FormGroup;
 
@@ -18,23 +18,23 @@ export class TablePage implements OnInit {
 
   ngOnInit() {
   }
-  detailVainqueur = this.formGroup.group({
+  detailvainqueur = this.formGroup.group({
     debut: [''],
     fin: ['']
   })
-  userss(){
+  usersV(){
     this.vainq = true;
   }
 
-  detailU (data:any){
+  detailV (data:any){
     console.log(data);
-    console.log(this.detailVainqueur);
+    console.log(this.detailvainqueur);
     
-      this.authService.listeUtilisateur(this.detailVainqueur.value)
+      this.authService.listeUtilisateurV(this.detailvainqueur.value)
       .subscribe(
         data =>{
           console.log(data);
-          this.detailUs=data
+          this.detailVs=data
           
         },err=>{
           console.log(err);
@@ -49,3 +49,4 @@ export class TablePage implements OnInit {
     } 
 
 }
+

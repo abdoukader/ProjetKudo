@@ -4,18 +4,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { TablePageRoutingModule } from './table-routing.module';
+import { VainqueurPageRoutingModule } from './vainqueur-routing.module';
 
-import { TablePage } from './table.page';
+import { VainqueurPage } from './vainqueur.page';
 
 @NgModule({
   imports: [
     CommonModule,
-    ReactiveFormsModule,
     FormsModule,
+    ReactiveFormsModule,
     IonicModule,
-    TablePageRoutingModule
+    VainqueurPageRoutingModule
   ],
-  declarations: [TablePage]
+  declarations: [VainqueurPage]
 })
-export class TablePageModule {}
+export class VainqueurPageModule {}

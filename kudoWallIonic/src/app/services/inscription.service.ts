@@ -8,6 +8,8 @@ import { Observable } from 'rxjs';
 })
 export class InscriptionService{
 
+  selectUser: any;
+
   labelAttribute = 'structure';
   formValueAttribute ='id';
   private endpoint = 'http://127.0.0.1:8080/add/user';
@@ -18,19 +20,18 @@ export class InscriptionService{
   private urllsiteStructure = 'http://127.0.0.1:8080/add/liste-structures';
   private endpoint3 = 'http://127.0.0.1:8080/kudo/team';
   private endpoint4 = 'http://127.0.0.1:8080/add/liste-user';
-  private detailV= 'http://127.0.0.1:8080/add/genereuxPeriode/start/{debut}/end/{fin}'
+  private detailG = 'http://127.0.0.1:8080/add/genereuxPeriode/start/';
+  private detailV = 'http://127.0.0.1:8080/add/vainqueurPeriode/start/'
 
 
-  constructor(private http: HttpClient, /*public selectkudo:Kudos*/) { }
+
+  constructor(private http: HttpClient) { }
     
       FindBySousStructure(data):Observable<any>{
-        
         return this.http.post(this.URL, data);
-
       }
 
     inscription(Data):Observable<any> {
-      
       return this.http.post(this.endpoint, Data);
     }
 
@@ -41,8 +42,8 @@ export class InscriptionService{
       return this.http.post(this.endpoint3,data3)
     }
 
-    kudowall(kudos):Observable<any>{
-      return this.http.get(this.endpoint2,kudos)
+    kudowall():Observable<any>{
+      return this.http.get(this.endpoint2)
     }
       
     listekudoP(){
@@ -55,13 +56,11 @@ export class InscriptionService{
     listerUser(){
       return this.http.get(this.endpoint4)
     }
-    listeUtilisateur(data){
-      return this.http.get<any>(this.detailV,data)
+    listeUtilisateur(detailVainqueur){
+      return this.http.get<any>(this.detailG+detailVainqueur.debut+"/end/"+detailVainqueur.fin)
     }
-
-  //   async check_initial_cpfObservable(something){
-  //   return this.http.get(this.endpoint1,).pipe(CATCH_ERROR_VAR(error => throwError(error)));
-    
-  // }
+   listeUtilisateurV(detailvainqueur){
+     return this.http.get<any>(this.detailV+detailvainqueur.debut+"/end/"+detailvainqueur.fin)
+   }
 
   }

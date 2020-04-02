@@ -14,16 +14,11 @@ const routes: Routes = [
   { path: 'kudowall',loadChildren: './pages/kudowall/kudowall.module#KudowallPageModule'},
   { path: 'choix-beneficiaire', loadChildren: () => import('./choix-beneficiaire/choix-beneficiaire.module').then( m => m.ChoixBeneficiairePageModule) },
   { path: 'type-kudo-team', loadChildren: () => import('./type-kudo-team/type-kudo-team.module').then( m => m.TypeKudoTeamPageModule) },
-  {
-    path: 'kudo-team',
-    loadChildren: () => import('./kudo-team/kudo-team.module').then( m => m.KudoTeamPageModule)
-  },
-  {
-    path: 'table',
-    loadChildren: () => import('./table/table.module').then( m => m.TablePageModule)
-  },
-  
-  
+  { path: 'kudo-team',loadChildren: () => import('./kudo-team/kudo-team.module').then( m => m.KudoTeamPageModule) },
+  { path: 'table', loadChildren: () => import('./table/table.module').then( m => m.TablePageModule) },
+  { path: 'detail', loadChildren: () => import('./detail/detail.module').then( m => m.DetailPageModule) },
+  { path: 'vainqueur', loadChildren: () => import('./vainqueur/vainqueur.module').then( m => m.VainqueurPageModule) },
+
 ];
 
 @NgModule({

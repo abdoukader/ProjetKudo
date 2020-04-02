@@ -14,18 +14,19 @@ import { KudowallPageModule } from './pages/kudowall/kudowall.module';
 import { AuthGuardService} from './services/auth-guard.service';
 //import { IonicStorageModule } from '@ionic/storage';
 import { InscriptionPageModule } from './pages/inscription/inscription.module';
+import { HomePageModule } from './home/home.module';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(),
-    //IonicStorageModule.forRoot(),
+    IonicModule.forRoot(), 
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    HomePageModule,
     AutoCompleteModule,
     KudowallPageModule,
     InscriptionPageModule,
@@ -33,6 +34,9 @@ import { InscriptionPageModule } from './pages/inscription/inscription.module';
   providers: [
     StatusBar,
     SplashScreen,
+    
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi:true },
+
     AuthService,
     AuthGuardService,
     { provide: HTTP_INTERCEPTORS,

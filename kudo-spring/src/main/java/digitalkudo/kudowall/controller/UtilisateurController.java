@@ -137,23 +137,24 @@ public class UtilisateurController {
         return  utilisateurRepository.findByOrderByNbrepointDesc();
     }
     @GetMapping(value = "/vainqueurPeriode/start/{debut}/end/{fin}")
-    public List<Utilisateur> utilisateurr (@PathVariable(value="debut") @DateTimeFormat(pattern = "dd-MM-yyyy") Date debut , @PathVariable (value="fin")@DateTimeFormat(pattern = "dd-MM-yyyy")Date fin){
+    public List<Utilisateur> utilisateurr (@PathVariable(value="debut") @DateTimeFormat(pattern = "yyyy-MM-dd") Date debut , @PathVariable (value="fin")@DateTimeFormat(pattern = "yyyy-MM-dd")Date fin){
         return kudoRepository
                 .findAllByDatekudoIsBetween(debut, fin)
                 .stream()
-                .map(Kudo::getUtilisateur)
+                .map(Kudo::getUtilisateur).distinct()
                 .sorted(Comparator.comparing(Utilisateur::getNbrepoint).reversed())
                 .collect(Collectors.toList());
     }
     @GetMapping(value = "/genereuxPeriode/start/{debut}/end/{fin}")
-    public List<Utilisateur> utilisateurG (@PathVariable(value="debut") @DateTimeFormat(pattern = "dd-MM-yyyy") Date debut , @PathVariable (value="fin")@DateTimeFormat(pattern = "dd-MM-yyyy")Date fin){
+    public List<Utilisateur> utilisateurG (@PathVariable(value="debut") @DateTimeFormat(pattern = "yyyy-MM-dd") Date debut , @PathVariable (value="fin") @DateTimeFormat(pattern = "yyyy-MM-dd")Date fin){
         return kudoRepository
                 .findAllByDatekudoIsBetween(debut, fin)
                 .stream()
-                .map(Kudo::getUtilisateur)
+                .map(Kudo::getUtilisateur).distinct()
                 .sorted(Comparator.comparing(Utilisateur::getNbrekudo).reversed())
                 .collect(Collectors.toList());
     }
+
 
 }
 

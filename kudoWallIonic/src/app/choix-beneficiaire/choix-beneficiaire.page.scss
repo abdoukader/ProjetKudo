@@ -1,84 +1,108 @@
 .page{
   display: block;
-  top: 200px;
+  top: 35%;
 }
-/*header {
-    font-size: 11px;
-    font-weight: bold;
-    background-color: #FF7900;
-    text-transform: uppercase;
-  }*/
-.choix{
-  background-color: #FF7900;
-  color: #ffffff;
+
+.tete{
+  background-color: rgb(255, 94, 0);
+  height: 65px;
 }
-ion-title{
-background-color: #FF7900;
-text-align: center;
-height: 60px;
-font-size: 30px;
+
+ion-title {
+    height: 60px;
+    font-size: 35px;
+    text-decoration: none;
+    text-transform: none;
+    color: #ffffff;
   }
-#3{
-  display: block;
-  top: 300px;
+
+.section1{
+  padding-bottom: 1.5em;
+  margin-bottom: 2em;
 }
-.man{
-  height: 100px;
-  width: 100%;
-  background-color: #cccccc;
-  color:#000000;
-  font-size: 25px;
-  display: inline-block;
-  font-weight: bold;
-  text-align: center;
-  cursor: pointer; 
-  //box-shadow: 0 8px 16px 0 rgb(104, 91, 91);
+
+.personne{
+    margin-top: 2em;
+    height: 90px;
+    width: 100%;
+    margin: 1 1 1 1;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #cccccc;
+    color:#000000;
+    font-size: 25px;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 5px;
+    text-decoration: none;   
+    border: 1px  #000000;  
 }
-.man:active{  
-  background-color: #FF7900;
-}
-img{
-  height: 100px;
-  width: auto;
-  margin: 1px;
-  float: left;
+
+.personne:hover{
+    background-color: #FF7900;
+    color: #ffffff;
 }
 .person{
   float: left;
-  width: auto;
-  height: 100px;
+  font-size: 50px;
+  width: 100px;
 }
-.team{
-  height: 120px;
-  width: 100%;
+
+.people{
+   float: left;
+   font-size: 50px;
+   width: 100px;
+ }
+
+.section2{
+  margin-bottom: 4em  ;
+}
+
+.equipe{
+  height: 90px;
+  width: 350px;
+  margin: 1 1 1 1;
   font-family: Arial, Helvetica, sans-serif;
   background-color: #cccccc;
   color:#000000;
   font-size: 25px;
   text-align: center;
   font-weight: bold;
-  border: double  3px;
-  cursor: pointer; 
-  //box-shadow: 0 8px 16px 0 rgb(104, 91, 91);
-  text-decoration: none;   
+  //border-radius: 5px;
+  //text-decoration: none;   
   border: 1px  #000000;  
 }
-.img1{
-  float: left;
+.but1 {
+	padding:08px 0 16px 0;
+	font:bold 25px Arial;
+	background:#fdfdfd;
+	color:black;
+  border-radius:2px;
+  font-size: 25px;
+  text-align: left;
+
+	width:90%;
+	border:1px solid rgb(27, 26, 26);
+  box-shadow:1px 1px 3px #999;
+  margin-left: 5%;
+  height: 60px;
 }
-.team:active{ 
-   background-color: #FF7900;
-}
-.ok {
-  height: 50px;
-  width: 300px;
-  color: #cccccc;
-  font-size: 20px;
-  display: block;
-  margin: auto;
-  border-radius: 5px;
-  top: 200px;
-}
-.ok:active{
+.equipe:hover{ 
   background-color: #FF7900;
+  color: #ffffff;
+}
+
+ion-icon{
+  stroke-opacity: 100;
+  stroke-width: 23%;
+}
+h2{
+  font-size: 30px;
+  margin-top: 3px;
+  
+}
+ion-title{
+  font-size: 30px;
+}
+.contener{
+  margin-top: -25px;
 }

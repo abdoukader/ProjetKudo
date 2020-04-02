@@ -64,14 +64,7 @@ onLogin() {
       //this.loginForm.reset();
 
     }
-
-  isAdmin() {
-    return this._auth.isAdmin();
-  }
-  isUser() {
-    return this._auth.isUser();
-  }
-
+  
  /* resetLoginForm(){
    let controlsObject = this.loginForm.controls;
    for (let prop in controlsObject){
