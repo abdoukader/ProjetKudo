@@ -1,33 +1,85 @@
-<ion-content>
-  <ion-card class="loginForm" *ngIf="!isLoading">
-        <ion-toolbar  color="orange">
-            <ion-title class="auth">Authentification</ion-title>
-          </ion-toolbar>      
-        <ion-card-content>
-        <form [formGroup]="loginForm" (ngSubmit)="onLogin()"   class="form" novalidate id="myform">
-                <ion-item transparent>
-                    <ion-label position="floating">Username
-                    </ion-label>
-                    <ion-input type="text" formControlName = "username">
-                        
-                    </ion-input>
-                </ion-item>
-               <span class="error ion-padding"  style="color:red" *ngIf = "isSubmitted && loginForm.controls.username.errors?.required">
-                    Username requis
-               </span>   
-                <ion-item lines = "full">
-                    <ion-label position="floating">Mot de passe
+<ion-card class="loginForm" *ngIf="!isLoading">
+    <ion-toolbar  color="orange">
+        <ion-title class="auth">Authentification</ion-title>
+      </ion-toolbar>      
+    <ion-card-content>
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()"   class="form" novalidate id="myform">
+            <ion-item transparent>
+                <ion-label position="floating" class="lab">Login
+                </ion-label>
+                <ion-input type="text" formControlName = "username" class="ecrit">
+                    
+                </ion-input>
+            </ion-item>
+           <span class="error ion-padding"  style="color:red" *ngIf = "isSubmitted && loginForm.controls.username.errors?.required">
+                Username requis
+           </span>   
+            <ion-item lines = "full">
+                <ion-label position="floating" class="lab">Password
 
-                    </ion-label>
-                    <ion-input type="password" formControlName = "password" ></ion-input>
-                </ion-item>
-                <span  class="error ion-padding" style="color:red"  *ngIf = "isSubmitted && loginForm.controls.password.errors?.required">
-                    Password requis
-               </span>  
-                <br>
-                <button type="submit" class="but1" [disabled]="!loginForm.valid">Se Connecter</button>
-            </form>
-          
-        </ion-card-content>
-    </ion-card>
-</ion-content>
+                </ion-label>
+                <ion-input type="password" formControlName = "password" class="ecrit"></ion-input>
+            </ion-item>
+            <span  class="error ion-padding" style="color:red"  *ngIf = "isSubmitted && loginForm.controls.password.errors?.required">
+                Password requis
+           </span>  
+            <br>
+            <button type="submit" class="but1" [disabled]="!loginForm.valid">Se Connecter</button>
+        </form>
+      
+    </ion-card-content>
+</ion-card>
+<!--<ion-header>
+    <ion-toolbar>
+        <ion-title>Authentification</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <div class="ion-padding">
+        <ion-input type="text"  placeholder="Nom utilisateur" class="set"></ion-input>
+        <br>
+        <br>
+        <ion-input type="text"  placeholder="Mot de passe" class="set"></ion-input>
+        <br>
+        <br>
+        <br>
+        <button class="but1">Je me connecte</button>
+    </div>  
+</ion-content>-->
+<!--<ion-card class="loginForm" *ngIf="!isLoading">
+    <ion-toolbar  color="orange">
+        <ion-title class="auth">Authentification</ion-title>
+      </ion-toolbar>      
+    <ion-card-content>
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()"   class="form" novalidate id="myform">
+            <ion-item transparent>
+                <ion-label position="floating" class="lab">Login
+                </ion-label>
+                <ion-input type="text" formControlName = "username" class="ecrit">
+                    
+                </ion-input>
+            </ion-item>
+           <span class="error ion-padding"  style="color:red" *ngIf = "isSubmitted && loginForm.controls.username.errors?.required">
+                Username requis
+           </span>   
+            <ion-item lines = "full">
+                <ion-label position="floating" class="lab">Password
+
+                </ion-label>
+                <ion-input type="password" formControlName = "password" class="ecrit"></ion-input>
+            </ion-item>
+            <span  class="error ion-padding" style="color:red"  *ngIf = "isSubmitted && loginForm.controls.password.errors?.required">
+                Password requis
+           </span>  
+            <br>
+            <button type="submit" class="but1" [disabled]="!loginForm.valid">Se Connecter</button>
+        </form>
+      
+    </ion-card-content>
+</ion-card>-->
+
+
+
+
+
+

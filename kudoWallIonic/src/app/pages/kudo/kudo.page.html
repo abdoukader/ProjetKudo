@@ -1,47 +1,38 @@
-<ion-header>
-  <ion-toolbar  color="orange">
-    <ion-title class="ion-text-center">FAIRE UN KUDO</ion-title>
-  </ion-toolbar>
-</ion-header>
- 
-  <ion-content >
-    <ion-card  *ngIf="!isLoading" background-color="dark">
-        <img id="cadre" src="../../../assets/Merciiikudo.jpg" alt="" />
-        <div class="kudo">
-          <ion-card-content>
+<ion-content >
+  <ion-card  *ngIf="!isLoading"  >
+        <ion-header>
+  
+            <div class="tet">
+            <ion-title class="ion-text-center">FAIRE UN KUDO</ion-title>
+          </div>
+        </ion-header>
+        <div>
+          <ion-card-content id="bloc">
 
-            <form #form="ngForm" >
+            <form #form="ngForm">
                     <ion-item>
-                        <ion-label position="floating">NomBénéficiaire</ion-label>
-                        <!-- <ion-input type="text" id="nombeneficiaire" [(ngModel)]="formKudo.nombeneficiaire" name="nombeneficiaire"  required></ion-input> -->
+                        <ion-label position="floating" class="label">NomBénéficiaire</ion-label>
                         <ion-input type="text" name="nombeneficiaire" #nom (keyup)="filterUtilisateur(nom)" (ionFocus)="filteredd=true" [(ngModel)]="formKudo.nombeneficiaire"  required></ion-input>
                         <div class="list" *ngIf="filteredd"> 
                           <li class="user" *ngFor="let user of filterU" (click)="selectliste(nom, user.nom)">{{user.nom}}</li>
                       </div>
                     </ion-item>
                    <ion-item>
-                      <ion-label position="floating">Structure </ion-label>
+                      <ion-label position="floating" class="label">Structure </ion-label>
                       <ion-input type="text" name="structure" #sousStructure (keyup)="filterStructure(sousStructure)" (ionFocus)="filtered = true" ngModel required></ion-input>
                       <div class="list" *ngIf="filtered">
                         <ul>
-                          <li class="item" *ngFor="let item of filterStr" (click)="selectStr(sousStructure, item.id, item.sousStructure)">{{item.sousStructure}}</li>
+                          <li class="item" *ngFor="let item of filterStr"  (click)="selectStr(sousStructure, item.id, item.sousStructure)" >{{item.sousStructure}}</li>
                           </ul>
                       </div>
                     </ion-item>
                     <br>  
                     <ion-item>
-                         <ion-label position="floating">Commentaire</ion-label> 
+                         <ion-label position="floating" class="label">Commentaire</ion-label> 
                          <ion-input type="text" id="commentaire"  [(ngModel)]="formKudo.commentaire" name="commentaire"  required></ion-input>
                     </ion-item>
-<<<<<<< HEAD
                     <br><br><br>
-                    <!-- <ion-button (click)="fairekudo()" type="submit" expand="block" fill="outline" class="btnLogin">Djadieuf</ion-button> -->
-                    <!-- <ion-button (click)="fairekudo()" type="submit" expand="block"  class="btnLogin">Djadieuf</ion-button> -->
-                    <ion-button  (click)="fairekudo()" type="submit" expand="block" shape="round" color="#f77911" class="but1"><strong>DJAADIEUF</strong></ion-button>
-=======
-                    <br>
-                    <ion-button (click)="fairekudo()" type="submit" expand="block"  class="btnLogin">Djadieuf</ion-button>
->>>>>>> 5ccfb1afc6741fcca57aacfe70a6f6d7de1da772
+                    <button  (click)="fairekudo()" type="submit" expand="block" shape="round" color="#f77911" class="but"><strong>DJAADIEUF</strong></button>
                 </form>
           </ion-card-content>
         </div> 

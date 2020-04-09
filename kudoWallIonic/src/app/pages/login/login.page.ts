@@ -10,7 +10,10 @@ import { FormBuilder, Validators,FormGroup, ControlContainer } from '@angular/fo
 })
 export class LoginPage implements OnInit {
   constructor(private _auth: AuthService, private _router: Router,private alertController:AlertController,private formBuilder: FormBuilder ) { 
+    //this.dynamicColor = 'orange';
   }
+  private dynamicColor: string
+
  loginForm : FormGroup;
  isSubmitted = false;
   ngOnInit() {
@@ -36,6 +39,11 @@ export class LoginPage implements OnInit {
 
     await alert.present();
   }
+
+ /* changeToDarkColor() {
+    this.dynamicColor = 'dark';
+}*/
+
  
 onLogin() {
   this.isSubmitted = true;

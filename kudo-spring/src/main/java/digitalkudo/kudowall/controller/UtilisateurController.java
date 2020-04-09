@@ -1,6 +1,5 @@
 package digitalkudo.kudowall.controller;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import digitalkudo.kudowall.model.*;
 import digitalkudo.kudowall.model.Role;
 import digitalkudo.kudowall.model.Structure;
@@ -11,12 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 

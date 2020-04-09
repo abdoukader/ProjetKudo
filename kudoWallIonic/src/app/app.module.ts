@@ -15,6 +15,9 @@ import { AuthGuardService} from './services/auth-guard.service';
 import { IonicStorageModule } from '@ionic/storage';
 import { InscriptionPageModule } from './pages/inscription/inscription.module';
 import { HomePageModule } from './home/home.module';
+import { KudowallStructurePageModule } from './kudowall-structure/kudowall-structure.module';
+import { KudoPageModule } from './pages/kudo/kudo.module';
+import { KudoPage } from './pages/kudo/kudo.page';
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,12 +32,15 @@ import { HomePageModule } from './home/home.module';
     ReactiveFormsModule,
     HomePageModule,
     AutoCompleteModule,
+    KudoPageModule,
     KudowallPageModule,
     InscriptionPageModule,
+    KudowallStructurePageModule,
   ],
   providers: [
     StatusBar,
     SplashScreen,
+    KudoPage,
     
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi:true },
 

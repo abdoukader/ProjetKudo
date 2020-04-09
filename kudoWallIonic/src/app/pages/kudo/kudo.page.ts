@@ -22,11 +22,11 @@ export class KudoPage implements OnInit {
   lis: any=[];
   filterU: any=[];
   msg=""
-  
- 
   idk= this.actRoute.snapshot.params['id'];
-  constructor(private kudos: InscriptionService, private alertController:AlertController,private alertControl:AlertController, public actRoute: ActivatedRoute,private structureliste:InscriptionService, private listeU:InscriptionService) { }
-  //constructor(private kudos: InscriptionService, private alertController:AlertController, public actRoute: ActivatedRoute,private structureliste:InscriptionService) { }
+
+  constructor(private kudos: InscriptionService, private alertController:AlertController,
+              private alertControl:AlertController, public actRoute: ActivatedRoute, private _router: Router,
+              private structureliste:InscriptionService, private listeU:InscriptionService) { }
 
   ngOnInit() {
     this.listeStructure()
@@ -34,14 +34,33 @@ export class KudoPage implements OnInit {
   }
 
   listeStructure(){
-    this.structureliste.listeStructure().subscribe(
-        res=> {
+    this.structureliste.listeStructure()
+    .subscribe(
+          res=> {
             this.str=res
             this.filterStr = this.str;
             console.log(res);
-        },err=>console.log(err)  
+        },err=>
+        console.log(err)  
     );
+   
   }
+
+  selectStr(input: any, id: number, nom: string) {
+    input.value = nom;
+    this.selectedId = id;
+    console.log(this.selectedId);
+    this.filtered = false;
+}
+
+  filterStructure(e: any) {
+    const val = e.value.toLowerCase();
+    this.filterStr = this.str.filter((s: any) => {
+        return s.sousStructure.toLowerCase().indexOf(val) > -1;
+    })
+    console.log(this.filterStr);
+  }
+
   listeUsers(){
     this.listeU.listerUser().subscribe(
         rep => {
@@ -52,13 +71,6 @@ export class KudoPage implements OnInit {
     )
   }
 
-filterStructure(e: any) {
-  const val = e.value.toLowerCase();
-  this.filterStr = this.str.filter((s: any) => {
-      return s.sousStructure.toLowerCase().indexOf(val) > -1;
-  })
-  console.log(this.filterStr);
-}
 filterUtilisateur(e:any){
   const val = e.value.toLowerCase();
   this.filterU = this.lis.filter((l:any) =>{
@@ -67,13 +79,6 @@ filterUtilisateur(e:any){
   console.log(this.filterU);
   
 }
-
-  selectStr(input: any, id: number, nom: string) {
-    input.value = nom;
-    this.selectedId = id;
-    this.filtered = false;
-}
-
 
  selectliste(input: any, nom: string){
     input.value = nom;
@@ -91,18 +96,15 @@ formKudo = {
  
 
 fairekudo(){
-  // const st = this.str.filter((s: any) => s.id === +this.selectedId);
-  // if(this.selectedId === null || (st.length > 0 && st[0].sousStructure !== this.formKudo.structure)) {
-  //     this.selectedId = null;
-  //     return;
-  // }
   this.formKudo.structure = this.selectedId;
   this.kudos.faireKudo(this.formKudo)
   .subscribe(
     res => {
       this.presentAlertError(res.msg)
+      this._router.navigate(['/kudowall-structure/'+this.selectedId]);
      // window.confirm('kudo réussit');
       console.log(res)
+      
     },
     err => {
       //window.confirm('kudo echoué')

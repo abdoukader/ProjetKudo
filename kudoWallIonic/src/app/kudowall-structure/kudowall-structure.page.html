@@ -1,0 +1,161 @@
+<ion-header no-border>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title style="text-align: center;">
+      <span style="color: #318CE7;">K</span>
+      <span style="color: #830b21;">U</span>
+      <span style="color: #778844;">D</span>
+      <span style="color: #661313;">O</span>
+                          &nbsp;<span>ou</span>&nbsp;
+      <span style="color: #661313;">D</span>
+      <span style="color: #808080;">J</span>
+      <span style="color: #fa2020;">A</span>
+      <span style="color: #fa2020;">A</span>
+      <span style="color: #fa2020;">D</span>
+      <span style="color: #a06e6e;">J</span>
+      <span style="color: #661313;">E</span>
+      <span style="color: #661313;">U</span>
+      <span style="color: #808080;">F</span>
+      <br>
+      &nbsp;<span style="text-align:center;
+                color: rgb(163, 82, 163);">W</span>
+      <span style="color: rgb(71, 9, 71);">A</span>
+      <span style="color: rgb(71, 9, 71);">L</span>
+      <span style="color: rgb(71, 9, 71);">L</span>
+    </ion-title>
+</ion-toolbar>
+<ion-item >
+  <div *ngIf ="take==false && id">
+    <button expand="block" shape="round"  (click)="changeButton()" color="#f77911" class="cherche"routerLink="/kudowall-structure">
+      <ion-icon ios="ios-search" md="md-search"></ion-icon>
+</button>
+</div>
+<ion-row>
+  <div *ngIf="!id">
+  <ion-searchbar class="bare" placeholder="DPART/ENTITE/SERVICE" name="structure" #sousStructure (keyup)="filterStructure(sousStructure)" (ionFocus)="filtered = true"
+                              (ionClear)="getItems()"  type="text" animated debounce="500" ></ion-searchbar>
+<br>
+<div class="list" *ngIf="filtered">
+  
+  <ul>
+    <li class="item" *ngFor="let item of filterStr" (click)="selectStr(sousStructure, item.id, item.sousStructure)">{{item.sousStructure}}</li>
+    </ul>
+</div>
+</div>
+  </ion-row>
+
+</ion-item>
+</ion-header>
+
+<ion-content>
+  <ion-grid *ngIf="ServiceVide">
+    <ion-row >
+      <ion-card class="toto">
+        <ion-col class="rien">
+          <div class="m">Merci beaucoup</div>
+          <ng-container *ngFor="let k of kudoA" class="collone">
+            <div class="info" >à{{k.nombeneficiaire}} </div>
+            <div class="info">{{k.commentaire}}</div>
+            <div class="info">{{k.utilisateur.nom}}</div>
+            <br>
+          </ng-container>
+          <ion-infinite-scroll (ionInfinite)="loadData($event)">
+            <ion-infinite-scroll-content
+              loadingSpinner="bubbles"
+              loadingText="Loading more data...">
+            </ion-infinite-scroll-content>
+          </ion-infinite-scroll>
+        </ion-col>
+      </ion-card>
+      <ion-card class="toto">
+        <ion-col class="rien">
+          <div class="t">Tres heureux</div>
+          <ng-container *ngFor="let k of kudoB" class="collone" id="heureux">
+            <div class="tre">à {{k.nombeneficiaire}}</div>
+            <div class="tre">{{k.commentaire}}</div>
+            <div class="tre">{{k.utilisateur.nom}}</div>
+            <br>
+          </ng-container>
+          <ion-infinite-scroll (ionInfinite)="loadData($event)">
+            <ion-infinite-scroll-content
+              loadingSpinner="bubbles"
+              loadingText="Chargement des données ...">
+            </ion-infinite-scroll-content>
+          </ion-infinite-scroll>
+        </ion-col>
+      </ion-card>
+      <ion-card class="toto">
+        <ion-col class="rien">
+          <div class="f">Felicitations</div>
+          <ng-container *ngFor="let k of kudoC"  class="collone"   id="felici">
+            <div class="fel">à {{k.nombeneficiaire}} </div>
+            <div class="fel">{{k.commentaire}}</div>
+            <div class="fel">{{k.utilisateur.nom}}</div>
+            <br>
+          </ng-container>
+          <ion-infinite-scroll (ionInfinite)="loadData($event)">
+            <ion-infinite-scroll-content
+              loadingSpinner="bubbles"
+              loadingText="Loading more data...">
+            </ion-infinite-scroll-content>
+          </ion-infinite-scroll>
+        </ion-col>
+      </ion-card>
+    </ion-row>
+    <ion-row>
+      <ion-card class="toto">
+        <ion-col class="rien">
+          <div class="b">Bien joue</div>
+          <ng-container *ngFor="let k of kudoD"  class="collone" id="bienjoue">
+            <div class="bien">à {{k.nombeneficiaire}}</div>
+            <div class="bien">{{k.commentaire}}</div>
+            <div class="bien">{{k.utilisateur.nom}}</div>
+            <br>
+          </ng-container>
+          <ion-infinite-scroll (ionInfinite)="loadData($event)">
+            <ion-infinite-scroll-content
+              loadingSpinner="bubbles"
+              loadingText="Loading more data...">
+            </ion-infinite-scroll-content>
+          </ion-infinite-scroll>
+        </ion-col>
+      </ion-card>
+      <ion-card class="toto">
+        <ion-col class="rien">
+          <div class="exc">Execellent</div>
+          <ng-container *ngFor="let k of kudoE"  class="collone" id="excellent">
+            <div class="excel">à {{k.nombeneficiaire}} </div>
+            <div class="excel">{{k.commentaire}}</div>
+            <div class="excel">{{k.utilisateur.nom}}</div>
+            <br>
+          </ng-container>
+          <ion-infinite-scroll (ionInfinite)="loadData($event)">
+            <ion-infinite-scroll-content
+              loadingSpinner="bubbles"
+              loadingText="Loading more data...">
+            </ion-infinite-scroll-content>
+          </ion-infinite-scroll>
+        </ion-col>
+      </ion-card>
+      <ion-card class="toto">
+        <ion-col class="rien">
+          <div class="ext">Extraordinaire</div>
+          <ng-container *ngFor="let k of kudoF"  class="collone" id="extraordinaire">
+            <div class="extra">à {{k.nombeneficiaire}} </div>
+            <div class="extra">{{k.commentaire}}</div>
+            <div class="extra">{{k.utilisateur.nom}}</div>
+            <br>
+          </ng-container>
+          <ion-infinite-scroll (ionInfinite)="loadData($event)">
+            <ion-infinite-scroll-content
+              loadingSpinner="bubbles"
+              loadingText="Loading more data...">
+            </ion-infinite-scroll-content>
+          </ion-infinite-scroll>
+        </ion-col>
+      </ion-card>
+      </ion-row>
+  </ion-grid>
+</ion-content>

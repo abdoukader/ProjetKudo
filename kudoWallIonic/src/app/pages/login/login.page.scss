@@ -1,12 +1,74 @@
 .page{
-    background-color: #626262;
+    background-color: #ffffff;
 }
 ion-content{
-    background-color: rgb(70, 97, 70);
+    //--ion-background-color: #ffffff;
+    top: 210px}
+ion-item  {
+   --ion-background-color: transparent!important;
+}
+ion-input{
+    border-radius: 1px;
+}
+.set{
+    font-family: Arial, Helvetica, sans-serif;
+    text-decoration: none;
+    font-style: normal;
+    font-size: 25px;
+    border: 1px solid;
+    margin: 2px;
+    height: 70px;
+    width: 90%;
+    //text-align: center;
+}
+.padding{
+   //padding: 5%;
+   // padding-top: 90%;
+}
+ion-toolbar{
+    //--ion-background-color:#ff7900!important;
+    border-radius: 5px;
+    //top: 220px;
+    height: 75px;
+}
+$colors: (
+   orange:    #FF7900,
+  
+);
+ion-title{
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    //color: white;
+    font-size: 25px;
+    //text-decoration: none;
+    //text-transform: none;
+    //margin: 0 0 0 0;
+    
+}
+.label{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+}
+.ecrit{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
 }
 .loginForm{
     display: block;
     top: 210px;
+}
+.logo{
+    height: 500px;
+    //position: relative;
+
+}
+.logo ion-icon{
+    position: absolute;
+    font-size: 5em;
+   // top: 50%;
+    //left: 50%;
+    //transform: translate(-50%,-50%);
+    //color: light; 
 }
 ion-toolbar{
     background-color :#F77911;
@@ -23,6 +85,19 @@ ion-toolbar{
     position: absolute;
     align-self: start;
 }
+
+.lab{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 25px;
+}
+.lab:checked{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 25px;
+    
+}
+
+
+
 .auth{
     text-align: center;
     text-decoration: none;
@@ -35,11 +110,11 @@ ion-toolbar{
 .but1{
     color: white;
     background-color: #cccccc;
-    border-radius: 5px;
+    border: 2px;
     font-size: 25px;
     font-family: Arial, Helvetica, sans-serif;
-    height: 50px;
-    width: 300px;
+    height: 70px;
+    width: 90%;
     margin: 2px;
     text-align: center;
     cursor: pointer;
@@ -47,9 +122,8 @@ ion-toolbar{
     margin: auto;
     
   }
-  .but1:hover{
-      color: #cccccc;
-
+  .but1.after{
+    background-color: #ff7900;
   }
 
  

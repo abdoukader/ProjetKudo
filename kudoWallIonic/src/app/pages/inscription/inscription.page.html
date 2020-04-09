@@ -14,46 +14,43 @@
     }
   </style>
 </head>
-<!-- <ion-header>
-  <ion-toolbar  color="orange">
-    <ion-title class="ion-text-center">INSCRIPTION</ion-title>
-    <ion-buttons slot="start">
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header> -->
-
-
 
 <ion-content>
   
   <ion-card class="loginForm" *ngIf="!isLoading">
+      <ion-header>
+  
+          <div class="tet">
+          <ion-title class="ion-text-center">INSCRIPTION</ion-title>
+        </div>
+      </ion-header>
    
         <ion-card-content>
             <form [formGroup]="inscriptionForm" (ngSubmit)="inscription()">
               <ion-item>
-                  <ion-label position="floating">Email</ion-label>
+                  <ion-label position="floating" class="label">Email</ion-label>
                   <ion-input type="email" name="email"  required></ion-input>
               </ion-item>
               <div class="validation-errors">
                 <ng-container *ngFor="let validation of ValidationMsg.email">
                   <div class="error-message" *ngIf="inscriptionForm.get('email').hasError(validation.type) && (inscriptionForm.get('email').touched)">
                     <ion-icon name="information-circle"></ion-icon>{{ validation.message }}
-                </div>
-            </ng-container>
-        </div>
+                 </div>
+                </ng-container>
+              </div>
               <ion-item>
-                  <ion-label position="floating">Prenom Nom </ion-label>
+                  <ion-label position="floating"class="label">Prenom Nom </ion-label>
                   <ion-input type="text" name="nom"  required></ion-input>
-            </ion-item>
-            <div class="validation-errors">
+              </ion-item>
+              <div class="validation-errors">
                 <ng-container *ngFor="let validation of ValidationMsg.nom">
                   <div class="error-message" *ngIf="inscriptionForm.get('nom').hasError(validation.type) && (inscriptionForm.get('nom').touched)">
                     <ion-icon name="information-circle"></ion-icon> {{ validation.message }}
-                </div>
-            </ng-container>
-        </div>
+                  </div>
+                </ng-container>
+              </div>
               <ion-item>
-                <ion-label position="floating">Username</ion-label>
+                <ion-label position="floating"class="label">Username</ion-label>
                 <ion-input type="texte" name="username" required></ion-input>
               </ion-item>
               <div class="validation-errors">
@@ -64,7 +61,7 @@
             </ng-container>
         </div>
               <ion-item>
-                <ion-label position="floating">Password</ion-label>
+                <ion-label position="floating" class="label">Password</ion-label>
                 <ion-input type="password" name="password"  required></ion-input>
               </ion-item>
               <div class="validation-errors">
@@ -75,7 +72,7 @@
             </ng-container>
         </div>
               <ion-item>
-                <ion-label position="floating">Service </ion-label>
+                <ion-label position="floating"class="label">Service </ion-label>
                 <ion-input type="text" name="structure" #sousStructure (keyup)="filterStructure(sousStructure)" (ionFocus)="filtered = true"  required></ion-input>
                 <div class="list" *ngIf="filtered">
                   <ul>
@@ -84,7 +81,7 @@
                   </div>
               </ion-item>
                   <ion-item>
-                      <ion-label position="floating">Téléphone</ion-label>
+                      <ion-label position="floating"class="label">Téléphone</ion-label>
                       <ion-input type="number" name="telephone"  required></ion-input>
                   </ion-item>
                     <div class="validation-errors">
