@@ -4,8 +4,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.time.LocalDate;
 import java.util.Date;
+import java.util.Optional;
 
 @Entity
 @Table(name = "kudo")
@@ -27,6 +27,11 @@ public class Kudo {
     @JsonIgnoreProperties({"id","kudos","structure","password","username","nbrepoint","nbrekudo","telephone","email","roles","datekudo"})
     @JoinColumn
     private Utilisateur utilisateur;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonIgnoreProperties({"id","departement","sousStructure","lieu"})
+    @JoinColumn
+    private Structure structures;
 
     //Relation Kudo_KudoPoint
     @JsonIgnoreProperties({"point","libelle"})
@@ -93,5 +98,13 @@ public class Kudo {
 
     public void setUtilisateur(Utilisateur utilisateur) {
         this.utilisateur = utilisateur;
+    }
+
+    public Structure getStructures() {
+        return structures;
+    }
+
+    public void setStructures(Structure structures) {
+        this.structures = structures;
     }
 }

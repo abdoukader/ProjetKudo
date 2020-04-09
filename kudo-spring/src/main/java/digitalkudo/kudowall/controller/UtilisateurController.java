@@ -39,10 +39,11 @@ public class UtilisateurController {
     @Autowired
     private KudoRepository kudoRepository;
 
+
     @PostMapping(value = "/user")
     public Utilisateur addUser(@RequestBody(required = false) Utilisateur u) {
         Utilisateur user = new Utilisateur(u.getNom(), u.getEmail(), u.getTelephone(), u.getUsername(),
-                encoder.encode(u.getPassword()),u.getNbrekudo(),u.getNbrepoint(),u.getKudos());
+                encoder.encode(u.getPassword()),u.getNbrekudo(),u.getNbrepoint(),u.getKudos(),u.getNbrepointTeam());
 
         Structure s =structureRepository.findById(u.getStructure()).get();
         Set<Structure> structure = new HashSet<>();
@@ -50,13 +51,13 @@ public class UtilisateurController {
         structures = structureRepository.findAll();
         if (!structures.isEmpty()){
             structures.forEach(Structure ->{
-                if (u.getStructure().equals(Structure.getId())){
+                if (u.getStructures().equals(Structure.getId())){
                     Structure.setId(Structure.getId());
                 }
             });
         }
         structure.add(s);
-        u.setStructures(structure);
+        u.setStructures( structure);
 
         Role role = new Role();
         Role role1 =roleRepository.findById(2);//ROLE_USER
@@ -73,9 +74,9 @@ public class UtilisateurController {
     @GetMapping(value = "/liste-user")
     //@PreAuthorize("hasAuthority('ROLE_USER')")
     public List<Utilisateur> users(@RequestBody (required = false) Utilisateur utilisateur){
-
         return utilisateurRepository.findAll();
     }
+
 
     @PostMapping(value = "/structure")
     //@PreAuthorize("hasAuthority('ROLE_ADMIN')")
@@ -152,6 +153,15 @@ public class UtilisateurController {
                 .stream()
                 .map(Kudo::getUtilisateur).distinct()
                 .sorted(Comparator.comparing(Utilisateur::getNbrekudo).reversed())
+                .collect(Collectors.toList());
+    }
+    @GetMapping(value = "/structureActive/start/{debut}/end/{fin}")
+    public List<Structure> structureActive(@PathVariable (value = "debut") @DateTimeFormat(pattern = "yyyy-MM-dd") Date debut , @PathVariable (value = "fin") @DateTimeFormat(pattern = "yyyy-MM-dd")Date fin){
+        return kudoRepository
+                .findAllByDatekudoIsBetween(debut, fin)
+                .stream()
+                .map(Kudo::getStructures)
+                //.sorted(Comparator.comparing(Structure::getSousStructure).reversed())
                 .collect(Collectors.toList());
     }
 

@@ -1,9 +1,10 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar>
     <ion-title>vainqueur</ion-title>
   </ion-toolbar>
-</ion-header>
-
+</ion-header> -->
+<div class="tete"><h1>VAINQUEUR/PERIODE</h1></div> 
+<br><br><br>
 <ion-content>
   <form [formGroup]="detailvainqueur" (ngSubmit)="detailV()">
         <ion-item class="form-group">
@@ -23,9 +24,9 @@
        </form>
        <div>
        <ion-list ng-switch-when="Utilisateur" *ngIf="!vainq">
-          <ion-item *ngFor="let detail of detailVs"  (click)="goToView(detail)" detail>
+          <ion-item *ngFor="let detail of detailVs let index = index" [color]="index ? 'black' : 'success'"  (click)="goToView(detail)" detail>
               <ion-label> 
-                  <h2>NOM   {{detail.nom}} </h2>
+                  <h2>{{detail.nom}} </h2>
                  <h3> NOMBRE DE POINT {{detail.nbrepoint}}</h3> 
               </ion-label>
             </ion-item>

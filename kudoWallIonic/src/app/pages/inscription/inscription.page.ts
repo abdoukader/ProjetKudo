@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { InscriptionService } from '../../services/inscription.service';
 import { HttpClient } from 'selenium-webdriver/http';
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder, FormControl } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
 import { AutoCompleteService } from 'ionic4-auto-complete';
 import { from } from 'rxjs';
@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
   })
   export class InscriptionPage implements OnInit {
 
-    inscriptionForm : FormGroup;
+   private inscriptionForm : FormGroup;
     isSubmitted = false;
     Data: any=[];
     structure: any=[];

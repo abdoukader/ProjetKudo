@@ -18,6 +18,10 @@ const routes: Routes = [
   { path: 'table', loadChildren: () => import('./table/table.module').then( m => m.TablePageModule) },
   { path: 'detail', loadChildren: () => import('./detail/detail.module').then( m => m.DetailPageModule) },
   { path: 'vainqueur', loadChildren: () => import('./vainqueur/vainqueur.module').then( m => m.VainqueurPageModule) },
+  {
+    path: 'kudowall-structure',
+    loadChildren: () => import('./kudowall-structure/kudowall-structure.module').then( m => m.KudowallStructurePageModule)
+  },
 
 ];
 

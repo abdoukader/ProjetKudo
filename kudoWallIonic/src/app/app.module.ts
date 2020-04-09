@@ -15,6 +15,7 @@ import { AuthGuardService} from './services/auth-guard.service';
 //import { IonicStorageModule } from '@ionic/storage';
 import { InscriptionPageModule } from './pages/inscription/inscription.module';
 import { HomePageModule } from './home/home.module';
+import { KudowallStructurePageModule } from './kudowall-structure/kudowall-structure.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -30,6 +31,7 @@ import { HomePageModule } from './home/home.module';
     AutoCompleteModule,
     KudowallPageModule,
     InscriptionPageModule,
+    KudowallStructurePageModule,
   ],
   providers: [
     StatusBar,

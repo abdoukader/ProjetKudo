@@ -14,15 +14,15 @@
       <div class="flex">
    
       <br><br><br>
-      <ion-button expand="block" shape="round" color="#f77911" class="but" type="submit">plus généreux</ion-button>
+      <button expand="block" shape="round" color="#f77911" class="but" type="submit">plus généreux</button>
    
        </div>
        </form>
        <div>
        <ion-list ng-switch-when="Utilisateur" *ngIf="!vainq">
-          <ion-item *ngFor="let detail of detailUs"  (click)="goToView(detail)" detail>
-              <ion-label> 
-                  <h2>NOM   {{detail.nom}} </h2>
+          <ion-item *ngFor="let detail of detailUs, let index = index" [color]="index ? 'black' : 'success'" (click)="goToView(detail)" detail>
+              <ion-label > 
+                  <h2 >{{detail.nom}} </h2>
                  <h3> NOMBRE DE KUDO DONNÉE {{detail.nbrekudo}}</h3> 
               </ion-label>
             </ion-item>

@@ -14,7 +14,6 @@
             <form #form="ngForm" >
                     <ion-item>
                         <ion-label position="floating" class="label">NomBénéficiaire</ion-label>
-                        <!-- <ion-input type="text" id="nombeneficiaire" [(ngModel)]="formKudo.nombeneficiaire" name="nombeneficiaire"  required></ion-input> -->
                         <ion-input type="text" name="nombeneficiaire" #nom (keyup)="filterUtilisateur(nom)" (ionFocus)="filteredd=true" [(ngModel)]="formKudo.nombeneficiaire"  required></ion-input>
                         <div class="list" *ngIf="filteredd"> 
                           <li class="user" *ngFor="let user of filterU" (click)="selectliste(nom, user.nom)">{{user.nom}}</li>
@@ -35,9 +34,8 @@
                          <ion-input type="text" id="commentaire"  [(ngModel)]="formKudo.commentaire" name="commentaire"  required></ion-input>
                     </ion-item>
                     <br><br><br>
-                    <!-- <ion-button (click)="fairekudo()" type="submit" expand="block" fill="outline" class="btnLogin">Djadieuf</ion-button> -->
-                    <!-- <ion-button (click)="fairekudo()" type="submit" expand="block"  class="btnLogin">Djadieuf</ion-button> -->
-                    <ion-button  (click)="fairekudo()" type="submit" expand="block" shape="round" color="#f77911" class="but"><strong>DJAADIEUF</strong></ion-button>
+                    
+                    <button  (click)="fairekudo()" type="submit" expand="block" shape="round" color="#f77911" [disabled]="ngForm" class="but"><strong>DJAADIEUF</strong></button>
                     
                 </form>
           </ion-card-content>

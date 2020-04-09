@@ -10,15 +10,18 @@ public class KudoWall {
         Long structure;
         private Kudo kudo;
         String nom;
+        String nomTeam;
         String email;
         String username;
         String telephone;
         Integer nbrepoint;
+        Integer nbrepointTeam;
         Integer nbrekudo;
         private Utilisateur utilisateur;
         String libelle;
         Integer point;
         private KudoPoint kudoPoint;
+        private Structure structures;
 
 
     public Date getDatekudo() {
@@ -121,6 +124,7 @@ public class KudoWall {
         return utilisateur;
     }
 
+
     public void setUtilisateur(Utilisateur utilisateur) {
         this.utilisateur = utilisateur;
     }
@@ -141,6 +145,14 @@ public class KudoWall {
         this.structure = structure;
     }
 
+    public Structure getStructures() {
+        return structures;
+    }
+
+    public void setStructures(Structure structures) {
+        this.structures = structures;
+    }
+
     public String getSousStructure() {
         return sousStructure;
     }
@@ -148,4 +160,13 @@ public class KudoWall {
     public void setSousStructure(String sousStructure) {
         this.sousStructure = sousStructure;
     }
+
+    public String getNomTeam() {
+        return nomTeam;
+    }
+
+    public void setNomTeam(String nomTeam) {
+        this.nomTeam = nomTeam;
+    }
+
 }

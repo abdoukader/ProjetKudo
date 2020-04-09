@@ -1,28 +1,89 @@
+// #cadre{
+//     width: 70%;
+//     height: 20%;
+//     margin-left: 60px;
+//     margin-top: -15px;
+// }
+// .ion-text-center{
+//     background-color:rgb(255, 94, 0);
+//     font-size: 130%;
+// }
+// .btnLogin{
+//     background-color: rgb(255, 94, 0);
+// }
+// .BOUT{
+//     background-color: rgb(255, 94, 0);
+// }
+// .but{
+//     background-color:rgb(255, 94, 0);
+//     width: 90%;
+//     //border-radius: 30%;
+//     margin-left: 5%;
+//     color: aliceblue;
+//     border-radius: 20px;
+//   }
 #cadre{
-    width: 70%;
-    height: 20%;
-    margin-left: 60px;
-    margin-top: -15px;
-}
-.ion-text-center{
-    background-color:rgb(255, 94, 0);
-    font-size: 130%;
+        width: 40%;
+        margin-left: 100px;
+        //margin-top: -10px;
+     }
+
+.kudo{
+    border: blue;
+    border:10px;
 }
 .btnLogin{
-    background-color: rgb(255, 94, 0);
+    font-size: 30px;
+    height: 50px;
+    //color: orange;
 }
-.BOUT{
-    background-color: rgb(255, 94, 0);
+.ion-text-center{
+    font-size: 25px;
+    color: white;
+    
 }
-.but{
+.tete{
     background-color:rgb(255, 94, 0);
-    width: 90%;
-    //border-radius: 30%;
-    margin-left: 5%;
-    color: aliceblue;
-    border-radius: 20px;
+    font-size: 80%;
+}
+.but1{
+    background-color:rgb(255, 94, 0);
+    width: 100%;
+    border-radius: 30%;
+    font-size: 120%;
+    //margin-left: 3%;
+    color: black;
   }
-  textarea{
-      width: 95%;
-      //height: 50%;
+  ion-toolbar{
+    background-color:rgb(255, 94, 0);
+    font-size: 80%;
+}
+.kudo{
+    border:250px;
+    color: orange;
+    border-bottom-right-radius: 25px;
+    
+    
+}
+.but {
+	padding:08px 0 16px 0;
+	font:bold 25px Arial;
+	background:rgb(255, 94, 0);
+	color:white;
+	border-radius:2px;
+	width:90%;
+	//border:1px solid rgb(27, 26, 26);
+  box-shadow:1px 1px 3px #999;
+  margin-left: 5%;
+  height: 60px;
+}
+.tet{
+    background-color: rgb(255, 94, 0);
+    height: 85px;
+  }
+  ion-card{
+      margin-top: 105px;
+  }
+  .label{
+      font-size: 25px;
   }

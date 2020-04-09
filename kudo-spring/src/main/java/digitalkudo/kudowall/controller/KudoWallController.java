@@ -4,12 +4,14 @@ import digitalkudo.kudowall.model.*;
 import digitalkudo.kudowall.repository.*;
 import digitalkudo.kudowall.services.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/kudo",method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE })
@@ -46,6 +48,9 @@ public class KudoWallController<id> {
         kudo.setNombeneficiaire(kw.getNombeneficiaire());
         kudo.setCommentaire(kw.getCommentaire());
         kudo.setUtilisateur(user);
+
+
+
         String exception1 = "Cet utilisateur n\'est pas inscrit";
         String exception2 = "vous ne pouvez pas être le bénéficiaire du kudo que vous émettez " + user.getNom() + "!";
         Utilisateur beneficiaire = utilisateurRepository.findByNom(kw.getNombeneficiaire());
@@ -59,9 +64,12 @@ public class KudoWallController<id> {
         } else {
             //if( user.getStructures().equals(beneficiaireStruc.getStructures()) == false)
             KudoPoint pointkudo = kudoPointRepository.findByPoint(kw.getPoint());
+           Structure structure = structureRepository.findById(kw.getStructure()).get();
 
             Integer point = pointkudo.getPoint();
             kudo.setKudoPoint(pointkudo);
+            kudo.setStructures(structure);
+
             Integer points = beneficiaire.getNbrepoint();
             beneficiaire.setNbrepoint(points + point);
             Integer nbrekudo = user.getNbrekudo();
@@ -84,6 +92,34 @@ public class KudoWallController<id> {
         return kudoRepository.findAll();
     }
 
+    @GetMapping(value = "/liste-kudo/{id}")
+    public Kudo lister(@PathVariable long id) throws Exception {
+        Kudo kudo = kudoRepository.findById(id).orElseThrow(
+                ()->new Exception("Aucun kudo ne correspond à cet id !")
+        );
+        return kudo;
+    }
+
+    @GetMapping(value = "/liste-kudos-service/{souStructure}")
+    public List<Kudo> listeKudosStructure(@PathVariable String souStructure){
+        return structureRepository
+                .findAllBySousStructure(souStructure)
+                .map(structure -> {
+                    Set<Structure> structures = new HashSet<>();
+                    structures.add(structure);
+                    System.out.println(structures.toString());
+                    List<Kudo> kudos= kudoRepository.findAllByUtilisateurIn(utilisateurRepository
+                            .findByStructuresIn(Collections.singletonList(structure)));
+                    if (structures.isEmpty()){
+                        return null;
+                    }
+                    else {
+                        return kudos;
+                    }
+                })
+                .orElse(new ArrayList<>());
+    }
+
     @CrossOrigin("http://localhost:8100")
     @PostMapping(value = "/team")
     @PreAuthorize("hasAuthority('ROLE_USER')")
@@ -98,13 +134,13 @@ public class KudoWallController<id> {
         Optional<Structure> structureteam = structureRepository.findById(kw.getStructure());
         kudo.setUtilisateur(user);
 
-        Utilisateur teambeneficiaire = utilisateurRepository.findByNom(kw.getNombeneficiaire());
+        Utilisateur teambeneficiaire = utilisateurRepository.findByNomTeam(kw.getNombeneficiaire());
         if (teambeneficiaire != null) {
             KudoPoint pointkudo = kudoPointRepository.findByPoint(kw.getPoint());
             Integer point = pointkudo.getPoint();
             kudo.setKudoPoint(pointkudo);
 
-            Integer points = teambeneficiaire.getNbrepoint();
+            Integer points = teambeneficiaire.getNbrepointTeam();
             teambeneficiaire.setNbrepoint(points + point);
             Integer kudos = user.getNbrekudo();
             user.setNbrekudo(kudos + 1);
@@ -120,12 +156,12 @@ public class KudoWallController<id> {
 
         } else {
             Utilisateur teamate = new Utilisateur();
-            teamate.setNom(kw.getNombeneficiaire());
-            teamate.setNbrepoint(0);
+            teamate.setNomTeam(kw.getNombeneficiaire());
+            teamate.setNbrepointTeam(0);
             KudoPoint pointdukodo = kudoPointRepository.findByPoint(kw.getPoint());
             Integer point = pointdukodo.getPoint();
             kudo.setKudoPoint(pointdukodo);
-            teamate.setNbrepoint(pointdukodo.getPoint());
+            teamate.setNbrepointTeam(pointdukodo.getPoint());
             teamate.setKudos(1);
 
             utilisateurRepository.save(teamate);
@@ -138,5 +174,14 @@ public class KudoWallController<id> {
         String msg = "Felicitation " +user.getNom()+  "  votre kudos a été enregisté avec succès" ;
         //Message message = new Message(200, msg,teamate.getNom(),kw.getCommentaire());
         return sms;
+    }
+    @GetMapping(value = "/vainqueurPeriodeTeam/start/{debut}/end/{fin}")
+    public List<Utilisateur> utilisateurr (@PathVariable(value="debut") @DateTimeFormat(pattern = "yyyy-MM-dd") Date debut , @PathVariable (value="fin")@DateTimeFormat(pattern = "yyyy-MM-dd")Date fin){
+        return kudoRepository
+                .findAllByDatekudoIsBetween(debut, fin)
+                .stream()
+                .map(Kudo::getUtilisateur).distinct()
+                .sorted(Comparator.comparing(Utilisateur::getNbrepointTeam).reversed())
+                .collect(Collectors.toList());
     }
 }

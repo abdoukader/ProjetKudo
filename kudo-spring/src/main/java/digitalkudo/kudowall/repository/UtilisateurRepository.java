@@ -1,5 +1,6 @@
 package digitalkudo.kudowall.repository;
 
+import digitalkudo.kudowall.model.Structure;
 import digitalkudo.kudowall.model.Utilisateur;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -10,6 +11,8 @@ public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long> 
     List<Utilisateur> findAll();
     Optional<Utilisateur> findByUsername(String username);
     Utilisateur findByNom(String nom);
+    Utilisateur findByNomTeam(String nomTeam);
+    List<Utilisateur> findByStructuresIn(List<Structure> structures);
     Utilisateur findByStructure(Long structure);
     Boolean existsByUsername(String username);
     Boolean existsByEmail(String email);

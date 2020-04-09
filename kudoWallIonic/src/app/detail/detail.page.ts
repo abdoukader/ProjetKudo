@@ -36,6 +36,19 @@ export class DetailPage implements OnInit {
       }
     )
   }
+  listeStructure(){
+    this.util.listeStructure()
+    .subscribe(
+      res =>{
+        console.log(res)
+        this.detail=res;
+      },
+      err =>{
+      console.log(err);
+      
+      }
+    )
+  }
   detailU (data:any){
     console.log(data);
     console.log(this.detailVainqueur);

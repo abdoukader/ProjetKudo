@@ -3,15 +3,16 @@
 }
 ion-content{
     background-color: rgb(70, 97, 70);
+    
 }
 .loginForm{
     display: block;
-    top: 210px;
+    top: 140px;
 }
 ion-toolbar{
     background-color :rgb(255, 94, 0);
     width: 100%;
-    height: 70px;
+    height: 80px;
     color:white;
     margin: auto;
     padding: initial;
@@ -32,24 +33,21 @@ ion-toolbar{
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.but1{
-    color: white;
-    background-color: #cccccc;
-    border-radius: 5px;
-    font-size: 25px;
-    font-family: Arial, Helvetica, sans-serif;
-    height: 50px;
-    width: 300px;
-    margin: 2px;
-    text-align: center;
-    cursor: pointer;
-    display: block;
-    margin: auto;
-    
-  }
-  .but1:hover{
-      color: #cccccc;
 
-  }
+  button {
+	padding:08px 0 16px 0;
+	font:bold 25px Arial;
+	background:rgb(255, 94, 0);
+	color:white;
+	border-radius:2px;
+	width:100%;
+  box-shadow:1px 1px 3px #999;
+  height: 60px;
+}
+.but1:disabled, but1[disabled]{
+	color: white;
+	opacity: 1;
+	background: rgb(167, 162, 159);
+}
 
  
