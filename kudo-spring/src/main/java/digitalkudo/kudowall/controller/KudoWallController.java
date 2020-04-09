@@ -47,7 +47,7 @@ public class KudoWallController<id> {
         String exception1 = "Cet utilisateur n\'est pas inscrit";
         String exception2 = "vous ne pouvez pas être le bénéficiaire du kudo que vous émettez " + user.getNom() + "!";
         Utilisateur beneficiaire = utilisateurRepository.findByNom(kw.getNombeneficiaire());
-        List<Utilisateur> beneficiaireStruc = utilisateurRepository.findByStructure(kw.getStructure());
+        //List<Utilisateur> beneficiaireStruc = utilisateurRepository.findByStructure(kw.getStructure());
         if (beneficiaire == null) {
             Message InvalidCredential = new Message(500,exception1,"","","");
             return InvalidCredential;
@@ -57,7 +57,6 @@ public class KudoWallController<id> {
         } else {
             //if( user.getStructures().equals(beneficiaireStruc.getStructures()) == false)
             KudoPoint pointkudo = kudoPointRepository.findByPoint(kw.getPoint());
-
             Integer point = pointkudo.getPoint();
             kudo.setKudoPoint(pointkudo);
             Integer points = beneficiaire.getNbrepoint();
@@ -66,16 +65,16 @@ public class KudoWallController<id> {
             user.setNbrekudo(nbrekudo + 1);
             Integer kudosrecu = beneficiaire.getKudos();
             beneficiaire.setKudos(kudosrecu + 1);
-
             utilisateurRepository.save(beneficiaire);
             utilisateurRepository.save(user);
             kudoRepository.save(kudo);
             String msg = "Felicitation vous venez de faire un kudo à " + beneficiaire.getNom();
             Message message = new Message(200, msg,beneficiaire.getNom(),kw.getCommentaire(),user.getNom());
             return message;
-         }
+        }
 
     }
+
     @GetMapping(value = "/liste")
     public List<Kudo> kudos(@RequestBody(required = false) Kudo Kudo) {
         return kudoRepository.findAll();
@@ -88,6 +87,7 @@ public class KudoWallController<id> {
         );
         return kudo;
     }
+
 
     @GetMapping(value = "/liste-kudos-service/{id}")
     public List<Kudo> listeKudosStructure(@PathVariable Long  id){
@@ -105,9 +105,11 @@ public class KudoWallController<id> {
                         return kudos;
                     }
                 })
+
                 .orElse(new ArrayList<>());}
 
 
+    @CrossOrigin("http://localhost:8100")
     @PostMapping(value = "/team")
     @PreAuthorize("hasAuthority('ROLE_USER')")
     public Message kudoTeam(@RequestBody(required = false) KudoWall kw) throws Exception {
@@ -121,13 +123,13 @@ public class KudoWallController<id> {
         Optional<Structure> structureteam = structureRepository.findById(kw.getStructure());
         kudo.setUtilisateur(user);
 
-        Utilisateur teambeneficiaire = utilisateurRepository.findByNom(kw.getNombeneficiaire());
+        Utilisateur teambeneficiaire = utilisateurRepository.findByNomTeam(kw.getNombeneficiaire());
         if (teambeneficiaire != null) {
             KudoPoint pointkudo = kudoPointRepository.findByPoint(kw.getPoint());
             Integer point = pointkudo.getPoint();
             kudo.setKudoPoint(pointkudo);
 
-            Integer points = teambeneficiaire.getNbrepoint();
+            Integer points = teambeneficiaire.getNbrepointTeam();
             teambeneficiaire.setNbrepoint(points + point);
             Integer kudos = user.getNbrekudo();
             user.setNbrekudo(kudos + 1);
@@ -143,12 +145,12 @@ public class KudoWallController<id> {
 
         } else {
             Utilisateur teamate = new Utilisateur();
-            teamate.setNom(kw.getNombeneficiaire());
-            teamate.setNbrepoint(0);
+            teamate.setNomTeam(kw.getNombeneficiaire());
+            teamate.setNbrepointTeam(0);
             KudoPoint pointdukodo = kudoPointRepository.findByPoint(kw.getPoint());
             Integer point = pointdukodo.getPoint();
             kudo.setKudoPoint(pointdukodo);
-            teamate.setNbrepoint(pointdukodo.getPoint());
+            teamate.setNbrepointTeam(pointdukodo.getPoint());
             teamate.setKudos(1);
 
             utilisateurRepository.save(teamate);
@@ -162,4 +164,5 @@ public class KudoWallController<id> {
         //Message message = new Message(200, msg,teamate.getNom(),kw.getCommentaire());
         return sms;
     }
+
 }

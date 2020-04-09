@@ -26,54 +26,54 @@
       </ion-header>
    
         <ion-card-content>
-            <form [formGroup]="inscriptionForm" (ngSubmit)="inscription()">
+            <form [formGroup]="inscriptionForm" color="orange" (ngSubmit)="inscription()">
               <ion-item>
                   <ion-label position="floating" class="label">Email</ion-label>
-                  <ion-input type="email" name="email"  required></ion-input>
+                  <ion-input type="email" formControlName="email"  required></ion-input>
               </ion-item>
               <div class="validation-errors">
                 <ng-container *ngFor="let validation of ValidationMsg.email">
                   <div class="error-message" *ngIf="inscriptionForm.get('email').hasError(validation.type) && (inscriptionForm.get('email').touched)">
-                    <ion-icon name="information-circle"></ion-icon>{{ validation.message }}
+                    <ion-icon name="information-circle-outline"></ion-icon>{{ validation.message }}
                  </div>
                 </ng-container>
               </div>
               <ion-item>
                   <ion-label position="floating"class="label">Prenom Nom </ion-label>
-                  <ion-input type="text" name="nom"  required></ion-input>
+                  <ion-input type="text" formControlName="nom"  required></ion-input>
               </ion-item>
               <div class="validation-errors">
                 <ng-container *ngFor="let validation of ValidationMsg.nom">
                   <div class="error-message" *ngIf="inscriptionForm.get('nom').hasError(validation.type) && (inscriptionForm.get('nom').touched)">
-                    <ion-icon name="information-circle"></ion-icon> {{ validation.message }}
+                    <ion-icon formControlName="information-circle-outline"></ion-icon> {{ validation.message }}
                   </div>
                 </ng-container>
               </div>
               <ion-item>
                 <ion-label position="floating"class="label">Username</ion-label>
-                <ion-input type="texte" name="username" required></ion-input>
+                <ion-input type="texte" formControlName="username" required></ion-input>
               </ion-item>
               <div class="validation-errors">
                 <ng-container *ngFor="let validation of ValidationMsg.username">
-                  <div class="error-message" *ngIf="inscriptionForm.get('nom').hasError(validation.type) && (inscriptionForm.get('username').touched)">
-                    <ion-icon name="information-circle"></ion-icon> {{ validation.message }}
+                  <div class="error-message" *ngIf="inscriptionForm.get('username').hasError(validation.type) && (inscriptionForm.get('username').touched)">
+                    <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
                 </div>
             </ng-container>
         </div>
               <ion-item>
                 <ion-label position="floating" class="label">Password</ion-label>
-                <ion-input type="password" name="password"  required></ion-input>
+                <ion-input type="password" formControlName="password"  required></ion-input>
               </ion-item>
               <div class="validation-errors">
                 <ng-container *ngFor="let validation of ValidationMsg.password">
-                  <div class="error-message" *ngIf="inscriptionForm.get('nom').hasError(validation.type) && (inscriptionForm.get('password').touched)">
-                    <ion-icon name="information-circle"></ion-icon>{{ validation.message }}
+                  <div class="error-message" *ngIf="inscriptionForm.get('password').hasError(validation.type) && (inscriptionForm.get('password').touched)">
+                    <ion-icon name="information-circle-outline"></ion-icon>{{ validation.message }}
                 </div>
             </ng-container>
         </div>
               <ion-item>
                 <ion-label position="floating"class="label">Service </ion-label>
-                <ion-input type="text" name="structure" #sousStructure (keyup)="filterStructure(sousStructure)" (ionFocus)="filtered = true"  required></ion-input>
+                <ion-input type="text" formControlName="structure" #sousStructure (keyup)="filterStructure(sousStructure)" (ionFocus)="filtered = true"  required></ion-input>
                 <div class="list" *ngIf="filtered">
                   <ul>
                     <li class="item" *ngFor="let item of filterStr" (click)="selectStr(sousStructure, item.id, item.sousStructure)">{{item.sousStructure}}</li>
@@ -82,16 +82,16 @@
               </ion-item>
                   <ion-item>
                       <ion-label position="floating"class="label">Téléphone</ion-label>
-                      <ion-input type="number" name="telephone"  required></ion-input>
+                      <ion-input type="number" formControlName="telephone" #telephone required></ion-input>
                   </ion-item>
                     <div class="validation-errors">
                       <ng-container *ngFor="let validation of ValidationMsg.telephone">
                           <div class="error-message" *ngIf="inscriptionForm.get('telephone').hasError(validation.type) && (inscriptionForm.get('telephone').touched)">
-                            <ion-icon name="information-circle"></ion-icon>{{ validation.message }}
+                            <ion-icon name="information-circle-outline"></ion-icon>{{ validation.message }}
                           </div>
                       </ng-container>
                     </div>
-                  <ion-button type="submit" expand="block" shape="round" class="but" color="orange" [disabled]="forminvalid"> S'inscrire </ion-button>
+                  <button type="submit" expand="block" shape="round" class="but" [disabled]="!inscriptionForm.valid"> S'inscrire </button>
             </form>
         </ion-card-content>
     </ion-card>

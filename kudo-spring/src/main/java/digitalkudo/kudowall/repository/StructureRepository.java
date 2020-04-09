@@ -14,4 +14,5 @@ public interface StructureRepository extends JpaRepository<Structure, Long > {
     Optional<Structure> findAllBySousStructure(String sousStructure);
     Optional<Structure> findStructureById(Long id);
     //Optional<Structure> findStructureBySousStructure(String sousStructure);
+    Optional<Structure> findById(Integer id);
 }

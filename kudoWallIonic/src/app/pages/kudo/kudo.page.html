@@ -1,4 +1,6 @@
-<ion-content >
+
+ 
+  <ion-content >
   <ion-card  *ngIf="!isLoading"  >
         <ion-header>
   
@@ -6,7 +8,7 @@
             <ion-title class="ion-text-center">FAIRE UN KUDO</ion-title>
           </div>
         </ion-header>
-        <div>
+        <div >
           <ion-card-content id="bloc">
 
             <form #form="ngForm">
@@ -32,7 +34,9 @@
                          <ion-input type="text" id="commentaire"  [(ngModel)]="formKudo.commentaire" name="commentaire"  required></ion-input>
                     </ion-item>
                     <br><br><br>
-                    <button  (click)="fairekudo()" type="submit" expand="block" shape="round" color="#f77911" class="but"><strong>DJAADIEUF</strong></button>
+                    
+                    <button  (click)="fairekudo()" type="submit" expand="block" shape="round" color="#f77911" [disabled]="ngForm" class="but"><strong>DJAADIEUF</strong></button>
+                    
                 </form>
           </ion-card-content>
         </div> 

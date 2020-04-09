@@ -9,6 +9,8 @@ export class InscriptionService{
   
   labelAttribute = 'structure';
   formValueAttribute ='id';
+  selectUser:any;
+
   //infiniteScroll:any;
 
   private endpoint = 'http://127.0.0.1:8080/add/user';
@@ -18,10 +20,11 @@ export class InscriptionService{
   private urllsiteStructure = 'http://127.0.0.1:8080/add/liste-structures';
   private endpoint3 = 'http://127.0.0.1:8080/kudo/team';
   private endpoint4 = 'http://127.0.0.1:8080/add/liste-user';
-  private detailV= 'http://127.0.0.1:8080/add/genereuxPeriode/start/{debut}/end/{fin}';
   private kudos = 'http://127.0.0.1:8080/kudo/liste-kudo/';                                                  
   private kudowallGlobal = 'http://127.0.0.1:8080/kudo/liste';
   private kudowallStructure = 'http://127.0.0.1:8080/kudo/liste-kudos-service/'
+  private detailG = 'http://127.0.0.1:8080/add/genereuxPeriode/start/';
+  private detailV = 'http://127.0.0.1:8080/add/vainqueurPeriode/start/';
 
   constructor(private http: HttpClient,public listekudos:InscriptionService) { }
     
@@ -50,10 +53,7 @@ export class InscriptionService{
     listerUser(){
       return this.http.get(this.endpoint4);
   }
-    listeUtilisateur(data){
-      return this.http.get<any>(this.detailV,data);
-  }
-
+ 
     regroupKudos(kudo,kudoA,kudoB,kudoC,kudoD,kudoE,kudoF){
       kudo.forEach((item) =>  {
         switch (item.kudoPoint.id){
@@ -96,18 +96,11 @@ export class InscriptionService{
       return this.http.get<any>(this.kudowallStructure+id);
   }
 
- /* loadData(event) {
-    setTimeout(() => {
-      console.log('Done');
-      event.target.complete();
-    }, 500);
-  }
-
-  toggleInfiniteScroll() { /*this.infiniteScroll.disabled = !this.infiniteScroll.disabled }*/
-
-  //   async check_initial_cpfObservable(something){
-  //   return this.http.get(this.endpoint1,).pipe(CATCH_ERROR_VAR(error => throwError(error)));
-    
-  // }
+  listeUtilisateur(detailVainqueur){
+      return this.http.get<any>(this.detailG+detailVainqueur.debut+"/end/"+detailVainqueur.fin)
+    }
+   listeUtilisateurV(detailvainqueur){
+     return this.http.get<any>(this.detailV+detailvainqueur.debut+"/end/"+detailvainqueur.fin)
+   }
 
 }

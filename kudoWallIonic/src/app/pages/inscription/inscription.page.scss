@@ -11,17 +11,7 @@ ion-toolbar{
     font-size: 80%;
 }
 
-ion-button {
-	padding:08px 0 16px 0;
-	font:bold 25px Arial;
-	background:rgb(167, 162, 159);
-	color:white;
-	border-radius:2px;
-	width:100%;
-  box-shadow:1px 1px 3px #999;
-  height: 60px;
-}
-ion-button:active {
+button {
 	padding:08px 0 16px 0;
 	font:bold 25px Arial;
 	background:rgb(255, 94, 0);
@@ -49,14 +39,26 @@ p{
 at-circle-outline{
 	color: black;
 }
-.list{
-	border: 2px solid red;
+// .list{
+// 	border: 2px solid red;
 	
-}
+// }
 .but:disabled, but[disabled]{
 	color: white;
 	opacity: 1;
-	background: #fa8b30;
+	background: rgb(167, 162, 159);
+}
+.tet{
+    background-color: rgb(255, 94, 0);
+    height: 85px;
+  }
+  .ion-text-center{
+    font-size: 27px;
+    color: white;
+    
+}
+.label{
+	font-size: 25px;
 }
 .tet{
     background-color: rgb(255, 94, 0);

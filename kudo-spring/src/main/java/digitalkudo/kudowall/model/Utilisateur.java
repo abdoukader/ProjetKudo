@@ -1,6 +1,7 @@
 package digitalkudo.kudowall.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.NaturalId;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -22,13 +23,15 @@ import java.util.Set;
         })
 })
 
-public class Utilisateur {
+public class
+Utilisateur {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Size(min=2)
     private String nom;
-
+    @Size(min=2)
+    private String nomTeam;
     @NaturalId
     @Size(max = 50)
     @Email
@@ -43,8 +46,9 @@ public class Utilisateur {
     @Size(min=2)
     private String password;
 
-    private Long    structure;
+    //private Long    structure;
     private Integer nbrepoint;
+    private Integer nbrepointTeam;
     private Integer nbrekudo;
     private Integer kudos;
 
@@ -57,7 +61,8 @@ public class Utilisateur {
     private Set<Role> roles = new HashSet<>();
 
     //Relation Utilisateur_Structure
-    @JsonIgnore
+    //@JsonIgnore
+
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "user_structures",
     joinColumns = @JoinColumn(name = "user_id"),
@@ -69,16 +74,23 @@ public class Utilisateur {
     @JsonIgnore
     public List<Kudo> kudo;
 
+
+    //@JsonIgnoreProperties({"id","departement","sousStructure","lieu"})
+    @JoinColumn
+    private Long structure;
+
     public Utilisateur() { }
 
-    public Utilisateur(String nom, String email, Integer telephone, String username, String password, Integer nbrekudo, Integer nbrepoint,Integer kudos) {
+    public Utilisateur(String nom, String email, Integer telephone, String username, String password, Integer nbrekudo, Integer nbrepoint,Integer nbrepointTeam,Integer kudos) {
         this.nom = nom;
+        this.nomTeam = nomTeam;
         this.email = email;
         this.telephone = telephone;
         this.username = username;
         this.password = password;
         this.nbrekudo = nbrekudo;
         this.nbrekudo = nbrepoint;
+        this.nbrepointTeam = nbrepointTeam;
         this.kudos = kudos;
     }
     public Long getId() {
@@ -129,7 +141,7 @@ public class Utilisateur {
         this.password = password;
     }
 
-    public Long getStructure() {
+   public Long getStructure() {
         return structure;
     }
 
@@ -165,12 +177,28 @@ public class Utilisateur {
         this.roles = roles;
     }
 
-    public Set<Structure> getStructures() {
+   public Set<Structure> getStructures() {
         return structures;
     }
 
     public void setStructures(Set<Structure> structures) {
         this.structures = structures;
+    }
+
+    public String getNomTeam() {
+        return nomTeam;
+    }
+
+    public void setNomTeam(String nomTeam) {
+        this.nomTeam = nomTeam;
+    }
+
+    public Integer getNbrepointTeam() {
+        return nbrepointTeam;
+    }
+
+    public void setNbrepointTeam(Integer nbrepointTeam) {
+        this.nbrepointTeam = nbrepointTeam;
     }
 
     public List<Kudo> getKudo() {
@@ -180,6 +208,7 @@ public class Utilisateur {
     public void setKudo(List<Kudo> kudo) {
         this.kudo = kudo;
     }
+
 
 
 }

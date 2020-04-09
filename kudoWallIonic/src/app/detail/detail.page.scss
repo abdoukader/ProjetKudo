@@ -1,0 +1,54 @@
+td,
+th {
+    border: 1px solid rgb(190, 190, 190);
+    padding: 10px;
+}
+
+td {
+    text-align: center;
+}
+
+tr:nth-child(even) {
+    background-color: #eee;
+}
+
+th[scope="col"] {
+    background-color: #696969;
+    color: #fff;
+}
+
+th[scope="row"] {
+    background-color: #d7d9f2;
+}
+
+caption {
+    padding: 10px;
+    caption-side: bottom;
+}
+
+table {
+    border-collapse: collapse;
+    border: 2px solid rgb(200, 200, 200);
+    letter-spacing: 1px;
+    font-family: sans-serif;
+    font-size: .8rem;
+}
+.tet{
+    background-color: rgb(255, 94, 0);
+    height: 85px;
+  }
+  #corp{
+      margin-top: 10px;
+  }
+  .ion-text-center{
+    font-size: 19px;
+    color: white;
+    
+}
+ion-label{
+    font-size: 55px;
+}
+.lab{
+    //height: 100px;
+    font-size: 18px;
+}

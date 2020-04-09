@@ -94,20 +94,17 @@ formKudo = {
   commentaire:""
 }
  
-
 fairekudo(){
   this.formKudo.structure = this.selectedId;
   this.kudos.faireKudo(this.formKudo)
   .subscribe(
     res => {
       this.presentAlertError(res.msg)
-      this._router.navigate(['/kudowall-structure/'+this.selectedId]);
-     // window.confirm('kudo réussit');
       console.log(res)
-      
+      this._router.navigate(['/kudowall-structure/'+this.selectedId]);
+
     },
     err => {
-      //window.confirm('kudo echoué')
       console.log(err)
     }
   )

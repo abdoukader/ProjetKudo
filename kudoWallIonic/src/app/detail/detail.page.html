@@ -1,0 +1,49 @@
+
+<ion-content>
+  
+        <ion-card>
+            <ion-header>
+  
+                <div class="tet">
+                <ion-title class="ion-text-center">DETAIL UTILISATEUR</ion-title>
+              </div>
+            </ion-header>
+          <ion-card-content id="corp">
+            <ion-list *ngIf="detail">
+              <ion-item >
+                <ion-label> Mail :</ion-label>
+                <ion-label>{{detail.email}}</ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-label> Nom :</ion-label>
+                <ion-label>{{detail.nom}}</ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-label> Telephone :</ion-label>
+                <ion-label>{{detail.telephone}}</ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-label> Nombre de point :</ion-label>
+                <ion-label>{{detail.nbrepoint}}</ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-label> Service :</ion-label>
+                <ion-label>{{detail.structures[0].sousStructure}}</ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-label> kudos donnée :</ion-label>
+                <ion-label>{{detail.nbrekudo}}</ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-label> kudos reçu :</ion-label>
+                <ion-label>{{detail.kudos}}</ion-label>
+              </ion-item>
+
+
+           
+            </ion-list>
+       
+          </ion-card-content>
+        </ion-card>
+    
+</ion-content>

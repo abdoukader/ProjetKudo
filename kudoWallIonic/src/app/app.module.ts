@@ -12,7 +12,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AutoCompleteModule } from 'ionic4-auto-complete';
 import { KudowallPageModule } from './pages/kudowall/kudowall.module';
 import { AuthGuardService} from './services/auth-guard.service';
-import { IonicStorageModule } from '@ionic/storage';
+//import { IonicStorageModule } from '@ionic/storage';
 import { InscriptionPageModule } from './pages/inscription/inscription.module';
 import { HomePageModule } from './home/home.module';
 import { KudowallStructurePageModule } from './kudowall-structure/kudowall-structure.module';
@@ -24,8 +24,7 @@ import { KudoPage } from './pages/kudo/kudo.page';
   entryComponents: [],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(),
-    IonicStorageModule.forRoot(),
+    IonicModule.forRoot(), 
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
